@@ -1,7 +1,6 @@
 import React from "react";
 import { Search } from "../features/search/search";
 import { Subreddits } from "../features/subReddits/subReddits";
-import { DataFetching } from "../components/DataFetching";
 
 export const App = () => {
     return (
