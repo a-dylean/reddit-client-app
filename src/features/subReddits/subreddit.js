@@ -1,5 +1,7 @@
 import React from "react";
 import { Postslist } from "../posts/postsList";
+import { useDispatch } from "react-redux";
+import { selectSubreddit } from "./subRedditsSlice";
 
 /* - takes the following props:
     - title
@@ -9,13 +11,13 @@ import { Postslist } from "../posts/postsList";
 
 export const Subreddit = ({ subreddit, children }) => {
 
-    const thumbnail = subreddit.data.thumbnail;
+    const thumbnail = subreddit.data.header_img;
     
-    const handleClick = () => {};
+    const dispatch = useDispatch();
 
   return (
     <div>
-      <button style={{ height: "80px", width: "200px" }} onClick={handleClick}>
+      <button style={{ height: "80px", width: "200px", margin: "5px" }} onClick={(e) => dispatch(selectSubreddit(e.target.value))}>
         <img
           src={thumbnail}
           alt="thumbnail"
@@ -25,7 +27,7 @@ export const Subreddit = ({ subreddit, children }) => {
             event.onerror = null
           }}
         />
-        {subreddit.data.subreddit}
+        {subreddit.data.title}
       </button>
     </div>
   );

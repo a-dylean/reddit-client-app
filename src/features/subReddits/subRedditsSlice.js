@@ -2,8 +2,9 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+// Fetching Data using API with createAsyncThunk (Redux-Toolkit)
 export const getSubreddits = createAsyncThunk("subreddits/getSubreddits", async () => {
-    return fetch("https://www.reddit.com/r/popular.json").then((res) => res.json()).then((data) => data.data.children);
+    return fetch("https://www.reddit.com/subreddits.json").then((res) => res.json()).then((data) => data.data.children);
 });
 
 // Slice Object
@@ -11,10 +12,12 @@ export const subRedditsSlice = createSlice({
     name: 'subreddits',
     initialState: {
         subreddits: [],
-        selectedSubreddit: null
+        selectedSubreddit: "AskReddit",
+        loading: false
     },
     reducers: {
-        
+        selectSubreddit: (state, action) =>
+            state.selectedSubreddit = action.payload
         },
     extraReducers: {
         [getSubreddits.pending]: (state, action) => {
@@ -30,6 +33,5 @@ export const subRedditsSlice = createSlice({
     }
 });
 
-
-//export const { getSubreddits } = subRedditsSlice.actions;
+export const { selectSubreddit } = subRedditsSlice.actions;
 export default subRedditsSlice.reducer;

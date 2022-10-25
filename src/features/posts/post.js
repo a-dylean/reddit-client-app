@@ -20,10 +20,25 @@ it takes the following props:
 
 
 */
-export const Post = () => {
+export const Post = ({ post, children }) => {
+    const utcDate = post.data.created_utc;
     return (
+        <div style={{ border: "1px solid black"}}>
         <div>
-            Post
+            {post.data.title}
+        </div>
+        <div>
+            {post.data.ups}
+        </div>
+        <div>
+            {post.data.author}
+        </div>
+        <div>
+            Created: {utcDate}
+        </div>
+        <div>
+            {post.data.num_comments}
+        </div>
         </div>
     )
-}
+};
