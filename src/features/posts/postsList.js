@@ -14,7 +14,7 @@ export const Postslist = () => {
     return "Loading...";
   }
 
-  console.log(posts);
+  //console.log(posts);
 
   return (
     <div>

@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import SubredditsReducer from '../features/subReddits/subRedditsSlice';
 import PostsReducer from "../features/posts/postsSlice";
+import SearchReducer from "../features/search/searchSlice";
 
 export default configureStore({
     reducer: {
         subreddit: SubredditsReducer,
-        post: PostsReducer
+        post: PostsReducer,
+        search: SearchReducer
     },      
 });
 /* Store
