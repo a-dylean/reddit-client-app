@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectSubreddit } from "../posts/postsSlice";
+import { getPosts, selectSubreddit } from "../posts/postsSlice";
 
 /* - takes the following props:
     - title
@@ -13,13 +13,15 @@ export const Subreddit = ({ subreddit, children }) => {
 
   const dispatch = useDispatch();
 
+  const onClickHandler = () => {
+    dispatch(selectSubreddit(subreddit.data.url))
+}
+
   return (
     <div>
       <button
         style={{ width: "200px", margin: "5px" }}
-        onClick={() => {
-          dispatch(selectSubreddit());
-        }}
+        onClick={onClickHandler}
       >
         <img
           src={

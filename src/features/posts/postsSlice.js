@@ -1,9 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
 
-export const getPosts = createAsyncThunk("posts/getPosts", async () => {
-  //const selectedSubreddit = useSelector(state => state.post.selectedSubreddit);
-  return fetch("https://www.reddit.com" + "/r/pics/" + ".json")
+export const getPosts = createAsyncThunk("posts/getPosts", async (subreddit) => {
+  return fetch(`https://www.reddit.com${subreddit}.json`)
     .then((res) => res.json())
     .then((data) => data.data.children);
 });
@@ -13,7 +11,7 @@ export const postsSlice = createSlice({
   name: "posts",
   initialState: {
     posts: [],
-    selectedSubreddit: "",
+    selectedSubreddit: "/r/Home",
     loading: false,
   },
   reducers: {
