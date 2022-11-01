@@ -18,7 +18,8 @@ export const Subreddits = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log(subreddits);
+  
+  //console.log(subreddits);
 
   return (
     <div>

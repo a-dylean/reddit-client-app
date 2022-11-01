@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import SubredditsReducer from '../features/subReddits/subRedditsSlice';
 import PostsReducer from "../features/posts/postsSlice";
 import SearchReducer from "../features/search/searchSlice";
+import CommentsReducer from "../features/comments/commentsSlice"
 
 export default configureStore({
     reducer: {
         subreddit: SubredditsReducer,
         post: PostsReducer,
-        search: SearchReducer
+        search: SearchReducer,
+        comments: CommentsReducer
     },      
 });
 /* Store
@@ -36,7 +38,7 @@ export default configureStore({
             image: 'Image1',
             author: 'Author1',
             date: 'Date1',
-            comments: [],
+            numberOfcomments: 45,
             rating: 540
         },
           post2: {
@@ -45,7 +47,7 @@ export default configureStore({
             image: 'Image2',
             author: 'Author2',
             date: 'Date2',
-            comments: [],
+            numberOfcomments: 345,
             rating: 200
         }  
         },
@@ -54,6 +56,9 @@ export default configureStore({
             post2: {}
         }
         
+    },
+    comments: {
+        "fhjs": {postId: "sroitn", comment: []}
     }
 }
 */

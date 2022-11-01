@@ -2,10 +2,12 @@ import React from "react";
 import { Search } from "../features/search/search";
 import { Subreddits } from "../features/subReddits/subReddits";
 import { Postslist } from "../features/posts/postsList";
+import { Comments } from "../features/comments/comments";
+import "./app.css";
 
 export const App = () => {
   return (
-    <div>
+    <div className="">
       <div className="ui container" style={{ marginTop: "10px" }}>
         <Search />
       </div>

@@ -1,10 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getPosts = createAsyncThunk("posts/getPosts", async (subreddit) => {
-  return fetch(`https://www.reddit.com${subreddit}.json`)
-    .then((res) => res.json())
-    .then((data) => data.data.children);
-});
+export const getPosts = createAsyncThunk(
+  "posts/getPosts",
+  async (subreddit) => {
+    return fetch(`https://www.reddit.com${subreddit}.json`)
+      .then((res) => res.json())
+      .then((data) => data.data.children);
+  }
+);
 
 // Slice Object
 export const postsSlice = createSlice({
