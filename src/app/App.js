@@ -20,7 +20,7 @@ export const App = () => {
         </div>
         <div
           className="ui container"
-          style={{ padding: "5px", textAlign: "right" }}
+          style={{ padding: "5px", textAlign: "right", width: "200px" }}
         >
           <Subreddits />
         </div>

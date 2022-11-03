@@ -1,29 +1,8 @@
 import React from "react";
 import { Comments } from "../comments/comments";
-import { useDispatch, useSelector } from "react-redux";
-import { selectPost, getComments } from "../comments/commentsSlice";
-import { useEffect, useState } from "react";
-import { selectSubreddit } from "./postsSlice";
-import { getSubreddits } from "../subReddits/subRedditsSlice";
-
-/*
-it takes the following props:
-    - id
-    - title
-    - image
-    - author
-    - date
-    - comments
-    - rating
-- displays:
-    - title
-    - content
-    - rating
-    - buttons (like/dislike)
-    - author of the post
-    - date
-    - number of comments
-*/
+import { useDispatch } from "react-redux";
+import { selectPost } from "../comments/commentsSlice";
+import { useState } from "react";
 
 export const Post = ({ post, children }) => {
   const unix_timestamp = post.data.created_utc;
@@ -50,7 +29,7 @@ export const Post = ({ post, children }) => {
           src={image}
           id="post_image"
           alt="post image"
-          style={{ height: "150px" }}
+          style={{ height: "300px" }}
           onError={(event) => {
             event.target.style.display = "none";
             event.onerror = null;

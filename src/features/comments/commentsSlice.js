@@ -5,7 +5,10 @@ export const getComments = createAsyncThunk(
   async (postId) => {
     return fetch(`https://www.reddit.com/comments/${postId}.json`)
       .then((res) => res.json())
-      .then((data) => ({ comments: data.map((item) => item.data.children).flat(), postId}))
+      .then((data) => ({
+        comments: data.map((item) => item.data.children).flat(),
+        postId,
+      }));
   }
 );
 export const commentsSlice = createSlice({
@@ -27,7 +30,10 @@ export const commentsSlice = createSlice({
     [getComments.fulfilled]: (state, action) => {
       state.loading = false;
       const { postId, comments } = action.payload;
-      state.comments = { ...state.comments, [postId]: comments };
+      state.comments = {
+        ...state.comments,
+        [postId]: comments,
+      };
     },
     [getComments.rejected]: (state, action) => {
       state.loading = false;
