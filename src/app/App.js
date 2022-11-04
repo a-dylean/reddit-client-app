@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import { Search } from "../features/search/search";
 import { Subreddits } from "../features/subReddits/subReddits";
 import { Postslist } from "../features/posts/postsList";
-import { Comments } from "../features/comments/comments";
 import "./app.css";
+import { useSelector } from "react-redux";
+import { Post } from "../features/posts/post";
 
 export const App = () => {
+  const posts = useSelector((state) => state.post.posts);
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const postsPerPage = 10;
+  const pagesVisited = pageNumber * postsPerPage;
+
+  const displayPosts = posts.slice(pagesVisited, pagesVisited + postsPerPage).map((post) => (
+    <Post post={post} key={post.data.id} />
+  ));
+
+  const pageCount = Math.ceil(posts.length / postsPerPage);
+
+  const handlePageClick = ({ selected }) => {
+    setPageNumber(selected);
+    console.log(pageNumber);
+  };
   return (
     <div className="">
       <div className="ui container" style={{ marginTop: "10px" }}>
@@ -17,6 +35,7 @@ export const App = () => {
       >
         <div className="ui container" style={{ padding: "5px" }}>
           <Postslist />
+          {displayPosts}
         </div>
         <div
           className="ui container"
@@ -24,6 +43,26 @@ export const App = () => {
         >
           <Subreddits />
         </div>
+      </div>
+      <div>
+        <ReactPaginate
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          breakLabel={"..."}
+          pageCount={pageCount}
+          marginPagesDisplayed={3}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination justify-content-center"}
+          pageClassName={"page-item"}
+          pageLinkClassName={"page-link"}
+          previousClassName={"page-item"}
+          previousLinkClassName={"page-link"}
+          nextClassName={"page-item"}
+          nextLinkClassName={"page-link"}
+          breakClassName={"page-item"}
+          breakLinkClassName={"page-link"}
+          activeClassName={"active"}
+        />
       </div>
     </div>
   );

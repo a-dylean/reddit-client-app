@@ -7,7 +7,11 @@ export const Postslist = () => {
   const { posts, loading, selectedSubreddit } = useSelector(
     (state) => state.post
   );
+
   const searchTerm = useSelector((state) => state.search.searchTerm);
+  posts.filter((post) =>
+    post.data.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,20 +22,14 @@ export const Postslist = () => {
     return "Loading...";
   }
 
-  //console.log(posts);
-
   return (
     <div>
       <h2>Posts</h2>
       <div>
-        {posts
-          .filter((post) =>
-            post.data.title.toLowerCase().
-            includes(searchTerm.toLowerCase())
-          )
-          .map((post) => (
-            <Post post={post} key={post.data.id} />
-          ))}
+        {/* {
+          // .map((post) => (
+          //   <Post post={post} key={post.data.id} />
+          // ))} */}
       </div>
     </div>
   );
