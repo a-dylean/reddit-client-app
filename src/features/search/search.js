@@ -3,31 +3,36 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchTerm, clearSearchTerm } from "./searchSlice";
+import { getSubreddits, searchSubreddits } from "../subReddits/subRedditsSlice";
 
 const searchIconUrl = 'https://static-assets.codecademy.com/Courses/Learn-Redux/Recipes-App/icons/search.svg';
 const clearIconUrl = 'https://static-assets.codecademy.com/Courses/Learn-Redux/Recipes-App/icons/clear.svg';
 
 export const Search = () => {
-    const searchTerm = useSelector(state => state.search.searchTerm)
+    const searchTerm = useSelector(state => state.search.searchTerm);
     const dispatch = useDispatch();
 
     const onSearchTermChangeHandler = (e) => {
-        dispatch(setSearchTerm(e.target.value))
+        dispatch(setSearchTerm(e.target.value));
+        dispatch(searchSubreddits(searchTerm));
     }
 
-    const onClearSearchTermHandler = (e) => {
-        dispatch(clearSearchTerm())
+    const onClearSearchTermHandler = () => {
+        dispatch(clearSearchTerm());
+        dispatch(getSubreddits());
     }
   return (
     <div className="ui segment">
       {/* <form className="ui form">
         <div className="field">
           <label>Subreddits search</label> */}
-          <img id="search-icon" alt="" src={searchIconUrl} />
+          
+          <div>
+            <img id="search-icon" alt="search-icon" src={searchIconUrl} /> 
           <input 
           type="text" 
           value={searchTerm}
-          placeholder="search Reddit"
+          placeholder="Search Reddit"
           onChange={onSearchTermChangeHandler} />
           {searchTerm.length > 0 && (
         <button
@@ -35,9 +40,10 @@ export const Search = () => {
           type="button"
           id="search-clear-button"
         >
-          <img src={clearIconUrl} alt="" />
+          <img src={clearIconUrl} alt="clear-button" />
         </button>
       )}
+          </div>
         </div>
     //   </form>
     // </div>

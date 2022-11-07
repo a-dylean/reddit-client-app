@@ -8,11 +8,6 @@ export const Postslist = () => {
     (state) => state.post
   );
 
-  const searchTerm = useSelector((state) => state.search.searchTerm);
-  posts.filter((post) =>
-    post.data.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPosts(selectedSubreddit));

@@ -24,11 +24,7 @@ export const Subreddits = () => {
       <h2>Subreddits</h2>
       <div>
         {subreddits
-          .filter((subreddit) =>
-            subreddit.data.title
-              .toLowerCase()
-              .includes(searchTerm.toLowerCase())
-          )
+          .slice(0, 10)
           .map((subreddit) => (
             <Subreddit subreddit={subreddit} key={subreddit.data.id} />
           ))}

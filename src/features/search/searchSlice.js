@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getSubreddits } from "../subReddits/subRedditsSlice";
 
 export const searchSlice = createSlice({
   name: "search",

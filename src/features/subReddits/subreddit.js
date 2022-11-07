@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getPosts, selectSubreddit } from "../posts/postsSlice";
+import { useDispatch } from "react-redux";
+import { selectSubreddit } from "../posts/postsSlice";
 import { setPageNumber, setPagesVisitedToZero } from "../../app/pageSlice";
 
 
@@ -12,7 +12,6 @@ import { setPageNumber, setPagesVisitedToZero } from "../../app/pageSlice";
 
 export const Subreddit = ({ subreddit, children }) => {
   const thumbnail = subreddit.data.header_img;
-
   const dispatch = useDispatch();
 
   const onClickHandler = () => {
