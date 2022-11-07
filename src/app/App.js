@@ -6,13 +6,12 @@ import { Postslist } from "../features/posts/postsList";
 import "./app.css";
 import { useSelector } from "react-redux";
 import { Post } from "../features/posts/post";
+import { setPageNumber, setPagesVisited } from "./pageSlice";
+import { useDispatch } from "react-redux";
 
 export const App = () => {
   const posts = useSelector((state) => state.post.posts);
-  const [pageNumber, setPageNumber] = useState(0);
-
-  const postsPerPage = 10;
-  const pagesVisited = pageNumber * postsPerPage;
+  const {pageNumber, postsPerPage, pagesVisited} = useSelector((state) => state.page);
 
   const displayPosts = posts.slice(pagesVisited, pagesVisited + postsPerPage).map((post) => (
     <Post post={post} key={post.data.id} />
@@ -20,10 +19,14 @@ export const App = () => {
 
   const pageCount = Math.ceil(posts.length / postsPerPage);
 
+  const dispatch = useDispatch();
   const handlePageClick = ({ selected }) => {
-    setPageNumber(selected);
-    console.log(pageNumber);
+    dispatch(setPageNumber((selected)));
+    dispatch(setPagesVisited());
+    
+    console.log(selected)
   };
+
   return (
     <div className="">
       <div className="ui container" style={{ marginTop: "10px" }}>
@@ -34,17 +37,7 @@ export const App = () => {
         style={{ display: "flex", flexDirection: "row" }}
       >
         <div className="ui container" style={{ padding: "5px" }}>
-          <Postslist />
-          {displayPosts}
-        </div>
-        <div
-          className="ui container"
-          style={{ padding: "5px", textAlign: "right", width: "200px" }}
-        >
-          <Subreddits />
-        </div>
-      </div>
-      <div>
+         <div>
         <ReactPaginate
           previousLabel={"Previous"}
           nextLabel={"Next"}
@@ -62,8 +55,20 @@ export const App = () => {
           breakClassName={"page-item"}
           breakLinkClassName={"page-link"}
           activeClassName={"active"}
+          forcePage={pageNumber}
         />
+      </div> 
+      <Postslist />
+          {displayPosts}
+        </div>
+        <div
+          className="ui container"
+          style={{ padding: "5px", textAlign: "right", width: "200px" }}
+        >
+          <Subreddits />
+        </div>
       </div>
+      
     </div>
   );
 };

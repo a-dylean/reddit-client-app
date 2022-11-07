@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts, selectSubreddit } from "../posts/postsSlice";
+import { setPageNumber, setPagesVisitedToZero } from "../../app/pageSlice";
+
 
 /* - takes the following props:
     - title
@@ -14,7 +16,10 @@ export const Subreddit = ({ subreddit, children }) => {
   const dispatch = useDispatch();
 
   const onClickHandler = () => {
-    dispatch(selectSubreddit(subreddit.data.url))
+    dispatch(selectSubreddit(subreddit.data.url));
+    dispatch(setPageNumber(0));
+    dispatch(setPagesVisitedToZero());
+    
 }
 
   return (

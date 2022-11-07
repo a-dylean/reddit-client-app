@@ -3,13 +3,15 @@ import SubredditsReducer from '../features/subReddits/subRedditsSlice';
 import PostsReducer from "../features/posts/postsSlice";
 import SearchReducer from "../features/search/searchSlice";
 import CommentsReducer from "../features/comments/commentsSlice"
+import PageReducer from "./pageSlice"
 
 export default configureStore({
     reducer: {
         subreddit: SubredditsReducer,
         post: PostsReducer,
         search: SearchReducer,
-        comments: CommentsReducer
+        comments: CommentsReducer,
+        page: PageReducer
     },      
 });
 /* Store

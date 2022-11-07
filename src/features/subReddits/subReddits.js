@@ -19,8 +19,6 @@ export const Subreddits = () => {
     return <div>Loading...</div>;
   }
   
-  //console.log(subreddits);
-
   return (
     <div>
       <h2>Subreddits</h2>

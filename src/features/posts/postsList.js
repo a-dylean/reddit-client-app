@@ -12,7 +12,7 @@ export const Postslist = () => {
   posts.filter((post) =>
     post.data.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPosts(selectedSubreddit));
@@ -24,7 +24,7 @@ export const Postslist = () => {
 
   return (
     <div>
-      <h2>Posts</h2>
+      <h2>{selectedSubreddit}</h2>
       <div>
         {/* {
           // .map((post) => (

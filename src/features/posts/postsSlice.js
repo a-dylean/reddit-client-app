@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const getPosts = createAsyncThunk(
   "posts/getPosts",
   async (subreddit) => {
-    return fetch(`https://www.reddit.com${subreddit}.json`)
+    return fetch(`https://www.reddit.com${subreddit}.json?limit=100`)
       .then((res) => res.json())
       .then((data) => data.data.children);
   }
