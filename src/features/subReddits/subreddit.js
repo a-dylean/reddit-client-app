@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { selectSubreddit } from "../posts/postsSlice";
 import { setPageNumber, setPagesVisitedToZero } from "../../app/pageSlice";
 
-
 /* - takes the following props:
     - title
     - image
@@ -18,8 +17,7 @@ export const Subreddit = ({ subreddit, children }) => {
     dispatch(selectSubreddit(subreddit.data.url));
     dispatch(setPageNumber(0));
     dispatch(setPagesVisitedToZero());
-    
-}
+  };
 
   return (
     <div>

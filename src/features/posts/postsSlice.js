@@ -9,7 +9,6 @@ export const getPosts = createAsyncThunk(
   }
 );
 
-// Slice Object
 export const postsSlice = createSlice({
   name: "posts",
   initialState: {

@@ -11,20 +11,22 @@ import { useDispatch } from "react-redux";
 
 export const App = () => {
   const posts = useSelector((state) => state.post.posts);
-  const {pageNumber, postsPerPage, pagesVisited} = useSelector((state) => state.page);
+  const { pageNumber, postsPerPage, pagesVisited } = useSelector(
+    (state) => state.page
+  );
 
-  const displayPosts = posts.slice(pagesVisited, pagesVisited + postsPerPage).map((post) => (
-    <Post post={post} key={post.data.id} />
-  ));
+  const displayPosts = posts
+    .slice(pagesVisited, pagesVisited + postsPerPage)
+    .map((post) => <Post post={post} key={post.data.id} />);
 
   const pageCount = Math.ceil(posts.length / postsPerPage);
 
   const dispatch = useDispatch();
   const handlePageClick = ({ selected }) => {
-    dispatch(setPageNumber((selected)));
+    dispatch(setPageNumber(selected));
     dispatch(setPagesVisited());
-    
-    console.log(selected)
+
+    console.log(selected);
   };
 
   return (
@@ -37,7 +39,17 @@ export const App = () => {
         style={{ display: "flex", flexDirection: "row" }}
       >
         <div className="ui container" style={{ padding: "5px" }}>
-         <div>
+          <Postslist />
+          {displayPosts}
+        </div>
+        <div
+          className="ui container"
+          style={{ padding: "5px", textAlign: "right", width: "200px" }}
+        >
+          <Subreddits />
+        </div>
+      </div>
+      <div>
         <ReactPaginate
           previousLabel={"Previous"}
           nextLabel={"Next"}
@@ -57,18 +69,7 @@ export const App = () => {
           activeClassName={"active"}
           forcePage={pageNumber}
         />
-      </div> 
-      <Postslist />
-          {displayPosts}
-        </div>
-        <div
-          className="ui container"
-          style={{ padding: "5px", textAlign: "right", width: "200px" }}
-        >
-          <Subreddits />
-        </div>
       </div>
-      
     </div>
   );
 };

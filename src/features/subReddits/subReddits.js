@@ -8,7 +8,6 @@ import { Subreddit } from "./subreddit";
 
 export const Subreddits = () => {
   const { subreddits, loading } = useSelector((state) => state.subreddit);
-  const searchTerm = useSelector((state) => state.search.searchTerm);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,16 +17,14 @@ export const Subreddits = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  
+
   return (
     <div>
       <h2>Subreddits</h2>
       <div>
-        {subreddits
-          .slice(0, 10)
-          .map((subreddit) => (
-            <Subreddit subreddit={subreddit} key={subreddit.data.id} />
-          ))}
+        {subreddits.slice(0, 10).map((subreddit) => (
+          <Subreddit subreddit={subreddit} key={subreddit.data.id} />
+        ))}
       </div>
     </div>
   );
