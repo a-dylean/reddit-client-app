@@ -4,10 +4,18 @@ import { useDispatch } from "react-redux";
 import { selectPost } from "../comments/commentsSlice";
 import { useState } from "react";
 
+import { Card, CardActions, CardHeader, CardContent, IconButton, Badge, Paper, Box, CardMedia } from "@mui/material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import {blue} from '@mui/material/colors';
+
 export const Post = ({ post, children }) => {
   const unix_timestamp = post.data.created_utc;
-  var date = new Date(unix_timestamp * 1000).toLocaleString();
+  const date = new Date(unix_timestamp * 1000).toLocaleString();
   const image = post.data.url;
+  const author_data = post.data.author;
+  const subheader = 'Created by ' + author_data + ' | ' + date;
   const [commentsToggle, setCommentsToggle] = useState(false);
   const dispatch = useDispatch();
 
@@ -20,35 +28,53 @@ export const Post = ({ post, children }) => {
     }
     setCommentsToggle(newCommentsToggle);
   };
-
   return (
-    <div style={{ border: "1px solid black", margin: "10px" }}>
-      <div style={{ fontWeight: "bold", textAlign: "center" }}>
-        {post.data.title}
-      </div>
-      <div style={{ textAlign: "center" }}>
-        <img
-          src={image}
-          id="post_image"
-          alt="post image"
-          style={{ height: "300px" }}
-          onError={(event) => {
+    <Card sx={{ maxwidth: 350, mb: 5}}>
+      <CardHeader 
+      title={post.data.title}
+      subheader={subheader} />
+      <CardMedia display="flex" justifyContent='center' alignItems='center'>
+      <Box
+        component='img'
+        src={image}
+        alt="post image"
+        sx={{
+          height: 300,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: 'center',
+
+        }}
+        onError={(event) => {
             event.target.style.display = "none";
             event.onerror = null;
-          }}
-        />
-      </div>
-      <div style={{ display: "flex", flexDirection: "row", padding: "10px" }}>
-        <div>Likes: {post.data.ups}</div>
-        <div>Created by {post.data.author}</div>
-        <div>Created: {date}</div>
-      </div>
-      <div>
-        <button onClick={onClickHandler}>
-          Comments: {post.data.num_comments}
-        </button>
-      </div>
-      <div>{commentsToggle && <Comments postId={post.data.id} />}</div>
-    </div>
+        }}
+      />
+      </CardMedia>
+      <CardContent style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: 'center'
+        }}>
+        <CardActions>
+        <IconButton aria-label="add to favorites">
+          <Badge badgeContent={post.data.ups} max={100} sx={{color: 'black'}}>
+          <FavoriteIcon sx={{color: '#f44336'}}/>
+          </Badge>
+        </IconButton>
+        <IconButton aria-label="view comments" onClick={onClickHandler}>
+        <Badge badgeContent={post.data.num_comments} max={100} sx={{color: 'black'}}>
+          <ChatBubbleIcon sx={{color: blue[400]}}/>
+          </Badge>
+        </IconButton>
+                <IconButton aria-label="share">
+          <ShareIcon sx={{color: 'black'}}/>
+        </IconButton>
+        </CardActions>
+      </CardContent>
+      <Paper>
+        {commentsToggle && <Comments postId={post.data.id} />}
+      </Paper>
+    </Card>
   );
 };

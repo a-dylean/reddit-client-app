@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "./postsSlice";
 
-export const Postslist = () => {
+import { Typography, LinearProgress } from "@mui/material";
+
+export const Postslist = (props) => {
   const { loading, selectedSubreddit } = useSelector((state) => state.post);
 
   const dispatch = useDispatch();
@@ -11,7 +13,11 @@ export const Postslist = () => {
   }, [selectedSubreddit]);
 
   if (loading) {
-    return "Loading...";
+    return (
+      <div>
+        <Typography>Posts are loading...</Typography>
+        <LinearProgress />
+    </div>);
   }
 
   return (

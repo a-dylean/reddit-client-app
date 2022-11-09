@@ -5,8 +5,12 @@ import { useDispatch } from "react-redux";
 import { getSubreddits, searchSubreddits } from "../subReddits/subRedditsSlice";
 import { debounce } from "lodash";
 
-const searchIconUrl =
-  "https://static-assets.codecademy.com/Courses/Learn-Redux/Recipes-App/icons/search.svg";
+import { Container, TextField, Grid } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { InputAdornment } from "@mui/material";
+import BackspaceIcon from "@mui/icons-material/Backspace";
+
+
 const clearIconUrl =
   "https://static-assets.codecademy.com/Courses/Learn-Redux/Recipes-App/icons/clear.svg";
 
@@ -29,25 +33,30 @@ export const Search = () => {
     dispatch(getSubreddits());
   };
   return (
-    <div className="ui segment">
-      <div>
-        <img id="search-icon" alt="search-icon" src={searchIconUrl} />
-        <input
-          type="text"
+    <Grid container justifyContent='center'>
+        <TextField
+          id="standard-basic"
+          label="Search Reddit"
+          variant="standard"
           value={searchTerm}
-          placeholder="Search Reddit"
           onChange={searchTermChangeHandler}
-        />
-        {searchTerm.length > 0 && (
-          <button
-            onClick={clearSearchTermHandler}
-            type="button"
-            id="search-clear-button"
-          >
-            <img src={clearIconUrl} alt="clear-button" />
-          </button>
-        )}
-      </div>
-    </div>
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">
+                {searchTerm.length > 0 && (
+                  <BackspaceIcon onClick={clearSearchTermHandler} />
+                )}
+              </InputAdornment>
+            ),
+            style: {
+              width: 300
+            }
+          }}
+        /></Grid>
   );
 };

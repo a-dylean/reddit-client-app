@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getSubreddits } from "./subRedditsSlice";
 import { Subreddit } from "./subreddit";
 
+import { List, Typography, LinearProgress } from "@mui/material";
+
 export const Subreddits = () => {
   const { subreddits, loading } = useSelector((state) => state.subreddit);
 
@@ -15,17 +17,21 @@ export const Subreddits = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Typography>Subreddits are loading...</Typography>
+        <LinearProgress/>
+    </div>);
   }
 
   return (
     <div>
       <h2>Subreddits</h2>
-      <div>
+      <List>
         {subreddits.slice(0, 10).map((subreddit) => (
           <Subreddit subreddit={subreddit} key={subreddit.data.id} />
         ))}
-      </div>
+     </List>
     </div>
   );
 };

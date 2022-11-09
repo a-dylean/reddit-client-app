@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import { selectSubreddit } from "../posts/postsSlice";
 import { setPageNumber, setPagesVisitedToZero } from "../../app/pageSlice";
 
+import { ListItemButton, Avatar, ListItemAvatar } from "@mui/material";
+
+
 /* - takes the following props:
     - title
     - image
@@ -20,25 +23,23 @@ export const Subreddit = ({ subreddit, children }) => {
   };
 
   return (
-    <div>
-      <button
-        style={{ width: "200px", margin: "5px" }}
+    <ListItemButton
         onClick={onClickHandler}
       >
-        <img
+        <ListItemAvatar minwidth={150}>
+          <Avatar 
           src={
             thumbnail ||
             "https://external-preview.redd.it/iDdntscPf-nfWKqzHRGFmhVxZm4hZgaKe5oyFws-yzA.png?width=640&crop=smart&auto=webp&s=bfd318557bf2a5b3602367c9c4d9cd84d917ccd5"
           }
           alt="thumbnail"
-          style={{ height: "50px", borderRadius: "50px" }}
           onError={(event) => {
             event.target.style.display = "none";
             event.onerror = null;
           }}
         />
+        </ListItemAvatar>
         <div style={{ fontWeight: "bold" }}>{subreddit.data.title}</div>
-      </button>
-    </div>
+    </ListItemButton>
   );
 };

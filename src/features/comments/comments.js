@@ -4,6 +4,8 @@ import { getComments } from "./commentsSlice";
 import { Comment } from "./comment";
 import { CommentsList } from "./commentsList";
 
+import { LinearProgress } from "@mui/material";
+
 export const Comments = ({ postId }) => {
   const { comments, loading } = useSelector((state) => state.comments);
   const postComments = comments[postId];
@@ -13,7 +15,12 @@ export const Comments = ({ postId }) => {
   }, [postId]);
 
   if (loading || !postComments) {
-    return "Loading...";
+    return (
+      <div>
+        <p>Comments are loading...</p>
+        <LinearProgress />
+      </div>
+    );
   }
 
   if (!loading && postComments.length > 0) {

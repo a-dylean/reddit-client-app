@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { CommentsList } from "./commentsList";
 
+import { Divider, Badge, Paper } from '@mui/material';
+import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
+
 export const Comment = ({ comment }) => {
   const unix_timestamp = comment.data.created_utc;
   const replies = comment.data?.replies?.data?.children;
@@ -11,22 +14,22 @@ export const Comment = ({ comment }) => {
   const onClick = () => setShowReplies(true);
 
   return (
-    <div style={{ border: "1px solid black", margin: "10px" }}>
-      {comment.data.body && (
-        <div onClick={onClick} style={{ fontWeight: "bold" }}>
-          {comment.data.author} | {date}:{" "}
-          <div style={{ fontWeight: "normal" }}>
-            {comment.data.body} <div>{replies?.length}</div>{" "}
-          </div>
-        </div>
-      )}
-      <div>
-        {showReplies
-          ? replies && (
+    <Paper>
+      <Divider variant="fullWidth"/>
+        {comment.data.body && ( 
+          <div style={{margin: 15}}>
+            <h4 style={{margin: 0}}>{comment.data.author} | {date}:</h4>
+            <div>
+          <p style={{margin: 5}}>{comment.data.body}</p></div>
+          <Badge badgeContent={replies?.length} onClick={onClick}>
+            <ForumRoundedIcon/>
+          </Badge>  
+      </div>)}
+      {showReplies ? replies && (
               <CommentsList CommentsComponent={Comment} comments={replies} />
             )
           : null}
-      </div>
-    </div>
+        <Divider variant="fullWidth"/>
+    </Paper>
   );
 };
