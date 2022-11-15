@@ -7,11 +7,9 @@ import { Post } from "../features/posts/post";
 import { setPageNumber, setPagesVisited } from "./pageSlice";
 import { useDispatch } from "react-redux";
 
-import '@fontsource/roboto/300.css';
-import { Container, Grid } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import "@fontsource/roboto/300.css";
+import { Container, Grid, Stack } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
 
 export const App = () => {
   const posts = useSelector((state) => state.post.posts);
@@ -26,42 +24,35 @@ export const App = () => {
   const pageCount = Math.ceil(posts.length / postsPerPage);
 
   const dispatch = useDispatch();
-  
+
   const handlePageClick = (event, value) => {
     dispatch(setPageNumber(value));
     dispatch(setPagesVisited());
   };
 
   return (
-    <Container>
-      <Typography>
-          <Search />
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            spacing={2}
-          >
-            <Grid item xs={6} md={8} minWidth={250}>
-                <Postslist />
-                {displayPosts}
-            </Grid>
-            <Grid item xs={6} md={4}>
-              <Subreddits />
-            </Grid>
-          </Grid>
-          <Stack spacing={2}>
-            <Pagination       
+    <Container spacing={2}>
+      <Grid container direction="row" justify="center" spacing={2}>
+        <Grid item xs={6} md={8} minWidth={250}>
+          <Postslist />
+          {displayPosts}
+          <Stack alignItems="center">
+            <Pagination
               count={pageCount}
-              onChange={handlePageClick} 
+              onChange={handlePageClick}
               page={pageNumber}
-              defaultPage={1}
+              defaultPage={0}
               siblingCount={2}
               boundaryCount={3}
-              color='primary'
-              />
+              color="primary"
+            />
           </Stack>
-          </Typography>
+        </Grid>
+        <Grid item xs={6} md={4}>
+          <Search />
+          <Subreddits />
+        </Grid>
+      </Grid>
     </Container>
   );
 };

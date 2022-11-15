@@ -4,7 +4,8 @@ import { getComments } from "./commentsSlice";
 import { Comment } from "./comment";
 import { CommentsList } from "./commentsList";
 
-import { LinearProgress } from "@mui/material";
+import {  LinearProgress, Typography } from "@mui/material";
+
 
 export const Comments = ({ postId }) => {
   const { comments, loading } = useSelector((state) => state.comments);
@@ -17,7 +18,7 @@ export const Comments = ({ postId }) => {
   if (loading || !postComments) {
     return (
       <div>
-        <p>Comments are loading...</p>
+        <Typography>Comments are loading...</Typography>
         <LinearProgress />
       </div>
     );
@@ -25,9 +26,7 @@ export const Comments = ({ postId }) => {
 
   if (!loading && postComments.length > 0) {
     return (
-      <div>
         <CommentsList CommentsComponent={Comment} comments={postComments} />
-      </div>
     );
   }
 };

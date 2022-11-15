@@ -21,8 +21,6 @@ export const Postslist = (props) => {
   }
 
   return (
-    <div>
-      <h2>{selectedSubreddit}</h2>
-    </div>
+    <Typography variant="h4">{selectedSubreddit}</Typography>
   );
 };

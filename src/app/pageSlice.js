@@ -4,7 +4,7 @@ export const pageSlice = createSlice({
   name: "page",
   initialState: {
     pageNumber: 0,
-    postsPerPage: 5,
+    postsPerPage: 10,
     pagesVisited: 0
   },
   reducers: {

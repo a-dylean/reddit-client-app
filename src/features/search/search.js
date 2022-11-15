@@ -5,14 +5,10 @@ import { useDispatch } from "react-redux";
 import { getSubreddits, searchSubreddits } from "../subReddits/subRedditsSlice";
 import { debounce } from "lodash";
 
-import { Container, TextField, Grid } from "@mui/material";
+import { TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { InputAdornment } from "@mui/material";
 import BackspaceIcon from "@mui/icons-material/Backspace";
-
-
-const clearIconUrl =
-  "https://static-assets.codecademy.com/Courses/Learn-Redux/Recipes-App/icons/clear.svg";
 
 const searchSubredditsDebounced = debounce((dispatch, ass) => {
   dispatch(searchSubreddits(ass));
@@ -33,7 +29,6 @@ export const Search = () => {
     dispatch(getSubreddits());
   };
   return (
-    <Grid container justifyContent='center'>
         <TextField
           id="standard-basic"
           label="Search Reddit"
@@ -57,6 +52,6 @@ export const Search = () => {
               width: 300
             }
           }}
-        /></Grid>
+        />
   );
 };

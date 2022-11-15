@@ -25,13 +25,10 @@ export const Subreddits = () => {
   }
 
   return (
-    <div>
-      <h2>Subreddits</h2>
       <List>
         {subreddits.slice(0, 10).map((subreddit) => (
           <Subreddit subreddit={subreddit} key={subreddit.data.id} />
         ))}
      </List>
-    </div>
   );
 };
