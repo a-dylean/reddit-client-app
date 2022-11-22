@@ -8,8 +8,43 @@ import { setPageNumber, setPagesVisited } from "./pageSlice";
 import { useDispatch } from "react-redux";
 
 import "@fontsource/roboto/300.css";
-import { Container, Grid, Stack } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Stack,
+  Card,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  List,
+  Box,
+  GlobalStyles,
+  createTheme,
+  ThemeProvider
+} from "@mui/material";
+
 import Pagination from "@mui/material/Pagination";
+
+const theme = createTheme({
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        body {
+          background-color: #e0e0e0;
+        }
+      `,
+    },
+},
+typography: {
+  allVariants: {
+    fontFamily: 'Verdana',
+    textTransform: 'none',
+    wordBreak: "break-word"
+  },
+  h5: {
+      fontSize: 18,
+  }
+}});
 
 export const App = () => {
   const posts = useSelector((state) => state.post.posts);
@@ -17,9 +52,7 @@ export const App = () => {
     (state) => state.page
   );
 
-  const displayPosts = posts
-    .slice(pagesVisited, pagesVisited + postsPerPage)
-    .map((post) => <Post post={post} key={post.data.id} />);
+  const slicedPosts = posts.slice(pagesVisited, pagesVisited + postsPerPage);
 
   const pageCount = Math.ceil(posts.length / postsPerPage);
 
@@ -31,29 +64,61 @@ export const App = () => {
   };
 
   return (
-    <Container spacing={2}>
-      <Grid container direction="row" justify="center" spacing={2}>
-        <Grid item xs={6} md={8} minWidth={250}>
-          <Postslist />
-          {displayPosts}
-          <Stack alignItems="center">
-            <Pagination
-              count={pageCount}
-              onChange={handlePageClick}
-              page={pageNumber}
-              defaultPage={0}
-              siblingCount={2}
-              boundaryCount={3}
-              color="primary"
-            />
-          </Stack>
+    <>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppBar
+        sx={{
+          backgroundColor: "#757575",
+        }}
+      >
+        <Container>
+          <Toolbar variant="dense">
+            <Search />
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      <Container sx={{ mt: "64px" }}>
+        <Postslist />
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="flex-start"
+          wrap="nowrap"
+          spacing={2}
+        >
+          <Grid item xs={8} sx={{ minWidth: 200 }}>
+            {slicedPosts.map((post) => (
+              <Box key={post.data.id} >
+                <Post post={post} />
+              </Box>
+            ))}
+          </Grid>
+
+          <Grid
+            item
+            maxWidth="md"
+            xs={4}
+            sx={{ width: "100%",  minWidth: 150 }}
+          >
+            <Card>
+              <Subreddits />
+            </Card>
+          </Grid>
         </Grid>
-        <Grid item xs={6} md={4}>
-          <Search />
-          <Subreddits />
-        </Grid>
-      </Grid>
-    </Container>
+          <Pagination
+            count={pageCount}
+            onChange={handlePageClick}
+            page={pageNumber}
+            defaultPage={0}
+            siblingCount={2}
+            boundaryCount={3}
+            color="primary"
+          />
+      </Container></ThemeProvider>
+    </>
   );
 };
 

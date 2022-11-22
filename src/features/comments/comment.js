@@ -8,7 +8,7 @@ import TreeItem from "@mui/lab/TreeItem";
 import NorthIcon from "@mui/icons-material/North";
 import SouthIcon from "@mui/icons-material/South";
 import ReplyIcon from "@mui/icons-material/Reply";
-import { blue } from "@mui/material/colors";
+
 
 export const Comment = ({ comment }) => {
   const unix_timestamp = comment.data.created_utc;
@@ -58,9 +58,7 @@ export const Comment = ({ comment }) => {
                   <Typography
                     gutterBottom={true}
                     sx={{
-                      fontWeight: "bold",
-                      overflowWrap: "break-word",
-                      wordBreak: "break-word",
+                      fontWeight: "bold"
                     }}
                   >
                     {comment.data.author} | {date}:
@@ -70,10 +68,6 @@ export const Comment = ({ comment }) => {
                   </Badge>
                 </Box>
                 <Typography
-                  sx={{
-                    overflowWrap: "break-word",
-                    wordBreak: "break-word",
-                  }}
                 >
                   {comment.data.body}
                 </Typography>

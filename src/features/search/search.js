@@ -28,30 +28,38 @@ export const Search = () => {
     setSearchTerm("");
     dispatch(getSubreddits());
   };
+
   return (
-        <TextField
-          id="standard-basic"
-          label="Search Reddit"
-          variant="standard"
-          value={searchTerm}
-          onChange={searchTermChangeHandler}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end">
-                {searchTerm.length > 0 && (
-                  <BackspaceIcon onClick={clearSearchTermHandler} />
-                )}
-              </InputAdornment>
-            ),
-            style: {
-              width: 300
-            }
-          }}
-        />
+    <TextField
+      id="outlined-basic"
+      placeholder="Search Reddit"
+      variant="outlined"
+      size="small"
+      fullWidth
+      value={searchTerm}
+      onChange={searchTermChangeHandler}
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <SearchIcon />
+          </InputAdornment>
+        ),
+        endAdornment: (
+          <InputAdornment position="end">
+            {searchTerm.length > 0 && (
+              <BackspaceIcon onClick={clearSearchTermHandler} />
+            )}
+          </InputAdornment>
+        ),
+        style: {
+          borderRadius: 50,
+          backgroundColor: "#f5f5f5",
+          "&:hover": {
+            backgroundColor: "#fafafa",
+          },
+          fontFamily: "Verdana",
+        },
+      }}
+    />
   );
 };

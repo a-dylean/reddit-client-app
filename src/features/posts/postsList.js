@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "./postsSlice";
 
@@ -21,6 +21,6 @@ export const Postslist = (props) => {
   }
 
   return (
-    <Typography variant="h4">{selectedSubreddit}</Typography>
+    <Typography variant="h4" sx={{ fontWeight: "bold", pb: 1, fontFamily: "Verdana"}}>{selectedSubreddit}</Typography>
   );
 };

@@ -4,6 +4,7 @@ import { selectSubreddit } from "../posts/postsSlice";
 import { setPageNumber, setPagesVisitedToZero } from "../../app/pageSlice";
 
 import {
+  List,
   ListItemButton,
   Avatar,
   ListItemAvatar,
@@ -27,7 +28,7 @@ export const Subreddit = ({ subreddit, children }) => {
   };
 
   return (
-    <ListItemButton onClick={onClickHandler}>
+    <ListItemButton onClick={onClickHandler} >
       <ListItemAvatar minwidth={150}>
         <Avatar
           src={
