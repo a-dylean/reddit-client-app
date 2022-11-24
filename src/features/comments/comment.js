@@ -63,8 +63,8 @@ export const Comment = ({ comment }) => {
                   >
                     {comment.data.author} | {date}:
                   </Typography>
-                  <Badge badgeContent={replies?.length}>
-                    <ForumRoundedIcon sx={{ color: "#bdbdbd" }} />
+                  <Badge badgeContent={replies?.length} >
+                    <ForumRoundedIcon sx={{ color: "#bdbdbd"}} />
                   </Badge>
                 </Box>
                 <Typography
@@ -76,11 +76,7 @@ export const Comment = ({ comment }) => {
                 <IconButton aria-label="ups">
                   <NorthIcon />
                 </IconButton>
-                <Typography
-                  sx={{
-                    color: comment.data.ups < 0 ? "red" : "black",
-                  }}
-                >
+                <Typography>
                   {comment.data.ups}
                 </Typography>
                 <IconButton aria-label="down">

@@ -1,10 +1,10 @@
 import React from "react";
 import { Comments } from "../comments/comments";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectPost } from "../comments/commentsSlice";
-import { useState } from "react";
+import { setSelectedPost, setFullVersion } from "./postsSlice";
 import ReactPlayer from 'react-player';
-
+import { Link, Navigate } from "react-router-dom";
 import {
   Card,
   CardActions,
@@ -31,23 +31,23 @@ export const Post = ({ post }) => {
   const image = post.data.url;
   const author_data = post.data.author;
   const subheader = "Created by " + author_data + " | " + date;
-  const [commentsToggle, setCommentsToggle] = useState(false);
+  //const [commentsToggle, setCommentsToggle] = useState(false);
   const dispatch = useDispatch();
+  const fullVersion = useSelector(state => state.post.fullVersion);
+  // const onClickHandler = () => {
+  //   const newCommentsToggle = !commentsToggle;
+  //   if (newCommentsToggle) {
+  //     dispatch(selectPost(post.data.id));
+  //   } else {
+  //     dispatch(selectPost(null));
+  //   }
+  //   setCommentsToggle(newCommentsToggle);
+  // };
 
-  const onClickHandler = () => {
-    const newCommentsToggle = !commentsToggle;
-    if (newCommentsToggle) {
-      dispatch(selectPost(post.data.id));
-    } else {
-      dispatch(selectPost(null));
-    }
-    setCommentsToggle(newCommentsToggle);
-  };
-
-  const [expanded, setExpanded] = useState(false);
-  const handleChange = () => {
-    setExpanded((prev) => !prev);
-  };
+  // const [expanded, setExpanded] = useState(false);
+  // const handleChange = () => {
+  //   setExpanded((prev) => !prev);
+  // };
 
   const buttonUp = {
     "&:hover": {
@@ -70,10 +70,18 @@ export const Post = ({ post }) => {
     border: "none"
   }
 
-  const link = post.data.media?.reddit_video?.scrubber_media_url;
-  console.log(link)
+  const onPostClick = () => {
+    dispatch(setFullVersion());
+    dispatch(setSelectedPost(post));
+    dispatch(selectPost(post.data.id));
+  };
+
   return (
-    <Card sx={{ maxwidth: 350, mb: 5, display: "flex", flexDirection: "row" }}>
+    <>
+    {fullVersion && (
+      <Navigate to="/post" replace={true} />
+    )}
+    <Card sx={{ maxwidth: 350, mb: 5, display: "flex", flexDirection: "row" }} >
       <Box sx={{ background: "#f5f5f5", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center" }}>
         <IconButton > 
           <ThumbUpOffAltIcon sx={buttonUp} />
@@ -82,7 +90,8 @@ export const Post = ({ post }) => {
         <IconButton>
           <ThumbDownOffAltIcon sx={buttonDown}/>
         </IconButton>
-      </Box>
+      </Box> 
+  
       <Box
         wrap="nowrap"
         sx={{ width: "100%", display: "flex", flexDirection: "column" }}
@@ -94,6 +103,7 @@ export const Post = ({ post }) => {
             p: 0,
           }}
         >
+          <Box onClick={onPostClick} sx={{cursor: "pointer"}}>
           <CardHeader title={post.data.title} subheader={subheader} />
           <CardMedia
             component="img"
@@ -118,16 +128,15 @@ export const Post = ({ post }) => {
           />)}
           {post.data?.selftext && (
             <Collapse
-              in={expanded}
-              collapsedSize={200}
+              in={fullVersion}
+              collapsedSize={150}
               sx={{
-                maskImage: !expanded
-                  ? "linear-gradient(to bottom, black, black 80%, black 20%, transparent 100%)"
-                  : "none",
+                maskImage: !fullVersion ? 
+                "linear-gradient(to bottom, black, black 80%, black 20%, transparent 100%)"
+                : "none"
               }}
             >
               <Typography
-                onClick={handleChange}
                 sx={{ p: "16px", width: "100%" }}
                 paragraph
                 wrap="nowrap"
@@ -138,7 +147,7 @@ export const Post = ({ post }) => {
           )}
           <CardActions>
           <ButtonGroup variant="outlined" aria-label="outlined button group" sx={button}>
-            <Button aria-label="view comments" onClick={onClickHandler} sx={button}>
+            <Button aria-label="view comments" sx={button}>
                 <ChatBubbleIcon />
             <Typography>{post.data.num_comments} {(post.data.num_comments === 1) ? "comment" : "comments"}</Typography>
             </Button>
@@ -152,10 +161,12 @@ export const Post = ({ post }) => {
               <MoreHorizIcon />
             </Button>
             </ButtonGroup>
-          </CardActions>
-          {commentsToggle && <Comments postId={post.data.id} />}
+          </CardActions> 
+           </Box>
+          {fullVersion && <Comments postId={post.data.id} />}
         </CardContent>
       </Box>
     </Card>
+    </>
   );
 };

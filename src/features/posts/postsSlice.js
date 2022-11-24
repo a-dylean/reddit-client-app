@@ -15,11 +15,19 @@ export const postsSlice = createSlice({
     posts: [],
     selectedSubreddit: "/r/Home",
     loading: false,
+    selectedPost: {},
+    fullVersion: false
   },
   reducers: {
     selectSubreddit: (state, action) => {
       state.selectedSubreddit = action.payload;
     },
+    setSelectedPost: (state, action) => {
+      state.selectedPost = action.payload;
+    },
+    setFullVersion: (state) => {
+      state.fullVersion = !state.fullVersion;
+    }
   },
   extraReducers: {
     [getPosts.pending]: (state, action) => {
@@ -34,5 +42,5 @@ export const postsSlice = createSlice({
     },
   },
 });
-export const { selectSubreddit } = postsSlice.actions;
+export const { selectSubreddit, setSelectedPost, setFullVersion } = postsSlice.actions;
 export default postsSlice.reducer;

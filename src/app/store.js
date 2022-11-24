@@ -10,5 +10,5 @@ export default configureStore({
         post: PostsReducer,
         comments: CommentsReducer,
         page: PageReducer
-    },      
+    }      
 });
