@@ -27,7 +27,7 @@ export const App = () => {
         </AppBar>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/post" element={<PostPage />} />
+          <Route path="/:postId" element={<PostPage />} />
         </Routes>
       </ThemeProvider>
       </BrowserRouter>

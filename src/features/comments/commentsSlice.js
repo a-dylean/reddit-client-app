@@ -18,11 +18,6 @@ export const commentsSlice = createSlice({
     postId: "",
     loading: false,
   },
-  reducers: {
-    selectPost: (state, action) => {
-      state.postId = action.payload;
-    },
-  },
   extraReducers: {
     [getComments.pending]: (state, action) => {
       state.loading = true;
@@ -41,5 +36,4 @@ export const commentsSlice = createSlice({
   },
 });
 
-export const { selectPost } = commentsSlice.actions;
 export default commentsSlice.reducer;

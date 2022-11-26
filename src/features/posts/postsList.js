@@ -10,7 +10,7 @@ export const Postslist = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPosts(selectedSubreddit));
-  }, [selectedSubreddit]);
+  }, [selectedSubreddit, dispatch]);
 
   if (loading) {
     return (
