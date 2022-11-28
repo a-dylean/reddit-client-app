@@ -57,7 +57,6 @@ export const Search = () => {
           "&:hover": {
             backgroundColor: "#fafafa",
           },
-          fontFamily: "Verdana",
         },
       }}
     />

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Post } from "../features/posts/post";
 import { setPageNumber, setPagesVisited } from "./pageSlice";
 import { useDispatch } from "react-redux";
-import { theme } from "./theme";
+import {Typography, LinearProgress } from "@mui/material";
 
 import {
   Container,
@@ -18,6 +18,7 @@ import Pagination from "@mui/material/Pagination";
 
 export const Home = () => {
   const posts = useSelector((state) => state.post.posts);
+  const loading = useSelector(state => state.post)
   const { pageNumber, postsPerPage, pagesVisited } = useSelector(
     (state) => state.page
   );
@@ -34,9 +35,7 @@ export const Home = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container sx={{ mt: "64px" }}>
-        <Postslist />
+      <Container sx={{ mt: "4rem" }}>
         <Grid
           container
           direction="row"
@@ -46,6 +45,9 @@ export const Home = () => {
           spacing={2}
         >
           <Grid item xs={8} sx={{ minWidth: 200 }}>
+          {loading ? 
+        <><Typography>Posts are loading...</Typography>
+        <LinearProgress /> </>: ""}
             {slicedPosts.map((post) => (
               <Box key={post.data.id}>
                   <Post post={post} />
@@ -53,7 +55,7 @@ export const Home = () => {
             ))}
           </Grid>
           <Grid item maxWidth="md" xs={4} sx={{ width: "100%", minWidth: 150, position: "sticky", top: "3rem" }}>
-            <Card sx={{}}>
+            <Card >
               <Subreddits />
             </Card>
           </Grid>
@@ -68,6 +70,5 @@ export const Home = () => {
           color="primary"
         />
       </Container>
-    </ThemeProvider>
   );
 };

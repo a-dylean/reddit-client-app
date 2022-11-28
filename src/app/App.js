@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Search } from "../features/search/search";
 import { theme } from "./theme";
-
+import { Postslist } from "../features/posts/postsList";
 export const App = () => {
   return (
     <>
@@ -19,8 +19,9 @@ export const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <AppBar>
-          <Container>
-            <Toolbar variant="dense">
+          <Container sx={{ position: "flex", justifyContent: "space-around"}}>
+            <Toolbar variant="dense" >
+            <Postslist/>
               <Search />
             </Toolbar>
           </Container>

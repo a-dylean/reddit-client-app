@@ -12,15 +12,7 @@ export const Postslist = (props) => {
     dispatch(getPosts(selectedSubreddit));
   }, [selectedSubreddit]);
 
-  if (loading) {
-    return (
-      <div>
-        <Typography>Posts are loading...</Typography>
-        <LinearProgress />
-    </div>);
-  }
-
   return (
-    <Typography variant="h4" sx={{ fontWeight: "bold", pb: 1, fontFamily: "Verdana"}}>{selectedSubreddit}</Typography>
+    <Typography variant="h5" sx={{width: "30%"}}>{selectedSubreddit}</Typography>
   );
 };

@@ -15,6 +15,8 @@ export const Comments = ({ postId }) => {
     dispatch(getComments(postId));
   }, [postId]);
 
+
+
   if (loading || !postComments) {
     return (
       <div>

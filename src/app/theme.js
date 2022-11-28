@@ -13,17 +13,52 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#757575",
+      main: "#FF4300",
     },
   },
   typography: {
     allVariants: {
-      fontFamily: "Verdana, Arial, Helvetica, sans-serif",
+      fontFamily: 'IBM Plex Sans, Arial, sans-serif',
       textTransform: "none",
       wordBreak: "break-word",
     },
-    h5: {
-      fontSize: 18,
+    h4: {
+      fontSize: "36px",
+      fontWeight: 600
     },
+    h5: {
+      fontSize: "18px",
+      fontWeight: 600,
+      lineHeight: "22px"
+    },
+    h6: {
+      fontFamily: "Noto Sans",
+      fontSize: "14px", 
+      width: "100%",
+      padding: "16px",
+      fontWeight: 400,
+      lineHeight: "21px"
+    }
   },
 });
+
+
+// const buttonUp = {
+//   "&:hover": {
+//     color: "#f44336"
+//   }
+// };
+
+// const buttonDown = {
+//   "&:hover": {
+//     color: "#3f51b5"
+//   }
+// };
+
+// const button = {
+//   "&:hover": {
+//     backgroundColor: "rgba(0, 0, 0, 0.04)",
+//     border: "none"
+//   },
+//   border: "none"
+// }

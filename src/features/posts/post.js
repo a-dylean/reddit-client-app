@@ -30,45 +30,9 @@ export const Post = ({ post }) => {
   const date = new Date(unix_timestamp * 1000).toLocaleString();
   const image = post.data.url;
   const author_data = post.data.author;
-  const subheader = "Created by " + author_data + " | " + date;
-  //const [commentsToggle, setCommentsToggle] = useState(false);
+  const subheader = "Posted by " + author_data + " | " + date;
   const dispatch = useDispatch();
   const fullVersion = useSelector(state => state.post.fullVersion);
-  // const onClickHandler = () => {
-  //   const newCommentsToggle = !commentsToggle;
-  //   if (newCommentsToggle) {
-  //     dispatch(selectPost(post.data.id));
-  //   } else {
-  //     dispatch(selectPost(null));
-  //   }
-  //   setCommentsToggle(newCommentsToggle);
-  // };
-
-  // const [expanded, setExpanded] = useState(false);
-  // const handleChange = () => {
-  //   setExpanded((prev) => !prev);
-  // };
-
-  const buttonUp = {
-    "&:hover": {
-      color: "#f44336"
-    }
-  };
-
-  const buttonDown = {
-    "&:hover": {
-      color: "#3f51b5"
-    }
-  };
-
-  const button = {
-    "&:hover": {
-      backgroundColor: "rgba(0, 0, 0, 0.04)",
-      border: "none"
-    },
-    color: "black",
-    border: "none"
-  }
 
   const onPostClick = () => {
     dispatch(setFullVersion());
@@ -81,26 +45,26 @@ export const Post = ({ post }) => {
     {fullVersion && (
       <Navigate to="/post" replace={true} />
     )}
-    <Card sx={{ maxwidth: 350, mb: 5, display: "flex", flexDirection: "row" }} >
+    <Card sx={{ maxwidth: 350, mb: "1rem", display: "flex", flexDirection: "row" }} >
       <Box sx={{ background: "#f5f5f5", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center" }}>
-        <IconButton > 
-          <ThumbUpOffAltIcon sx={buttonUp} />
+        <IconButton sx={{m: "0.3rem 0.3rem 0", p: "0.2"}}> 
+          <ThumbUpOffAltIcon />
         </IconButton>
-        <Typography sx={{fontWeight: "bold", fontSize: "10px"}}>{post.data.ups}</Typography>
-        <IconButton>
-          <ThumbDownOffAltIcon sx={buttonDown}/>
+        <Typography sx={{fontWeight: 600, fontSize: "15px", lineHight: 1, p: 0}}>{post.data.ups > 9999 ? "10k+" : post.data.ups}</Typography>
+        <IconButton sx={{m: "0 0.3rem 0.3rem", p: "0.2"}}>
+          <ThumbDownOffAltIcon/>
         </IconButton>
       </Box> 
   
       <Box
         wrap="nowrap"
-        sx={{ width: "100%", display: "flex", flexDirection: "column" }}
+        sx={{ width: "100%"}}
       >
         <CardContent
           sx={{
             display: "flex",
             flexDirection: "column",
-            p: 0,
+            p: 0
           }}
         >
           <Box onClick={onPostClick} sx={{cursor: "pointer"}}>
@@ -137,7 +101,7 @@ export const Post = ({ post }) => {
               }}
             >
               <Typography
-                sx={{ p: "16px", width: "100%" }}
+                variant="h6"
                 paragraph
                 wrap="nowrap"
               >
@@ -145,19 +109,20 @@ export const Post = ({ post }) => {
               </Typography>
             </Collapse>
           )}
-          <CardActions>
-          <ButtonGroup variant="outlined" aria-label="outlined button group" sx={button}>
-            <Button aria-label="view comments" sx={button}>
-                <ChatBubbleIcon />
-            <Typography>{post.data.num_comments} {(post.data.num_comments === 1) ? "comment" : "comments"}</Typography>
+          <CardActions sx={{p: "1rem"}}>
+          <ButtonGroup variant="outlined" aria-label="outlined button group"  >
+            <Button aria-label="view comments">
+                <ChatBubbleIcon sx={{pr: "0.3rem"}} />
+            <Typography sx={{fontWeight: 600, fontSize: "15px", lineHight: 1}} >{post.data.num_comments} {(post.data.num_comments === 1) ? "comment" : "comments"}
+            </Typography>
             </Button>
-            <Button aria-label="share post"sx={button} >
+            <Button aria-label="share post">
               <ShareIcon />
             </Button>
-            <Button aria-label="save post" sx={button}>
+            <Button aria-label="save post">
               <BookmarkBorderIcon />
             </Button>
-            <Button aria-label="more info" sx={button}>
+            <Button aria-label="more info">
               <MoreHorizIcon />
             </Button>
             </ButtonGroup>

@@ -9,7 +9,7 @@ import { Subreddit } from "./subreddit";
 import { List, Typography, LinearProgress } from "@mui/material";
 
 export const Subreddits = () => {
-  const { subreddits, loading } = useSelector((state) => state.subreddit);
+  const { subreddits, loading, rejected } = useSelector((state) => state.subreddit);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,6 +22,15 @@ export const Subreddits = () => {
         <Typography>Subreddits are loading...</Typography>
         <LinearProgress/>
     </div>);
+  }
+
+  if (rejected || !subreddits.length) {
+    return (
+      <div>
+        <Typography>Subreddit not found!</Typography>
+      </div>
+    );
+
   }
 
   return (
