@@ -9,6 +9,15 @@ export const getPosts = createAsyncThunk(
   }
 );
 
+export const getPost = createAsyncThunk(
+  "posts/getPost",
+  async (postId) => {
+    return fetch(`https://api.reddit.com/api/info/?id=t3_${postId}`)
+      .then((res) => res.json())
+      .then((data) => Object.assign({}, data.data.children[0]));
+  }
+);
+
 export const postsSlice = createSlice({
   name: "posts",
   initialState: {
@@ -23,7 +32,7 @@ export const postsSlice = createSlice({
     },
   },
   extraReducers: {
-    [getPosts.pending]: (state, action) => {
+    [getPosts.pending]: (state) => {
       state.loading = true;
     },
     [getPosts.fulfilled]: (state, action) => {
@@ -33,10 +42,23 @@ export const postsSlice = createSlice({
         state.posts,
       )
     },
-    [getPosts.rejected]: (state, action) => {
+    [getPosts.rejected]: (state) => {
       state.loading = false;
     },
+    [getPost.pending]: (state) => {
+      state.loading = true;
+    },
+    [getPost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.posts = {
+        ...state.posts,
+        [action.payload.data.id]: action.payload
+      };
+    },
+    [getPost.pending]: (state) => {
+      state.loading = false;
+    }
   },
 });
-export const { selectSubreddit, setSelectedPost, setFullVersion } = postsSlice.actions;
+export const { selectSubreddit } = postsSlice.actions;
 export default postsSlice.reducer;

@@ -38,6 +38,11 @@ export const theme = createTheme({
       padding: "16px",
       fontWeight: 400,
       lineHeight: "21px"
+    },
+    h7: { 
+      fontWeight: 600, 
+      fontSize: "15px", 
+      lineHight: 1
     }
   },
 });

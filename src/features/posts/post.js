@@ -91,7 +91,7 @@ export const Post = ({ post, fullVersion = false }) => {
               />
               {post.data.media?.reddit_video && (
                 <ReactPlayer
-                  url={post.data.media?.reddit_video?.fallback_url}
+                  url={post.data.media.reddit_video.fallback_url}
                   hight="100%"
                   width="100%"
                   playing={true}

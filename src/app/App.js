@@ -8,11 +8,13 @@ import {
   Toolbar,
   Container,
   ThemeProvider,
+  Typography
 } from "@mui/material";
 import { Search } from "../features/search/search";
 import { theme } from "./theme";
-import { Postslist } from "../features/posts/postsList";
+import { useSelector } from "react-redux";
 export const App = () => {
+  const selectedSubreddit = useSelector(state => state.post.selectedSubreddit)
   return (
     <>
     <BrowserRouter>
@@ -21,7 +23,7 @@ export const App = () => {
         <AppBar>
           <Container sx={{ position: "flex", justifyContent: "space-around"}}>
             <Toolbar variant="dense" >
-            <Postslist/>
+            <Typography variant="h5" sx={{width: "30%"}}>{selectedSubreddit}</Typography>
               <Search />
             </Toolbar>
           </Container>

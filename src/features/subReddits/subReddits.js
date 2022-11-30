@@ -5,22 +5,28 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getSubreddits } from "./subRedditsSlice";
 import { Subreddit } from "./subreddit";
+import { getPosts } from "../posts/postsSlice";
 
 import { List, Typography, LinearProgress } from "@mui/material";
 
 export const Subreddits = () => {
   const { subreddits, loading, rejected } = useSelector((state) => state.subreddit);
+  const { selectedSubreddit } = useSelector((state) => state.post);
+
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("Hello sub reddits")
     dispatch(getSubreddits());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getPosts(selectedSubreddit));
+  }, [selectedSubreddit, dispatch]);
 
   if (loading) {
     return (
       <div>
-        <Typography>Subreddits are loading...</Typography>
+        <Typography variant="h7">Subreddits are loading...</Typography>
         <LinearProgress/>
     </div>);
   }
@@ -28,7 +34,7 @@ export const Subreddits = () => {
   if (rejected || !subreddits.length) {
     return (
       <div>
-        <Typography>Subreddit not found!</Typography>
+        <Typography variant="h7">Subreddit not found!</Typography>
       </div>
     );
 

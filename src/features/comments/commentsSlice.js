@@ -15,11 +15,10 @@ export const commentsSlice = createSlice({
   name: "comments",
   initialState: {
     comments: {},
-    postId: "",
     loading: false,
   },
   extraReducers: {
-    [getComments.pending]: (state, action) => {
+    [getComments.pending]: (state) => {
       state.loading = true;
     },
     [getComments.fulfilled]: (state, action) => {
@@ -30,7 +29,7 @@ export const commentsSlice = createSlice({
         [postId]: comments,
       };
     },
-    [getComments.rejected]: (state, action) => {
+    [getComments.rejected]: (state) => {
       state.loading = false;
     },
   },

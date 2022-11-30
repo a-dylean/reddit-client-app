@@ -4,7 +4,6 @@ import { selectSubreddit } from "../posts/postsSlice";
 import { setPageNumber, setPagesVisitedToZero } from "../../app/pageSlice";
 
 import {
-  List,
   ListItemButton,
   Avatar,
   ListItemAvatar,
@@ -23,7 +22,7 @@ export const Subreddit = ({ subreddit, children }) => {
 
   const onClickHandler = () => {
     dispatch(selectSubreddit(subreddit.data.url));
-    dispatch(setPageNumber(0));
+    dispatch(setPageNumber(1));
     dispatch(setPagesVisitedToZero());
   };
 
@@ -42,7 +41,7 @@ export const Subreddit = ({ subreddit, children }) => {
           }}
         />
       </ListItemAvatar>
-      <Typography sx={{ fontWeight: "bold" }}>
+      <Typography variant="h7">
         {subreddit.data.title}
       </Typography>
     </ListItemButton>

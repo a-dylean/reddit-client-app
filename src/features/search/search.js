@@ -53,12 +53,9 @@ export const Search = () => {
         ),
         style: {
           borderRadius: 50,
-          backgroundColor: "#f5f5f5",
-          "&:hover": {
-            backgroundColor: "#fafafa",
+          backgroundColor: "#fafafa",
           },
-        },
-      }}
+        }}
     />
   );
 };

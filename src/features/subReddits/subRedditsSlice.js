@@ -30,24 +30,24 @@ export const subRedditsSlice = createSlice({
   },
   reducers: {},
   extraReducers: {
-    [getSubreddits.pending]: (state, action) => {
+    [getSubreddits.pending]: (state) => {
       state.loading = true;
     },
     [getSubreddits.fulfilled]: (state, action) => {
       state.loading = false;
       state.subreddits = action.payload;
     },
-    [searchSubreddits.rejected]: (state, action) => {
+    [getSubreddits.rejected]: (state) => {
       state.loading = false;
     },
-    [searchSubreddits.pending]: (state, action) => {
+    [searchSubreddits.pending]: (state) => {
       state.loading = true;
     },
     [searchSubreddits.fulfilled]: (state, action) => {
       state.loading = false;
       state.subreddits = action.payload;
     },
-    [searchSubreddits.rejected]: (state, action) => {
+    [searchSubreddits.rejected]: (state) => {
       state.loading = false;
     },
   },

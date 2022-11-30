@@ -20,7 +20,7 @@ export const Comments = ({ postId }) => {
   if (loading || !postComments) {
     return (
       <div>
-        <Typography>Comments are loading...</Typography>
+        <Typography variant="h7">Comments are loading...</Typography>
         <LinearProgress />
       </div>
     );

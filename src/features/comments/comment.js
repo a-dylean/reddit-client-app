@@ -51,8 +51,7 @@ export const Comment = ({ comment }) => {
                   sx={{
                     pt: 1,
                     display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
+                    justifyContent: "space-between"
                   }}
                 >
                   <Typography
@@ -63,9 +62,13 @@ export const Comment = ({ comment }) => {
                   >
                     {comment.data.author} | {date}:
                   </Typography>
-                  <Badge badgeContent={replies?.length} >
-                    <ForumRoundedIcon sx={{ color: "#bdbdbd"}} />
-                  </Badge>
+                  <Box
+                  sx={{
+                    display: "flex"
+                  }}>
+                  {replies?.length && <><ForumRoundedIcon sx={{ pr: "0.3rem" }} />
+                    <Typography variant="h7">{replies?.length} { (replies?.length > 1 ? "replies" : "reply")}</Typography></>}
+                    </Box>
                 </Box>
                 <Typography
                 >
@@ -76,7 +79,7 @@ export const Comment = ({ comment }) => {
                 <IconButton aria-label="ups">
                   <NorthIcon />
                 </IconButton>
-                <Typography>
+                <Typography variant="h7">
                   {comment.data.ups}
                 </Typography>
                 <IconButton aria-label="down">
