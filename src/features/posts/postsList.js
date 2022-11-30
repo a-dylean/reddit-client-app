@@ -10,7 +10,7 @@ export const Postslist = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPosts(selectedSubreddit));
-  }, [selectedSubreddit]);
+  }, [selectedSubreddit, dispatch]);
 
   return (
     <Typography variant="h5" sx={{width: "30%"}}>{selectedSubreddit}</Typography>

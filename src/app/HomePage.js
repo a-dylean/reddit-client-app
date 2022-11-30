@@ -23,7 +23,9 @@ export const Home = () => {
     (state) => state.page
   );
 
-  const slicedPosts = posts.slice(pagesVisited, pagesVisited + postsPerPage);
+  // TODO: fix pagination
+  // const slicedPosts = posts.slice(pagesVisited, pagesVisited + postsPerPage);
+  const slicedPosts = Object.values(posts)
 
   const pageCount = Math.ceil(posts.length / postsPerPage);
 

@@ -12,22 +12,15 @@ export const getPosts = createAsyncThunk(
 export const postsSlice = createSlice({
   name: "posts",
   initialState: {
-    posts: [],
+    posts: {},
     selectedSubreddit: "/r/Home",
     loading: false,
-    selectedPost: {},
-    fullVersion: false
   },
   reducers: {
     selectSubreddit: (state, action) => {
       state.selectedSubreddit = action.payload;
+      state.posts = {};
     },
-    setSelectedPost: (state, action) => {
-      state.selectedPost = action.payload;
-    },
-    setFullVersion: (state) => {
-      state.fullVersion = !state.fullVersion;
-    }
   },
   extraReducers: {
     [getPosts.pending]: (state, action) => {
@@ -35,7 +28,10 @@ export const postsSlice = createSlice({
     },
     [getPosts.fulfilled]: (state, action) => {
       state.loading = false;
-      state.posts = action.payload;
+      state.posts = action.payload.reduce(
+        (accumulator, post) => ({...accumulator, [post.data.id]: post}),
+        state.posts,
+      )
     },
     [getPosts.rejected]: (state, action) => {
       state.loading = false;

@@ -13,7 +13,7 @@ export const Comments = ({ postId }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getComments(postId));
-  }, [postId]);
+  }, [postId, dispatch]);
 
 
 

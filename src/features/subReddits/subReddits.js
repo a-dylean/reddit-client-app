@@ -13,8 +13,9 @@ export const Subreddits = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log("Hello sub reddits")
     dispatch(getSubreddits());
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return (
