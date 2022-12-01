@@ -90,14 +90,16 @@ export const Post = ({ post, fullVersion = false }) => {
                 }}
               />
               {post.data.media?.reddit_video && (
-                <ReactPlayer
-                  url={post.data.media.reddit_video.fallback_url}
-                  hight="100%"
-                  width="100%"
-                  playing={true}
-                  muted={true}
+                <CardMedia
+                  component="video" 
+                  height="350"
+                  src={post.data.media.reddit_video.fallback_url}
+                  preload="auto"
                   controls={true}
-                />
+                  autoPlay={true}
+                  loop={true} 
+                  sx={{ backgroundColor: "black"}}
+               />
               )}
               {post.data?.selftext && (
                 <Collapse

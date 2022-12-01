@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { Container, Box } from "@mui/material";
 import { Post } from "../features/posts/post";
 import { useSelector, useDispatch} from "react-redux";
-import {Button} from "@mui/material";
-import {Link, useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { getPost } from "../features/posts/postsSlice";
 
 const PostPage = () => {
@@ -22,9 +21,6 @@ const PostPage = () => {
     <Container sx={{ mt: "64px" }}>
      <Box sx={{display: "flex", justifyContent: "center",
           alignItems:"flex-start", pb: "1rem"}}>
-     <Link to="/">
-      <Button variant="contained" disableElevation sx={{textDecoration: "none"}}>Go to the main page</Button>
-      </Link>
       </Box>
       {selectedPost ? <Post post={selectedPost} fullVersion={true}/>
 : 'loading' }

@@ -35,7 +35,7 @@ export const theme = createTheme({
       fontFamily: "Noto Sans",
       fontSize: "14px", 
       width: "100%",
-      padding: "16px",
+      padding: " 0 16px",
       fontWeight: 400,
       lineHeight: "21px"
     },

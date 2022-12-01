@@ -8,7 +8,7 @@ import { debounce } from "lodash";
 import { TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { InputAdornment } from "@mui/material";
-import BackspaceIcon from "@mui/icons-material/Backspace";
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
 const searchSubredditsDebounced = debounce((dispatch, ass) => {
   dispatch(searchSubreddits(ass));
@@ -31,6 +31,7 @@ export const Search = () => {
 
   return (
     <TextField
+    type="text"
       id="outlined-basic"
       placeholder="Search Reddit"
       variant="outlined"
@@ -38,6 +39,7 @@ export const Search = () => {
       fullWidth
       value={searchTerm}
       onChange={searchTermChangeHandler}
+      autoComplete="off"
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
@@ -47,7 +49,7 @@ export const Search = () => {
         endAdornment: (
           <InputAdornment position="end">
             {searchTerm.length > 0 && (
-              <BackspaceIcon onClick={clearSearchTermHandler} />
+              <CancelOutlinedIcon onClick={clearSearchTermHandler} />
             )}
           </InputAdornment>
         ),
