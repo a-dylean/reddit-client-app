@@ -42,6 +42,7 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
           mb: "1rem",
           display: "flex",
           flexDirection: "row",
+          pb: 0
         }}
       >
         <Box
@@ -51,6 +52,7 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "center",
+            
           }}
         >
           <IconButton sx={{ m: "0.3rem 0.3rem 0", p: "0.2" }}>
@@ -65,13 +67,13 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
         </Box>
         <Box
           wrap="nowrap"
-          sx={{ width: "100%", display: "flex", flexDirection: "column" }}
+          sx={{ width: "100%", display: "flex", flexDirection: "column", pb: 0 }}
         >
           <CardContent
             sx={{
               display: "flex",
               flexDirection: "column",
-              p: 0,
+              p: 0
             }}
           >
             <Box onClick={onPostClick} sx={{ cursor: fullVersion ? "auto" : "pointer" }}>

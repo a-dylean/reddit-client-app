@@ -28,7 +28,7 @@ export const Subreddit = ({ subreddit, children }) => {
   };
 
   return (
-      <ListItemButton onClick={onClickHandler} >
+      <ListItemButton onClick={onClickHandler} disableRipple>
       <ListItemAvatar minwidth={150}>
         <Avatar
           src={

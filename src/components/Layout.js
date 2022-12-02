@@ -13,7 +13,7 @@ const Layout = ({ children, selectedSubreddit }) => {
           variant="dense"
           sx={{ display: "flex", justifyContent: "space-around" }}
         >
-        <Button sx={{ color: 'white'}} onClick={() => navigate(`/r/${selectedSubreddit}`)}><Typography variant='h5'>/r/{selectedSubreddit}</Typography></Button>
+        <Typography sx={{ color: 'white', cursor: "pointer"}} onClick={() => navigate(`/r/${selectedSubreddit}`)} variant='h5'>/r/{selectedSubreddit}</Typography>
           <Search />
         </Toolbar>
       </AppBar>

@@ -4,14 +4,34 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getSubreddits, searchSubreddits } from "../features/subReddits/subRedditsSlice";
 import { debounce } from "lodash";
-
-import { TextField, Box } from "@mui/material";
+import {styled} from "@mui/material/styles";
+import { TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { InputAdornment } from "@mui/material";
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
-const searchSubredditsDebounced = debounce((dispatch, ass) => {
-  dispatch(searchSubreddits(ass));
+const SearchTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: "rgba(0, 0, 0, 0.54)",
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: 'rgba(0, 0, 0, 0.54)',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'rgba(0, 0, 0, 0.54)',
+    },
+    '&:hover fieldset': {
+      borderColor: 'rgba(0, 0, 0, 0.54)',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'rgba(0, 0, 0, 0.54)',
+    },
+  },
+});
+
+const searchSubredditsDebounced = debounce((dispatch, searchTerm) => {
+  dispatch(searchSubreddits(searchTerm));
 }, 500);
 
 export const Search = () => {
@@ -30,7 +50,7 @@ export const Search = () => {
   };
 
   return (
-    <TextField
+    <SearchTextField
     type="text"
       id="outlined-basic"
       placeholder="Search Reddit"

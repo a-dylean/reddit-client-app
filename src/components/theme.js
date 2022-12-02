@@ -9,6 +9,51 @@ export const theme = createTheme({
           }
         `,
     },
+    MuiCardContent: {
+      styleOverrides:{
+        root: { 
+          "&:last-child": {
+            padding: 0
+          } 
+        },
+      }
+      },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          paddingTop: 0,
+          paddingBottom: 0
+        },
+        padding: {
+          padding: 0
+        }
+      }
+    },
+    MuiBox: {
+      styleOverrides: {
+        root: {
+          padding: 0
+        }
+      }
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          "&:hover": {
+            backgroundColor: "#FF4300"
+          }
+        }
+      }
+    },
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          "&:hover": {
+            backgroundColor: "#FF4300"
+          }
+        }
+      }
+    },
   },
   palette: {
     primary: {
