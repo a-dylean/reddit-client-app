@@ -55,7 +55,7 @@ const PageLayout = ({ selectedSubreddit }) => {
             )}
             {slicedPosts.map((post) => (
               <Box key={post.data.id}>
-                <Post post={post} />
+                <Post post={post} selectedSubreddit={selectedSubreddit}/>
               </Box>
             ))}
             <Box sx={{ display: "flex", justifyContent: "center" }}>

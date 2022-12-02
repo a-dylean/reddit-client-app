@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { Search } from "./search";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
 const Layout = ({ children, selectedSubreddit }) => {
   const navigate = useNavigate();

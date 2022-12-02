@@ -23,13 +23,12 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import { useParams } from "react-router-dom";
 
-export const Post = ({ post, fullVersion = false }) => {
+export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
   const unix_timestamp = post.data.created_utc;
   const date = new Date(unix_timestamp * 1000).toLocaleString();
   const image = post.data.url;
   const author_data = post.data.author;
   const subheader = "Posted by " + author_data + " | " + date;
-  const {selectedSubreddit} = useParams();
   const navigate = useNavigate();
   const onPostClick = () => {
     !fullVersion && navigate(`/r/${selectedSubreddit}/${post.data.id}`);
