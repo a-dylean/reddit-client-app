@@ -12,7 +12,7 @@ export const pageSlice = createSlice({
       state.pageNumber = action.payload;
     },
     setPagesVisited: (state) => {
-      state.pagesVisited = state.pageNumber * state.postsPerPage;
+      state.pagesVisited = state.pageNumber * state.postsPerPage - state.postsPerPage;
     },
     setPagesVisitedToZero: (state) => {
       state.pagesVisited = 0;
