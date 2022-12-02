@@ -4,9 +4,10 @@ import { Post } from "../features/posts/post";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getPost } from "../features/posts/postsSlice";
+import Layout from './Layout';
 
 const PostPage = () => {
-  const { postId } = useParams();
+  const { postId, selectedSubreddit } = useParams();
   const selectedPost = useSelector((state) => state.post.posts[postId]);
   const dispatch = useDispatch();
 
@@ -15,7 +16,7 @@ const PostPage = () => {
   }, [postId, dispatch]);
 
   return (
-    <>
+    <Layout selectedSubreddit={selectedSubreddit}>
       <Container sx={{ mt: "64px" }}>
         <Box
           sx={{
@@ -31,7 +32,7 @@ const PostPage = () => {
           <Card><Typography variant="h7">Loading...</Typography><LinearProgress/></Card>
         )}
       </Container>
-    </>
+    </Layout>
   );
 };
 

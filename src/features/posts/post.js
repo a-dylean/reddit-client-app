@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Comments } from "../comments/comments";
 import { useNavigate } from "react-router-dom";
 import {
@@ -20,6 +21,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import { useParams } from "react-router-dom";
 
 export const Post = ({ post, fullVersion = false }) => {
   const unix_timestamp = post.data.created_utc;
@@ -27,10 +29,10 @@ export const Post = ({ post, fullVersion = false }) => {
   const image = post.data.url;
   const author_data = post.data.author;
   const subheader = "Posted by " + author_data + " | " + date;
+  const {selectedSubreddit} = useParams();
   const navigate = useNavigate();
-
   const onPostClick = () => {
-    !fullVersion && navigate(`/${post.data.id}`);
+    !fullVersion && navigate(`/r/${selectedSubreddit}/${post.data.id}`);
   };
 
   return (

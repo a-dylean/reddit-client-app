@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const getPosts = createAsyncThunk(
   "posts/getPosts",
   async (subreddit) => {
-    return fetch(`https://www.reddit.com${subreddit}.json?limit=100`)
+    return fetch(`https://www.reddit.com/r/${subreddit}.json?limit=100`)
       .then((res) => res.json())
       .then((data) => data.data.children);
   }
@@ -22,7 +22,7 @@ export const postsSlice = createSlice({
   name: "posts",
   initialState: {
     posts: {},
-    selectedSubreddit: "/r/Home",
+    selectedSubreddit: "Home",
     loading: false,
   },
   reducers: {

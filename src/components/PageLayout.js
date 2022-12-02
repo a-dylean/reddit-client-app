@@ -1,23 +1,26 @@
 import React, { useEffect } from "react";
-import { Subreddits } from "../features/subReddits/subReddits";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getPosts } from "../features/posts/postsSlice";
+import { Subreddits } from "../features/subReddits/subReddits";
 import { Post } from "../features/posts/post";
 import { setPageNumber, setPagesVisited } from "./pageSlice";
-import { useDispatch } from "react-redux";
 import { Typography, LinearProgress, PaginationItem } from "@mui/material";
-
 import { Container, Grid, Card, Box } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Layout from './Layout'
 
-const DefaultPage = () => {
-  const posts = useSelector((state) => state.post.posts);
-  const loading = useSelector((state) => state.post.loading);
+const PageLayout = ({ selectedSubreddit }) => {
+  const dispatch = useDispatch();
+  const { posts, loading } = useSelector((state) => state.post);
+  useEffect(() => {
+    dispatch(getPosts(selectedSubreddit));
+  }, [selectedSubreddit, dispatch]);
   const { pageNumber, postsPerPage, pagesVisited } = useSelector(
     (state) => state.page
   );
-
   const slicedPosts = Object.values(posts).slice(
     pagesVisited,
     pagesVisited + postsPerPage
@@ -25,14 +28,13 @@ const DefaultPage = () => {
 
   const pageCount = Math.ceil(Object.values(posts).length / postsPerPage);
 
-  const dispatch = useDispatch();
-
   const handlePageClick = (event, pageNumber) => {
     dispatch(setPageNumber(pageNumber));
     dispatch(setPagesVisited());
   };
+
   return (
-    <>
+    <Layout selectedSubreddit={selectedSubreddit}>
       <Container sx={{ mt: "4rem" }}>
         <Grid
           container
@@ -90,8 +92,8 @@ const DefaultPage = () => {
           </Grid>
         </Grid>
       </Container>
-    </>
+    </Layout>
   );
 };
 
-export default DefaultPage;
+export default PageLayout;

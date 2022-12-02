@@ -12,17 +12,11 @@ import { List, Typography, LinearProgress } from "@mui/material";
 
 export const Subreddits = () => {
   const { subreddits, loading, rejected } = useSelector((state) => state.subreddit);
-  const { selectedSubreddit } = useSelector((state) => state.post);
-
-
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSubreddits());
   }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getPosts(selectedSubreddit));
-  }, [selectedSubreddit, dispatch]);
 
   if (loading) {
     return (

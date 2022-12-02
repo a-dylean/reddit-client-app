@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getSubreddits, searchSubreddits } from "../subReddits/subRedditsSlice";
+import { getSubreddits, searchSubreddits } from "../features/subReddits/subRedditsSlice";
 import { debounce } from "lodash";
 
 import { TextField, Box } from "@mui/material";

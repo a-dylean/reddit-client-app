@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectSubreddit } from "../posts/postsSlice";
-import { setPageNumber, setPagesVisitedToZero } from "../../app/pageSlice";
+import { setPageNumber, setPagesVisitedToZero } from "../../components/pageSlice";
 import { useNavigate } from "react-router-dom";
 import {
   ListItemButton,
@@ -21,8 +21,8 @@ export const Subreddit = ({ subreddit, children }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClickHandler = () => {
-    dispatch(selectSubreddit(subreddit.data.url));
-    dispatch(setPageNumber(1));
+    dispatch(selectSubreddit(subreddit.data.url.slice(3)));
+    dispatch(setPageNumber(1)); // TODO Clean it
     dispatch(setPagesVisitedToZero());
     navigate(`${subreddit.data.url}`)
   };
@@ -41,8 +41,7 @@ export const Subreddit = ({ subreddit, children }) => {
             event.onerror = null;
           }}
         />
-      </ListItemAvatar>
-       
+      </ListItemAvatar>   
       <Typography variant="h7">
         {subreddit.data.title}
       </Typography> 
