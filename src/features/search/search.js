@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { getSubreddits, searchSubreddits } from "../subReddits/subRedditsSlice";
 import { debounce } from "lodash";
 
-import { TextField } from "@mui/material";
+import { TextField, Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { InputAdornment } from "@mui/material";
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
@@ -36,7 +36,7 @@ export const Search = () => {
       placeholder="Search Reddit"
       variant="outlined"
       size="small"
-      fullWidth
+      //fullWidth
       value={searchTerm}
       onChange={searchTermChangeHandler}
       autoComplete="off"

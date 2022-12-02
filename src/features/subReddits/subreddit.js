@@ -1,13 +1,13 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectSubreddit } from "../posts/postsSlice";
 import { setPageNumber, setPagesVisitedToZero } from "../../app/pageSlice";
-
+import { useNavigate } from "react-router-dom";
 import {
   ListItemButton,
   Avatar,
   ListItemAvatar,
-  Typography,
+  Typography
 } from "@mui/material";
 
 /* - takes the following props:
@@ -19,15 +19,16 @@ import {
 export const Subreddit = ({ subreddit, children }) => {
   const thumbnail = subreddit.data.header_img;
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const onClickHandler = () => {
     dispatch(selectSubreddit(subreddit.data.url));
     dispatch(setPageNumber(1));
     dispatch(setPagesVisitedToZero());
+    navigate(`${subreddit.data.url}`)
   };
 
   return (
-    <ListItemButton onClick={onClickHandler} >
+      <ListItemButton onClick={onClickHandler} >
       <ListItemAvatar minwidth={150}>
         <Avatar
           src={
@@ -41,9 +42,10 @@ export const Subreddit = ({ subreddit, children }) => {
           }}
         />
       </ListItemAvatar>
+       
       <Typography variant="h7">
         {subreddit.data.title}
-      </Typography>
+      </Typography> 
     </ListItemButton>
   );
 };

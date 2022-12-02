@@ -1,6 +1,5 @@
 import React from "react";
 import { Comments } from "../comments/comments";
-import ReactPlayer from "react-player";
 import { useNavigate } from "react-router-dom";
 import {
   Card,
@@ -74,7 +73,7 @@ export const Post = ({ post, fullVersion = false }) => {
               p: 0,
             }}
           >
-            <Box onClick={onPostClick} sx={{ cursor: "pointer" }}>
+            <Box onClick={onPostClick} sx={{ cursor: fullVersion ? "auto" : "pointer" }}>
               <CardHeader title={post.data.title} subheader={subheader} />
               <CardMedia
                 component="img"

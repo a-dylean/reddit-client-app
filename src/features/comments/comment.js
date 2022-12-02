@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CommentsList } from "./commentsList";
 
-import { Divider, Badge, Box, Typography, IconButton } from "@mui/material";
+import { Divider, Box, Typography, IconButton } from "@mui/material";
 import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
 import TreeView from "@mui/lab/TreeView";
 import TreeItem from "@mui/lab/TreeItem";

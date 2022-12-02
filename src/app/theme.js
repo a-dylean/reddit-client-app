@@ -1,4 +1,3 @@
-import React from "react";
 import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
@@ -46,24 +45,3 @@ export const theme = createTheme({
     }
   },
 });
-
-
-// const buttonUp = {
-//   "&:hover": {
-//     color: "#f44336"
-//   }
-// };
-
-// const buttonDown = {
-//   "&:hover": {
-//     color: "#3f51b5"
-//   }
-// };
-
-// const button = {
-//   "&:hover": {
-//     backgroundColor: "rgba(0, 0, 0, 0.04)",
-//     border: "none"
-//   },
-//   border: "none"
-// }

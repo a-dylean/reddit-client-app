@@ -1,7 +1,13 @@
 import React from "react";
+import DefaultPage from "./DefaultPage";
 import PostPage from "./PostPage";
-import { Home } from "./HomePage";
-import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
+import HomePage from "./HomePage";
+import {
+  Routes,
+  Route,
+  BrowserRouter,
+  Link
+} from "react-router-dom";
 import {
   CssBaseline,
   AppBar,
@@ -9,33 +15,43 @@ import {
   Container,
   ThemeProvider,
   Typography,
-  Box
+  Box,
 } from "@mui/material";
 import { Search } from "../features/search/search";
 import { theme } from "./theme";
 import { useSelector } from "react-redux";
+
 export const App = () => {
-  const selectedSubreddit = useSelector(state => state.post.selectedSubreddit)
+  const selectedSubreddit = useSelector(
+    (state) => state.post.selectedSubreddit
+  );
+
+
+
   return (
     <>
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <AppBar>
-          <Container sx={{ position: "flex", justifyContent: "space-around"}}>
-            <Toolbar variant="dense">
-            <Link to="/" style={{textDecoration: "none", color: "white", width: "100%"}} >
-            <Typography variant="h5">{selectedSubreddit}</Typography>   
-            </Link>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <AppBar>
+            <Toolbar
+              variant="dense"
+              sx={{ display: "flex", justifyContent: "space-around"}}
+            >
+              <Link to={`${selectedSubreddit}`} style={{ textDecoration: "none", color: "white" }}>
+                <Typography variant="h5" width="100%">
+                  {selectedSubreddit}
+                </Typography>
+              </Link>
               <Search />
             </Toolbar>
-          </Container>
-        </AppBar>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/:postId" element={<PostPage />} />
-        </Routes>
-      </ThemeProvider>
+          </AppBar>
+          <Routes>
+            <Route exact path="/" element={<DefaultPage />} />
+            <Route path={`${selectedSubreddit}`} element={<HomePage />} />
+            <Route path="/:postId" element={<PostPage />} />
+          </Routes>
+        </ThemeProvider>
       </BrowserRouter>
     </>
   );
