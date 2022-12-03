@@ -11,9 +11,11 @@ import Pagination from "@mui/material/Pagination";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Layout from './Layout'
+import { useParams } from "react-router-dom";
 
-const PageLayout = ({ selectedSubreddit }) => {
+const PostsListPage = () => {
   const dispatch = useDispatch();
+  const {selectedSubreddit = "Home"} = useParams();
   const { posts, loading } = useSelector((state) => state.post);
   useEffect(() => {
     dispatch(getPosts(selectedSubreddit));
@@ -96,4 +98,4 @@ const PageLayout = ({ selectedSubreddit }) => {
   );
 };
 
-export default PageLayout;
+export default PostsListPage;

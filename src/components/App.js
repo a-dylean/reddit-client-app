@@ -1,8 +1,7 @@
 import React from "react";
-import DefaultPage from "./DefaultPage";
 import PostPage from "./PostPage";
-import PostListPage from "./PostListPage";
-import Layout from "./Layout";
+import PageLayout from "./PostsListPage";
+import PostsListPage from "./PostsListPage";
 import {
   Routes,
   Route,
@@ -23,8 +22,8 @@ export const App = () => {
           <CssBaseline />
           <Routes>
              <Route path="/r/:selectedSubreddit/:postId" element={<PostPage />} />
-             <Route path="/r/:selectedSubreddit" element={<PostListPage />} /> 
-             <Route exact path="/" element={<DefaultPage />} />
+             <Route path="/r/:selectedSubreddit" element={<PostsListPage />} /> 
+             <Route exact path="/" element={<PostsListPage />} />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
