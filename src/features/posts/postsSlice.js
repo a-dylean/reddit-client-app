@@ -22,7 +22,6 @@ export const postsSlice = createSlice({
   name: "posts",
   initialState: {
     posts: {},
-    selectedSubreddit: "Home",
     loading: false,
   },
   reducers: {
