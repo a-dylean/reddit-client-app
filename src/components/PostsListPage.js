@@ -1,39 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getPosts } from "../features/posts/postsSlice";
 import { Subreddits } from "../features/subReddits/subReddits";
 import { Post } from "../features/posts/post";
-import { setPageNumber, setPagesVisited } from "./pageSlice";
 import { Typography, LinearProgress, PaginationItem } from "@mui/material";
 import { Container, Grid, Card, Box } from "@mui/material";
-import Pagination from "@mui/material/Pagination";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Layout from './Layout'
 import { useParams } from "react-router-dom";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const PostsListPage = () => {
-  const dispatch = useDispatch();
-  const {selectedSubreddit = "Home"} = useParams();
-  const { posts, loading } = useSelector((state) => state.post);
+  const dispatch = useDispatch(); 
+  const { selectedSubreddit = "Home" } = useParams();
+  const { posts, loading, after } = useSelector((state) => state.post);
+
   useEffect(() => {
-    dispatch(getPosts(selectedSubreddit));
-  }, [selectedSubreddit, dispatch]);
-  const { pageNumber, postsPerPage, pagesVisited } = useSelector(
-    (state) => state.page
-  );
-  const slicedPosts = Object.values(posts).slice(
-    pagesVisited,
-    pagesVisited + postsPerPage
-  );
+    dispatch(getPosts({ subreddit: selectedSubreddit }));
+  }, [selectedSubreddit]);
 
-  const pageCount = Math.ceil(Object.values(posts).length / postsPerPage);
 
-  const handlePageClick = (event, pageNumber) => {
-    dispatch(setPageNumber(pageNumber));
-    dispatch(setPagesVisited());
-  };
+  const fetchMoreData = () => {
+    dispatch(getPosts({ subreddit: selectedSubreddit, after }));
+  }
+
 
   return (
     <Layout selectedSubreddit={selectedSubreddit}>
@@ -55,27 +45,19 @@ const PostsListPage = () => {
             ) : (
               ""
             )}
-            {slicedPosts.map((post) => (
+            
+            <InfiniteScroll
+              dataLength={Object.values(posts).length}
+              next={fetchMoreData}
+              hasMore={true} // fix this with after
+            >
+       
+            {Object.values(posts).map((post) => (
               <Box key={post.data.id}>
-                <Post post={post} selectedSubreddit={selectedSubreddit}/>
-              </Box>
-            ))}
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Pagination
-                variant="outlined"
-                count={pageCount}
-                onChange={handlePageClick}
-                page={pageNumber}
-                boundaryCount={3}
-                color="primary"
-                renderItem={(item) => (
-                  <PaginationItem
-                    slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-                    {...item}
-                  />
-                )}
-              />
-            </Box>
+                <Post  post={post} selectedSubreddit={selectedSubreddit}/>
+              </Box>))}
+          
+          </InfiniteScroll>
           </Grid>
           <Grid
             item
@@ -96,6 +78,7 @@ const PostsListPage = () => {
       </Container>
     </Layout>
   );
+    
 };
 
 export default PostsListPage;

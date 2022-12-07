@@ -1,7 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { selectSubreddit } from "../posts/postsSlice";
-import { setPageNumber, setPagesVisitedToZero } from "../../components/pageSlice";
 import { useNavigate } from "react-router-dom";
 import {
   ListItemButton,
@@ -22,8 +21,6 @@ export const Subreddit = ({ subreddit, children }) => {
   const navigate = useNavigate();
   const onClickHandler = () => {
     dispatch(selectSubreddit(subreddit.data.url.slice(3)));
-    dispatch(setPageNumber(1)); // TODO Clean it
-    dispatch(setPagesVisitedToZero());
     navigate(`${subreddit.data.url}`)
   };
 
