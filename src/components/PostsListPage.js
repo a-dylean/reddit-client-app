@@ -45,13 +45,11 @@ const PostsListPage = () => {
             ) : (
               ""
             )}
-            
             <InfiniteScroll
               dataLength={Object.values(posts).length}
               next={fetchMoreData}
               hasMore={true} // fix this with after
             >
-       
             {Object.values(posts).map((post) => (
               <Box key={post.data.id}>
                 <Post  post={post} selectedSubreddit={selectedSubreddit}/>

@@ -40,7 +40,7 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
           mb: "1rem",
           display: "flex",
           flexDirection: "row",
-          pb: 0
+          pb: 0,
         }}
       >
         <Box
@@ -50,7 +50,6 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "center",
-            
           }}
         >
           <IconButton sx={{ m: "0.3rem 0.3rem 0", p: "0.2" }}>
@@ -65,16 +64,25 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
         </Box>
         <Box
           wrap="nowrap"
-          sx={{ width: "100%", display: "flex", flexDirection: "column", pb: 0 }}
+          sx={{
+            hight: "100%",
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            pb: 0,
+          }}
         >
           <CardContent
             sx={{
               display: "flex",
               flexDirection: "column",
-              p: 0
+              p: 0,
             }}
           >
-            <Box onClick={onPostClick} sx={{ cursor: fullVersion ? "auto" : "pointer" }}>
+            <Box
+              onClick={onPostClick}
+              sx={{ cursor: fullVersion ? "auto" : "pointer" }}
+            >
               <CardHeader title={post.data.title} subheader={subheader} />
               <CardMedia
                 component="img"
@@ -83,6 +91,7 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
                 height="350"
                 sx={{
                   objectFit: "contain",
+                  pb: "16px"
                 }}
                 onError={(event) => {
                   event.target.style.display = "none";
@@ -91,20 +100,20 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
               />
               {post.data.media?.reddit_video && (
                 <CardMedia
-                  component="video" 
+                  component="video"
                   height="350"
                   src={post.data.media.reddit_video.fallback_url}
                   preload="auto"
                   controls={true}
                   autoPlay={true}
-                  loop={true} 
-                  sx={{ backgroundColor: "black"}}
-               />
+                  loop={true}
+                  sx={{ backgroundColor: "black" }}
+                />
               )}
-              {post.data?.selftext && (
+              {post.data.selftext.length >= 300 && (
                 <Collapse
                   in={fullVersion}
-                  collapsedSize={150}
+                  collapsedSize={110}
                   sx={{
                     maskImage: !fullVersion
                       ? "linear-gradient(to bottom, black, black 80%, black 20%, transparent 100%)"
@@ -116,6 +125,11 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
                   </Typography>
                 </Collapse>
               )}
+              {(post.data.selftext.length < 300) && (
+                <Typography variant="h6" paragraph wrap="nowrap">
+                  {post.data.selftext}
+                </Typography>
+              )}
 
               <CardActions sx={{ p: "1rem" }}>
                 <ButtonGroup
@@ -125,8 +139,7 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
                 >
                   <Button aria-label="view comments">
                     <ChatBubbleIcon sx={{ pr: "0.3rem" }} />
-                    <Typography variant="h7"
-                    >
+                    <Typography variant="h7">
                       {post.data.num_comments}{" "}
                       {post.data.num_comments === 1 ? "comment" : "comments"}
                     </Typography>
