@@ -2,30 +2,33 @@
 
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getSubreddits, searchSubreddits } from "../features/subReddits/subRedditsSlice";
+import {
+  getSubreddits,
+  searchSubreddits,
+} from "../features/subReddits/subRedditsSlice";
 import { debounce } from "lodash";
-import {styled} from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { InputAdornment } from "@mui/material";
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
 const SearchTextField = styled(TextField)({
-  '& label.Mui-focused': {
+  "& label.Mui-focused": {
     color: "rgba(0, 0, 0, 0.54)",
   },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: 'rgba(0, 0, 0, 0.54)',
+  "& .MuiInput-underline:after": {
+    borderBottomColor: "rgba(0, 0, 0, 0.54)",
   },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: 'rgba(0, 0, 0, 0.54)',
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "rgba(0, 0, 0, 0.54)",
     },
-    '&:hover fieldset': {
-      borderColor: 'rgba(0, 0, 0, 0.54)',
+    "&:hover fieldset": {
+      borderColor: "rgba(0, 0, 0, 0.54)",
     },
-    '&.Mui-focused fieldset': {
-      borderColor: 'rgba(0, 0, 0, 0.54)',
+    "&.Mui-focused fieldset": {
+      borderColor: "rgba(0, 0, 0, 0.54)",
     },
   },
 });
@@ -51,12 +54,11 @@ export const Search = () => {
 
   return (
     <SearchTextField
-    type="text"
+      type="text"
       id="outlined-basic"
       placeholder="Search Reddit"
       variant="outlined"
       size="small"
-      //fullWidth
       value={searchTerm}
       onChange={searchTermChangeHandler}
       autoComplete="off"
@@ -76,8 +78,8 @@ export const Search = () => {
         style: {
           borderRadius: 50,
           backgroundColor: "#fafafa",
-          },
-        }}
+        },
+      }}
     />
   );
 };

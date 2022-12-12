@@ -20,6 +20,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import useWindowSize from "../../components/useWindowSize";
 
 export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
   const unix_timestamp = post.data.created_utc;
@@ -31,37 +32,40 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
   const onPostClick = () => {
     !fullVersion && navigate(`/r/${selectedSubreddit}/${post.data.id}`);
   };
+  const size = useWindowSize();
 
   return (
     <>
       <Card
         sx={{
-          maxwidth: 350,
+          width: "auto",
           mb: "1rem",
           display: "flex",
           flexDirection: "row",
           pb: 0,
         }}
       >
-        <Box
-          sx={{
-            background: "#f5f5f5",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "center",
-          }}
-        >
-          <IconButton sx={{ m: "0.3rem 0.3rem 0", p: "0.2" }}>
-            <ThumbUpOffAltIcon />
-          </IconButton>
-          <Typography variant="h7">
-            {post.data.ups > 9999 ? "10k+" : post.data.ups}
-          </Typography>
-          <IconButton sx={{ m: "0 0.3rem 0.3rem", p: "0.2" }}>
-            <ThumbDownOffAltIcon />
-          </IconButton>
-        </Box>
+        {size.width > 600 && (
+          <Box
+            sx={{
+              background: "#f5f5f5",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              alignItems: "center",
+            }}
+          >
+            <IconButton sx={{ m: "0.3rem 0.3rem 0", p: "0.2" }}>
+              <ThumbUpOffAltIcon />
+            </IconButton>
+            <Typography variant="h7">
+              {post.data.ups > 9999 ? "10k+" : post.data.ups}
+            </Typography>
+            <IconButton sx={{ m: "0 0.3rem 0.3rem", p: "0.2" }}>
+              <ThumbDownOffAltIcon />
+            </IconButton>
+          </Box>
+        )}
         <Box
           wrap="nowrap"
           sx={{
@@ -91,7 +95,7 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
                 height="350"
                 sx={{
                   objectFit: "contain",
-                  pb: "16px"
+                  pb: "16px",
                 }}
                 onError={(event) => {
                   event.target.style.display = "none";
@@ -125,7 +129,7 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
                   </Typography>
                 </Collapse>
               )}
-              {(post.data.selftext.length < 300) && (
+              {post.data.selftext.length < 300 && (
                 <Typography variant="h6" paragraph wrap="nowrap">
                   {post.data.selftext}
                 </Typography>
@@ -140,8 +144,11 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
                   <Button aria-label="view comments">
                     <ChatBubbleIcon sx={{ pr: "0.3rem" }} />
                     <Typography variant="h7">
-                      {post.data.num_comments}{" "}
-                      {post.data.num_comments === 1 ? "comment" : "comments"}
+                      {post.data.num_comments}
+                      {size.width > 600 &&
+                        (post.data.num_comments === 1
+                          ? " comment"
+                          : " comments")}
                     </Typography>
                   </Button>
                   <Button aria-label="share post">

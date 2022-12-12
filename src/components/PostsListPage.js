@@ -1,14 +1,15 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getPosts } from "../features/posts/postsSlice";
 import { Subreddits } from "../features/subReddits/subReddits";
 import { Post } from "../features/posts/post";
-import { Typography, LinearProgress, PaginationItem } from "@mui/material";
+import { Typography, LinearProgress } from "@mui/material";
 import { Container, Grid, Card, Box } from "@mui/material";
 import Layout from './Layout'
 import { useParams } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import useWindowSize from "./useWindowSize";
 
 const PostsListPage = () => {
   const dispatch = useDispatch(); 
@@ -17,13 +18,14 @@ const PostsListPage = () => {
 
   useEffect(() => {
     dispatch(getPosts({ subreddit: selectedSubreddit }));
-  }, [selectedSubreddit]);
+  }, [selectedSubreddit, dispatch]);
 
 
   const fetchMoreData = () => {
     dispatch(getPosts({ subreddit: selectedSubreddit, after }));
   }
 
+  const size = useWindowSize();
 
   return (
     <Layout selectedSubreddit={selectedSubreddit}>
@@ -36,7 +38,9 @@ const PostsListPage = () => {
           wrap="nowrap"
           spacing={2}
         >
-          <Grid item xs={8} sx={{ minWidth: 200 }}>
+          <Grid item 
+          xs={16} 
+          md={8}>
             {loading ? (
               <Card>
                 <Typography variant="h7">Posts are loading...</Typography>
@@ -48,7 +52,7 @@ const PostsListPage = () => {
             <InfiniteScroll
               dataLength={Object.values(posts).length}
               next={fetchMoreData}
-              hasMore={true} // fix this with after
+              hasMore={after}
             >
             {Object.values(posts).map((post) => (
               <Box key={post.data.id}>
@@ -57,13 +61,13 @@ const PostsListPage = () => {
           
           </InfiniteScroll>
           </Grid>
-          <Grid
+          {size.width > 600 && <Grid
             item
             maxWidth="md"
-            xs={4}
+            xs={0}
+            md={4}
             sx={{
               width: "100%",
-              minWidth: 150,
               position: "sticky",
               top: "3rem",
             }}
@@ -71,7 +75,7 @@ const PostsListPage = () => {
             <Card>
               <Subreddits />
             </Card>
-          </Grid>
+          </Grid>}
         </Grid>
       </Container>
     </Layout>

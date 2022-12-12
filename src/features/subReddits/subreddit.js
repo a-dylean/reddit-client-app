@@ -15,7 +15,7 @@ import {
 - onclick renders a new postlist
 */
 
-export const Subreddit = ({ subreddit, children }) => {
+export const Subreddit = ({ subreddit }) => {
   const thumbnail = subreddit.data.header_img;
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -1,12 +1,10 @@
 import React from "react";
 import PostPage from "./PostPage";
-import PageLayout from "./PostsListPage";
 import PostsListPage from "./PostsListPage";
 import {
   Routes,
   Route,
   BrowserRouter,
-  useParams
 } from "react-router-dom";
 import {
   CssBaseline,

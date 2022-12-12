@@ -5,9 +5,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getSubreddits } from "./subRedditsSlice";
 import { Subreddit } from "./subreddit";
-import { getPosts } from "../posts/postsSlice";
-
-
 import { List, Typography, LinearProgress } from "@mui/material";
 
 export const Subreddits = () => {
