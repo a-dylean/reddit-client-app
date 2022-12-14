@@ -15,13 +15,14 @@ import {
 - onclick renders a new postlist
 */
 
-export const Subreddit = ({ subreddit }) => {
+export const Subreddit = ({ subreddit, toddleSubreddits }) => {
   const thumbnail = subreddit.data.header_img;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClickHandler = () => {
     dispatch(selectSubreddit(subreddit.data.url.slice(3)));
     navigate(`${subreddit.data.url}`)
+    toddleSubreddits();
   };
 
   return (

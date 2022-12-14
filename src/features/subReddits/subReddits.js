@@ -7,7 +7,7 @@ import { getSubreddits } from "./subRedditsSlice";
 import { Subreddit } from "./subreddit";
 import { List, Typography, LinearProgress } from "@mui/material";
 
-export const Subreddits = () => {
+export const Subreddits = ({toddleSubreddits}) => {
   const { subreddits, loading, rejected } = useSelector((state) => state.subreddit);
   
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ export const Subreddits = () => {
   return (
       <List>
         {subreddits.slice(0, 10).map((subreddit) => (
-          <Subreddit subreddit={subreddit} key={subreddit.data.id} />
+          <Subreddit subreddit={subreddit} key={subreddit.data.id} toddleSubreddits={toddleSubreddits}/>
         ))}
      </List>
   );

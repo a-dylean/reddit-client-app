@@ -9,6 +9,7 @@ import {
   Menu,
   MenuItem,
   Container,
+  Card
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Search } from "./search";
@@ -16,24 +17,31 @@ import { useNavigate } from "react-router-dom";
 import useWindowSize from "./useWindowSize";
 import { Subreddits } from "../features/subReddits/subReddits";
 
+
 const Layout = ({ children, selectedSubreddit }) => {
   const navigate = useNavigate();
   const size = useWindowSize();
-  const [anchorElUser, setAnchorElUser] = useState(null);
+  // const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  // const handleShowSubreddits = (event) => {
+  //   setAnchorElUser(event.currentTarget);
+  // };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  // const handleCloseSubreddits = () => {
+  //   setAnchorElUser(null);
+  // };
+
+  const [showSubreddits, setShowSubreddits] = useState(false);
+  const toddleSubreddits = () => {
+    const newShowReplies = !showSubreddits;
+    setShowSubreddits(newShowReplies);
+  }
 
   return (
     <>
       <AppBar>
         <Toolbar>
-          {size.width > 600 && <Typography
+          {size.width > 600 && (<Typography
             sx={{
               color: "white",
               cursor: "pointer",
@@ -42,21 +50,18 @@ const Layout = ({ children, selectedSubreddit }) => {
             variant="h5"
           >
             /r/{selectedSubreddit}
-          </Typography>}
-          <Box sx={{ margin: "0 auto" }}>
-            <Search />
-          </Box>
-          {size.width < 600 && (
-            <>
+          </Typography>)}
+
+            {size.width < 600 && (<>
               <IconButton
                 size="large"
                 aria-label="subreddits"
-                onClick={handleOpenUserMenu}
+                onClick={toddleSubreddits}
                 color="inherit"
               >
                 <MenuIcon fontSize="large" />
               </IconButton>
-              <Menu
+              {/* <Menu
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
@@ -69,14 +74,19 @@ const Layout = ({ children, selectedSubreddit }) => {
                   horizontal: "right",
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+                onClose={handleCloseSubreddits}
               >
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Subreddits />
-                </MenuItem>
-              </Menu>
+                <MenuItem onClick={handleCloseSubreddits}> */}
+                  <Box sx={{display: showSubreddits ? "block" : "none", position: "absolute", top: "51px", left: "0px", backgroundColor: "#FF4300", width: "100%", borderRadius: "4px" }}>
+                    <Subreddits toddleSubreddits={toddleSubreddits}/>
+                  </Box>
+                {/* </MenuItem>
+              </Menu> */}
             </>
           )}
+          <Box onClick={toddleSubreddits} sx={{position: "absolute", margin: "auto 0", left: "25%"}}>
+            <Search />
+          </Box>
         </Toolbar>
       </AppBar>
       <main>{children}</main>
