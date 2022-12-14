@@ -59,6 +59,7 @@ export const Search = () => {
       placeholder="Search Reddit"
       variant="outlined"
       size="small"
+      fullWidth
       value={searchTerm}
       onChange={searchTermChangeHandler}
       autoComplete="off"

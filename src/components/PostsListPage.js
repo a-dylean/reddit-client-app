@@ -29,7 +29,7 @@ const PostsListPage = () => {
 
   return (
     <Layout selectedSubreddit={selectedSubreddit}>
-      <Container sx={{ mt: "4rem" }}>
+      <Container sx={{ mt: "5rem" }}>
         <Grid
           container
           direction="row"

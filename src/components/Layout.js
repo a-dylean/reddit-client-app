@@ -8,6 +8,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Container,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Search } from "./search";
@@ -18,18 +19,10 @@ import { Subreddits } from "../features/subReddits/subReddits";
 const Layout = ({ children, selectedSubreddit }) => {
   const navigate = useNavigate();
   const size = useWindowSize();
-  const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -39,8 +32,8 @@ const Layout = ({ children, selectedSubreddit }) => {
   return (
     <>
       <AppBar>
-        <Toolbar variant="dense">
-          <Typography
+        <Toolbar>
+          {size.width > 600 && <Typography
             sx={{
               color: "white",
               cursor: "pointer",
@@ -49,8 +42,8 @@ const Layout = ({ children, selectedSubreddit }) => {
             variant="h5"
           >
             /r/{selectedSubreddit}
-          </Typography>
-          <Box sx={{ margin: "auto" }}>
+          </Typography>}
+          <Box sx={{ margin: "0 auto" }}>
             <Search />
           </Box>
           {size.width < 600 && (
@@ -67,7 +60,7 @@ const Layout = ({ children, selectedSubreddit }) => {
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
-                  vertical: "top",
+                  vertical: "bottom",
                   horizontal: "right",
                 }}
                 keepMounted
