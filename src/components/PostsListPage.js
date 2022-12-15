@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getPosts } from "../features/posts/postsSlice";
@@ -69,7 +69,7 @@ const PostsListPage = () => {
             sx={{
               width: "100%",
               position: "sticky",
-              top: "3rem",
+              top: "4rem",
             }}
           >
             <Card>
