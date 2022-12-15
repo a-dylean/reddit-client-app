@@ -13,7 +13,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { InputAdornment } from "@mui/material";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
-const SearchTextField = styled(TextField)({
+const SearchTextField = styled(TextField)(({theme}) => ({
   "& label.Mui-focused": {
     color: "rgba(0, 0, 0, 0.54)",
   },
@@ -30,12 +30,19 @@ const SearchTextField = styled(TextField)({
     "&.Mui-focused fieldset": {
       borderColor: "rgba(0, 0, 0, 0.54)",
     },
-  },
-});
+    '& .MuiInputBase-input': {
+      [theme.breakpoints.down('sm')]: {
+      transition: theme.transitions.create('width'),
+      width: '0.01ch',
+      '&:focus': {
+          width: '17ch',
+        },
+      }}}
+    }))
 
 const searchSubredditsDebounced = debounce((dispatch, searchTerm) => {
   dispatch(searchSubreddits(searchTerm));
-}, 500);
+}, 250);
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");

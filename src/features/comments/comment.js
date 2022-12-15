@@ -23,7 +23,7 @@ export const Comment = ({ comment }) => {
       <ListItemText
         primary={
           comment.data.body && (
-            <Box sx={{ mr: 3, cursor: replies ? "pointer" : "auto", p: "0 16px", width: "fit-content" }} onClick={onClick}>
+            <Box sx={{ mr: 3, cursor: replies ? "pointer" : "auto", p: "0 1rem", width: "fit-content" }} onClick={onClick}>
               <Typography variant="h7" gutterBottom={true}>
                 {comment.data.author} | {date}:
               </Typography>

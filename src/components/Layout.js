@@ -25,56 +25,44 @@ const Layout = ({ children, selectedSubreddit }) => {
   return (
     <>
       <AppBar>
-        <Toolbar sx={{justifyContent: size.width < 600 ? "space-between" : "none"}}>
+        <Toolbar
+          sx={{ display: "flex", justifyContent: size.width < 600 && "space-between" }}
+        >
+          <Typography
+            sx={{
+              color: "white",
+              cursor: "pointer",
+        
+            }}
+            onClick={() => navigate(`/r/${selectedSubreddit}`)}
+            variant="h3"
+          >
+            /r/{selectedSubreddit}
+          </Typography>
           {size.width > 600 && (
-            <>
-              <Typography
-                sx={{
-                  color: "white",
-                  cursor: "pointer",
-                }}
-                onClick={() => navigate(`/r/${selectedSubreddit}`)}
-                variant="h3"
-              >
-                /r/{selectedSubreddit}
-              </Typography>
-              <Box
-                onClick={toddleSubreddits}
-                sx={{ position: "relative", left: "30%" }}
-              >
-                <Search />
-              </Box>
-            </>
+            <Box
+              onClick={toddleSubreddits}
+              sx={{ position: "relative", left: "30%" }}
+            >
+              <Search />
+            </Box>
           )}
 
           {size.width < 600 && (
-            <>
-              <Box
-                onClick={toddleSubreddits}
-                sx={{right: "0px" }}
-              >
+              <Box onClick={toddleSubreddits}>
                 <Search />
-              </Box>
-              <IconButton
-                size="large"
-                aria-label="show subreddits"
-                onClick={toddleSubreddits}
-                color="inherit"
-              >
-                <MenuIcon fontSize="large" />
-              </IconButton>
-              <Card
+                <Card
                 sx={{
                   display: showSubreddits ? "block" : "none",
                   position: "absolute",
-                  top: "59px",
-                  left: "1rem",
+                  top: "56px",
+                  right: "1rem",
                   color: "black",
                 }}
               >
                 <Subreddits toddleSubreddits={toddleSubreddits} />
               </Card>
-            </>
+              </Box>
           )}
         </Toolbar>
       </AppBar>

@@ -84,7 +84,7 @@ export const theme = createTheme({
       fontSize: "0.9rem",
       padding: "0 1rem",
       fontWeight: 400,
-      lineHeight: "1.3rem",
+      lineHeight: "1.2rem",
     },
     h7: { 
       fontWeight: 600, 
