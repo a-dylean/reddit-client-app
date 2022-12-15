@@ -41,11 +41,11 @@ export const Comment = ({ comment }) => {
                   </>
                 )}
                 <Box onClick={(event) => event.stopPropagation()}>
-                  <IconButton aria-label="ups">
+                  <IconButton aria-label="rate up">
                     <NorthIcon />
                   </IconButton>
                   <Typography variant="h7">{comment.data.ups}</Typography>
-                  <IconButton aria-label="down">
+                  <IconButton aria-label="rate down">
                     <SouthIcon />
                   </IconButton>
                   <IconButton aria-label="reply">

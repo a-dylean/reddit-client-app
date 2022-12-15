@@ -26,7 +26,8 @@ export const Subreddit = ({ subreddit, toddleSubreddits }) => {
   };
 
   return (
-      <ListItemButton onClick={onClickHandler} disableRipple>
+    <li>
+      <ListItemButton aria-label="select subreddit" onClick={onClickHandler} disableRipple>
       <ListItemAvatar minwidth={150}>
         <Avatar
           src={
@@ -44,5 +45,6 @@ export const Subreddit = ({ subreddit, toddleSubreddits }) => {
         {subreddit.data.title}
       </Typography> 
     </ListItemButton>
+    </li>
   );
 };

@@ -5,6 +5,7 @@ import {
   Typography,
   Box,
   IconButton,
+  Card,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Search } from "./search";
@@ -56,25 +57,23 @@ const Layout = ({ children, selectedSubreddit }) => {
               </Box>
               <IconButton
                 size="large"
-                aria-label="subreddits"
+                aria-label="show subreddits"
                 onClick={toddleSubreddits}
                 color="inherit"
               >
                 <MenuIcon fontSize="large" />
               </IconButton>
-              <Box
+              <Card
                 sx={{
                   display: showSubreddits ? "block" : "none",
                   position: "absolute",
-                  top: "51px",
-                  left: "0px",
-                  backgroundColor: "#FF4300",
-                  width: "100%",
-                  borderRadius: "4px",
+                  top: "59px",
+                  left: "1rem",
+                  color: "black",
                 }}
               >
                 <Subreddits toddleSubreddits={toddleSubreddits} />
-              </Box>
+              </Card>
             </>
           )}
         </Toolbar>

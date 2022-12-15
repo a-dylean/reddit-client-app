@@ -55,13 +55,13 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
               alignItems: "center",
             }}
           >
-            <IconButton sx={{ m: "0.3rem 0.3rem 0", p: "0.2" }}>
+            <IconButton aria-label="thumb up" sx={{ m: "0.3rem 0.3rem 0", p: "0.2" }}>
               <ThumbUpOffAltIcon />
             </IconButton>
             <Typography variant="h7">
               {post.data.ups > 9999 ? "10k+" : post.data.ups}
             </Typography>
-            <IconButton sx={{ m: "0 0.3rem 0.3rem", p: "0.2" }}>
+            <IconButton aria-label="thumb down" sx={{ m: "0 0.3rem 0.3rem", p: "0.2" }}>
               <ThumbDownOffAltIcon />
             </IconButton>
           </Box>
