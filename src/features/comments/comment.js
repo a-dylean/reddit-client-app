@@ -23,14 +23,14 @@ export const Comment = ({ comment }) => {
       <ListItemText
         primary={
           comment.data.body && (
-            <Box sx={{ mr: 3, cursor: replies ? "pointer" : "auto", p: "0 16px" }} onClick={onClick}>
+            <Box sx={{ mr: 3, cursor: replies ? "pointer" : "auto", p: "0 16px", width: "fit-content" }} onClick={onClick}>
               <Typography variant="h7" gutterBottom={true}>
                 {comment.data.author} | {date}:
               </Typography>
               <Typography variant="h6" sx={{ p: 0 }}>
                 {comment.data.body}
               </Typography>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Box sx={{ display: "flex", alignItems: "center", width: "max-content" }}>
                 {replies?.length && (
                   <>
                     <ForumRoundedIcon color="action" sx={{ pr: "0.3rem" }} />
@@ -60,11 +60,13 @@ export const Comment = ({ comment }) => {
       ></ListItemText>
       {showReplies ? (
         <ListItemText
-        sx={{ p: "0 16px"}}
+        sx={{ p: "0 1rem"}}
           inset={true}
           primary={
             replies && (
-              <Box sx={{ mr: 3 }}>
+              <Box 
+              sx={{ width: "100%" }}
+              >
                 <CommentsList CommentsComponent={Comment} comments={replies} />
               </Box>
             )

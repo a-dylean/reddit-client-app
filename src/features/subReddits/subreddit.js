@@ -41,7 +41,7 @@ export const Subreddit = ({ subreddit, toddleSubreddits }) => {
           }}
         />
       </ListItemAvatar>   
-      <Typography variant="h7">
+      <Typography variant="h4">
         {subreddit.data.title}
       </Typography> 
     </ListItemButton>

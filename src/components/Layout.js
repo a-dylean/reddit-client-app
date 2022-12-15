@@ -34,7 +34,7 @@ const Layout = ({ children, selectedSubreddit }) => {
                   cursor: "pointer",
                 }}
                 onClick={() => navigate(`/r/${selectedSubreddit}`)}
-                variant="h5"
+                variant="h3"
               >
                 /r/{selectedSubreddit}
               </Typography>

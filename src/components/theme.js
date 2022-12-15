@@ -66,27 +66,30 @@ export const theme = createTheme({
       textTransform: "none",
       wordBreak: "break-word",
     },
+    h3: {
+      fontSize: "1.3rem",
+      fontWeight: 600
+    },
     h4: {
-      fontSize: "36px",
+      fontSize: "1rem",
       fontWeight: 600
     },
     h5: {
-      fontSize: "18px",
+      fontSize: "1.2rem",
       fontWeight: 600,
-      lineHeight: "22px"
+      lineHeight: "1.2rem"
     },
     h6: {
       fontFamily: "Noto Sans",
-      fontSize: "14px", 
-      width: "100%",
-      padding: " 0 16px",
+      fontSize: "0.9rem",
+      padding: "0 1rem",
       fontWeight: 400,
-      lineHeight: "21px",
+      lineHeight: "1.3rem",
     },
     h7: { 
       fontWeight: 600, 
-      fontSize: "15px", 
-      lineHight: 1
+      fontSize: "0.8rem", 
+      lineHeight: "0.5rem"
     }
   },
 });
