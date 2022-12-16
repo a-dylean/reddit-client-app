@@ -58,7 +58,6 @@ const PostsListPage = () => {
               <Box key={post.data.id}>
                 <Post  post={post} selectedSubreddit={selectedSubreddit}/>
               </Box>))}
-          
           </InfiniteScroll>
           </Grid>
           {size.width > 600 && <Grid

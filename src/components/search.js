@@ -8,37 +8,45 @@ import {
 } from "../features/subReddits/subRedditsSlice";
 import { debounce } from "lodash";
 import { styled } from "@mui/material/styles";
-import { TextField } from "@mui/material";
+import { InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { InputAdornment } from "@mui/material";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import { Subreddit } from "../features/subReddits/subreddit";
 
-const SearchTextField = styled(TextField)(({theme}) => ({
-  "& label.Mui-focused": {
-    color: "rgba(0, 0, 0, 0.54)",
-  },
-  "& .MuiInput-underline:after": {
-    borderBottomColor: "rgba(0, 0, 0, 0.54)",
-  },
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "rgba(0, 0, 0, 0.54)",
-    },
-    "&:hover fieldset": {
-      borderColor: "rgba(0, 0, 0, 0.54)",
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: "rgba(0, 0, 0, 0.54)",
-    },
-    '& .MuiInputBase-input': {
-      [theme.breakpoints.down('sm')]: {
-      transition: theme.transitions.create('width'),
-      width: '0.01ch',
+const SearchDiv = styled("div")(() => ({
+  position: "relative",
+  borderRadius: 50,
+  backgroundColor: "#fafafa",
+  color: "rgba(0, 0, 0, 0.54)",
+  
+
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "black",
+  '& .MuiInputBase-input': {
+    width: "100%",
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    [theme.breakpoints.down('sm')]: {
+      position: "relative",
+      width: '0.001rem',
       '&:focus': {
-          width: '17ch',
-        },
-      }}}
-    }))
+        width: '15rem',
+      },
+    },
+  },
+}));
 
 const searchSubredditsDebounced = debounce((dispatch, searchTerm) => {
   dispatch(searchSubreddits(searchTerm));
@@ -60,33 +68,22 @@ export const Search = () => {
   };
 
   return (
-    <SearchTextField
-      type="text"
-      id="outlined-basic"
+    <>
+    <SearchDiv>
+<SearchIconWrapper>
+        <SearchIcon />
+</SearchIconWrapper>
+    <StyledInputBase
+    fullWidth
       placeholder="Search Reddit"
-      variant="outlined"
       size="small"
       value={searchTerm}
       onChange={searchTermChangeHandler}
-      autoComplete="off"
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <SearchIcon />
-          </InputAdornment>
-        ),
-        endAdornment: (
-          <InputAdornment position="end">
-            {searchTerm.length > 0 && (
-              <CancelOutlinedIcon onClick={clearSearchTermHandler} />
-            )}
-          </InputAdornment>
-        ),
-        style: {
-          borderRadius: 50,
-          backgroundColor: "#fafafa",
-        },
-      }}
-    />
-  );
+      endAdornment={searchTerm.length > 0 && (
+              <CancelOutlinedIcon sx={{ mr: 2, color: "rgba(0, 0, 0, 0.54)"}} onClick={clearSearchTermHandler}/>)}
+      >      
+    </StyledInputBase>
+    </SearchDiv>
+    
+  </>);
 };

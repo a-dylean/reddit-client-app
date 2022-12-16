@@ -4,10 +4,8 @@ import {
   Toolbar,
   Typography,
   Box,
-  IconButton,
   Card,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import { Search } from "./search";
 import { useNavigate } from "react-router-dom";
 import useWindowSize from "./useWindowSize";
@@ -24,7 +22,7 @@ const Layout = ({ children, selectedSubreddit }) => {
 
   return (
     <>
-      <AppBar>
+      <AppBar >
         <Toolbar
           sx={{ display: "flex", justifyContent: size.width < 600 && "space-between" }}
         >
@@ -32,8 +30,9 @@ const Layout = ({ children, selectedSubreddit }) => {
             sx={{
               color: "white",
               cursor: "pointer",
-        
+             // display: (showSubreddits && size.width < 600) && "none"
             }}
+            noWrap
             onClick={() => navigate(`/r/${selectedSubreddit}`)}
             variant="h3"
           >
@@ -42,27 +41,30 @@ const Layout = ({ children, selectedSubreddit }) => {
           {size.width > 600 && (
             <Box
               onClick={toddleSubreddits}
-              sx={{ position: "relative", left: "30%" }}
+              sx={{ margin: "0 auto", width: "35%"}}
             >
               <Search />
             </Box>
           )}
 
           {size.width < 600 && (
-              <Box onClick={toddleSubreddits}>
+              <><Box onClick={toddleSubreddits}>
                 <Search />
                 <Card
                 sx={{
-                  display: showSubreddits ? "block" : "none",
                   position: "absolute",
                   top: "56px",
+                 // backgroundColor: " #e6e6e6",
                   right: "1rem",
-                  color: "black",
+                  left: "1rem",
+                  display: showSubreddits ? "display" : "none",
+                 boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px"
                 }}
               >
                 <Subreddits toddleSubreddits={toddleSubreddits} />
               </Card>
               </Box>
+              </>
           )}
         </Toolbar>
       </AppBar>
