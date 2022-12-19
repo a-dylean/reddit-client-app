@@ -20,19 +20,15 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
-import useWindowSize from "../../components/useWindowSize";
+import { useWindowSize, relativeDays } from "../../components/helperFunctions";
 
 export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
-  const unix_timestamp = post.data.created_utc;
-  const date = new Date(unix_timestamp * 1000).toLocaleString();
-  const image = post.data.url;
-  const author_data = post.data.author;
-  const subheader = "Posted by " + author_data + " | " + date;
+  const size = useWindowSize();
+  const date = new Date(post.data.created_utc * 1000);
   const navigate = useNavigate();
-  const onPostClick = () => {
+  const handlePostClick = () => {
     !fullVersion && navigate(`/r/${selectedSubreddit}/${post.data.id}`);
   };
-  const size = useWindowSize();
 
   return (
     <>
@@ -41,7 +37,6 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
           width: "auto",
           mb: "1rem",
           display: "flex",
-          flexDirection: "row",
           pb: 0,
         }}
       >
@@ -55,13 +50,19 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
               alignItems: "center",
             }}
           >
-            <IconButton aria-label="thumb up" sx={{ m: "0.3rem 0.3rem 0", p: "0.2" }}>
+            <IconButton
+              aria-label="thumb up"
+              sx={{ m: "0.3rem 0.3rem 0", p: "0.3rem" }}
+            >
               <ThumbUpOffAltIcon />
             </IconButton>
             <Typography variant="h7">
               {post.data.ups > 9999 ? "10k+" : post.data.ups}
             </Typography>
-            <IconButton aria-label="thumb down" sx={{ m: "0 0.3rem 0.3rem", p: "0.2" }}>
+            <IconButton
+              aria-label="thumb down"
+              sx={{ m: "0 0.3rem 0.3rem", p: "0.3rem" }}
+            >
               <ThumbDownOffAltIcon />
             </IconButton>
           </Box>
@@ -84,18 +85,22 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
             }}
           >
             <Box
-              onClick={onPostClick}
+              onClick={handlePostClick}
               sx={{ cursor: fullVersion ? "auto" : "pointer" }}
             >
-              <CardHeader title={post.data.title} subheader={subheader} />
+              <CardHeader
+                title={post.data.title}
+                subheader={`Posted by ${post.data.author} ${relativeDays(
+                  date.getTime()
+                )}`}
+              />
               <CardMedia
                 component="img"
-                src={image}
+                src={post.data.url}
                 alt="post image"
-                height="350"
+                height="400rem"
                 sx={{
                   objectFit: "contain",
-                  pb: "16px",
                 }}
                 onError={(event) => {
                   event.target.style.display = "none";
@@ -105,7 +110,7 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
               {post.data.media?.reddit_video && (
                 <CardMedia
                   component="video"
-                  height="350"
+                  height="500rem"
                   src={post.data.media.reddit_video.fallback_url}
                   preload="auto"
                   controls={true}

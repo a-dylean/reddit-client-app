@@ -9,7 +9,7 @@ import { Container, Grid, Card, Box } from "@mui/material";
 import Layout from './Layout'
 import { useParams } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import useWindowSize from "./useWindowSize";
+import {useWindowSize} from "./helperFunctions";
 
 const PostsListPage = () => {
   const dispatch = useDispatch(); 

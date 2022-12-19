@@ -75,7 +75,7 @@ export const theme = createTheme({
       fontWeight: 600
     },
     h5: {
-      fontSize: "1.2rem",
+      fontSize: "1.1rem",
       fontWeight: 600,
       lineHeight: "1.2rem"
     },
@@ -84,7 +84,7 @@ export const theme = createTheme({
       fontSize: "0.9rem",
       padding: "0 1rem",
       fontWeight: 400,
-      lineHeight: "1.2rem",
+      lineHeight: "1rem",
     },
     h7: { 
       fontWeight: 600, 

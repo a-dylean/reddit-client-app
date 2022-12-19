@@ -11,38 +11,37 @@ import { styled } from "@mui/material/styles";
 import { InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-import { Subreddit } from "../features/subReddits/subreddit";
 
 const SearchDiv = styled("div")(() => ({
   position: "relative",
   borderRadius: 50,
   backgroundColor: "#fafafa",
   color: "rgba(0, 0, 0, 0.54)",
-  
-
+  "&:hover": {
+    border: "1px solid grey",
+  },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  height: "100%",
+  position: "absolute",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "black",
-  '& .MuiInputBase-input': {
+  "& .MuiInputBase-input": {
     width: "100%",
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down("sm")]: {
       position: "relative",
-      width: '0.001rem',
-      '&:focus': {
-        width: '15rem',
+      width: "0.001rem",
+      "&:focus": {
+        width: "15rem",
       },
     },
   },
@@ -68,22 +67,25 @@ export const Search = () => {
   };
 
   return (
-    <>
     <SearchDiv>
-<SearchIconWrapper>
+      <SearchIconWrapper>
         <SearchIcon />
-</SearchIconWrapper>
-    <StyledInputBase
-    fullWidth
-      placeholder="Search Reddit"
-      size="small"
-      value={searchTerm}
-      onChange={searchTermChangeHandler}
-      endAdornment={searchTerm.length > 0 && (
-              <CancelOutlinedIcon sx={{ mr: 2, color: "rgba(0, 0, 0, 0.54)"}} onClick={clearSearchTermHandler}/>)}
-      >      
-    </StyledInputBase>
+      </SearchIconWrapper>
+      <StyledInputBase
+        fullWidth
+        placeholder="Search Reddit"
+        size="small"
+        value={searchTerm}
+        onChange={searchTermChangeHandler}
+        endAdornment={
+          searchTerm.length > 0 && (
+            <CancelOutlinedIcon
+              sx={{ mr: 2, color: "rgba(0, 0, 0, 0.54)" }}
+              onClick={clearSearchTermHandler}
+            />
+          )
+        }
+      ></StyledInputBase>
     </SearchDiv>
-    
-  </>);
+  );
 };

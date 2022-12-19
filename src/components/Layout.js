@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Search } from "./search";
 import { useNavigate } from "react-router-dom";
-import useWindowSize from "./useWindowSize";
+import {useWindowSize} from "./helperFunctions";
 import { Subreddits } from "../features/subReddits/subReddits";
 
 const Layout = ({ children, selectedSubreddit }) => {
