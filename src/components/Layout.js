@@ -16,8 +16,8 @@ const Layout = ({ children, selectedSubreddit }) => {
   const size = useWindowSize();
   const [showSubreddits, setShowSubreddits] = useState(false);
   const toddleSubreddits = () => {
-    const newShowReplies = !showSubreddits;
-    setShowSubreddits(newShowReplies);
+    const newShowSubreddits = !showSubreddits;
+    setShowSubreddits(newShowSubreddits);
   };
 
   return (
@@ -30,7 +30,6 @@ const Layout = ({ children, selectedSubreddit }) => {
             sx={{
               color: "white",
               cursor: "pointer",
-             // display: (showSubreddits && size.width < 600) && "none"
             }}
             noWrap
             onClick={() => navigate(`/r/${selectedSubreddit}`)}
@@ -53,12 +52,13 @@ const Layout = ({ children, selectedSubreddit }) => {
                 <Card
                 sx={{
                   position: "absolute",
-                  top: "56px",
-                 // backgroundColor: " #e6e6e6",
+                  top: "3.3rem",
                   right: "1rem",
                   left: "1rem",
                   display: showSubreddits ? "display" : "none",
-                 boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px"
+                 boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                 borderTopLeftRadius: 0,
+                 borderTopRightRadius: 0
                 }}
               >
                 <Subreddits toddleSubreddits={toddleSubreddits} />

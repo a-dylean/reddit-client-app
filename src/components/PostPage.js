@@ -17,7 +17,7 @@ const PostPage = () => {
 
   return (
     <Layout selectedSubreddit={selectedSubreddit}>
-      <Container sx={{ mt: "64px" }}>
+      <Container sx={{ mt: "4rem" }}>
         <Box
           sx={{
             display: "flex",
