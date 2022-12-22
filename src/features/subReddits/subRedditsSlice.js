@@ -21,12 +21,22 @@ export const searchSubreddits = createAsyncThunk(
   }
 );
 
+export const getSubredditInfo = createAsyncThunk(
+  "subreddits/getSubredditInfo",
+  async (subreddit) => {
+    return fetch(`https://www.reddit.com/r/${subreddit}/about.json`)
+    .then((res) => res.json())
+    .then((data) => data.data)
+  }
+);
+
 // Slice Object
 export const subRedditsSlice = createSlice({
   name: "subreddits",
   initialState: {
     subreddits: [],
     loading: false,
+    subredditInfo: {}
   },
   reducers: {},
   extraReducers: {
@@ -48,6 +58,16 @@ export const subRedditsSlice = createSlice({
       state.subreddits = action.payload;
     },
     [searchSubreddits.rejected]: (state) => {
+      state.loading = false;
+    },
+    [getSubredditInfo.pending]: (state) => {
+      state.loading = true;
+    },
+    [getSubredditInfo.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.subredditInfo = action.payload;
+    },
+    [getSubredditInfo.rejected]: (state) => {
       state.loading = false;
     },
   },

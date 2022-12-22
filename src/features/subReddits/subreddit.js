@@ -10,7 +10,6 @@ import {
   ListItemText,
 } from "@mui/material";
 import { useWindowSize } from "../../components/helperFunctions";
-import SubredditInfo from "./subredditInfo";
 
 /* - takes the following props:
     - title
@@ -18,22 +17,22 @@ import SubredditInfo from "./subredditInfo";
 - onclick renders a new postlist
 */
 
-export const Subreddit = ({ subreddit, toddleSubreddits }) => {
+export const Subreddit = ({ subreddit }) => {
   const thumbnail = subreddit.data.icon_img;
   const subscribers = subreddit.data.subscribers.toLocaleString("en-US");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClickHandler = () => {
-   // dispatch(selectSubreddit(subreddit.data.url.slice(3)));
-    dispatch(selectSubreddit(subreddit.data));
+    dispatch(selectSubreddit(subreddit.data.url.slice(3)));
+    //dispatch(selectSubreddit(subreddit.data));
     navigate(`${subreddit.data.url}`);
-    toddleSubreddits();
+    //toddleSubreddits();
   };
   const size = useWindowSize();
 
   return (
     <li>
-      <ListItemButton
+      {subreddit && (<ListItemButton
         divider
         aria-label="select subreddit"
         onClick={onClickHandler}
@@ -63,7 +62,7 @@ export const Subreddit = ({ subreddit, toddleSubreddits }) => {
             </Typography>
           )}
         </ListItemText>
-      </ListItemButton>
+      </ListItemButton>)}
     </li>
   );
 };

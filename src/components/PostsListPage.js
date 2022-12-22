@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getPosts, selectSubreddit } from "../features/posts/postsSlice";
+import { getPosts } from "../features/posts/postsSlice";
 import { Subreddits } from "../features/subReddits/subReddits";
 import { Post } from "../features/posts/post";
-import { Typography, LinearProgress } from "@mui/material";
-import { Container, Grid, Card, Box } from "@mui/material";
+import { Typography, LinearProgress, Container, Grid, Card, Box, ListSubheader } from "@mui/material";
 import Layout from "./Layout";
 import { useParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useWindowSize } from "./helperFunctions";
-import SubredditInfo from "../features/subReddits/subredditInfo";
+import { SubredditInfo } from "../features/subReddits/subredditInfo";
+import { getSubredditInfo } from "../features/subReddits/subRedditsSlice";
+
 const PostsListPage = () => {
   const dispatch = useDispatch();
   const { selectedSubreddit = "Home" } = useParams();
@@ -19,6 +20,8 @@ const PostsListPage = () => {
   useEffect(() => {
     dispatch(getPosts({ subreddit: selectedSubreddit }));
   }, [selectedSubreddit, dispatch]);
+
+ 
 
   const fetchMoreData = () => {
     dispatch(getPosts({ subreddit: selectedSubreddit, after }));
@@ -75,6 +78,7 @@ const PostsListPage = () => {
                   <SubredditInfo selectedSubreddit={selectedSubreddit}/>
                 </Card>
                 <Card>
+                { size.width > 600 && <ListSubheader>FEATURED SUBREDDITS</ListSubheader>}
                   <Subreddits />
                 </Card>
               </Grid>

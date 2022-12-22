@@ -14,11 +14,6 @@ import { Subreddits } from "../features/subReddits/subReddits";
 const Layout = ({ children, selectedSubreddit }) => {
   const navigate = useNavigate();
   const size = useWindowSize();
-  const [showSubreddits, setShowSubreddits] = useState(false);
-  const toddleSubreddits = () => {
-    const newShowSubreddits = !showSubreddits;
-    setShowSubreddits(newShowSubreddits);
-  };
 
   return (
     <>
@@ -39,33 +34,47 @@ const Layout = ({ children, selectedSubreddit }) => {
           </Typography>
           {size.width > 600 && (
             <Box
-              onClick={toddleSubreddits}
               sx={{ margin: "0 auto", width: "35%"}}
             >
-              <Search />
-            </Box>
-          )}
-
-          {size.width < 600 && (
-              <><Box onClick={toddleSubreddits}>
-                <Search />
-                <Card
+              <Search/>
+              {/* <Card
                 sx={{
+                  width: "34%",
                   position: "absolute",
-                  top: "3.3rem",
-                  right: "1rem",
-                  left: "1rem",
-                  display: showSubreddits ? "display" : "none",
+                  top: "4rem",
+                  //display: showSubreddits ? "display" : "none",
                  boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
                  borderTopLeftRadius: 0,
                  borderTopRightRadius: 0
                 }}
               >
-                <Subreddits toddleSubreddits={toddleSubreddits} />
+                <Subreddits />
+              </Card> */}
+            </Box>
+          )}
+
+          {/* {size.width < 600 && (
+              <><Box 
+             // onClick={toddleSubreddits}
+              >
+                <Search />
+                <Card
+                sx={{
+                  position: "absolute",
+                  top: "3.5rem",
+                  right: "1rem",
+                  left: "1rem",
+                  //display: showSubreddits ? "display" : "none",
+                 boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                 borderTopLeftRadius: 0,
+                 borderTopRightRadius: 0
+                }}
+              >
+                <Subreddits/>
               </Card>
               </Box>
               </>
-          )}
+          )} */}
         </Toolbar>
       </AppBar>
       <main>{children}</main>

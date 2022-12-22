@@ -8,9 +8,10 @@ import {
 } from "../features/subReddits/subRedditsSlice";
 import { debounce } from "lodash";
 import { styled } from "@mui/material/styles";
-import { InputBase } from "@mui/material";
+import { InputBase, Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import { Subreddits } from "../features/subReddits/subReddits";
 
 const SearchDiv = styled("div")(() => ({
   position: "relative",
@@ -41,7 +42,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       position: "relative",
       width: "0.001rem",
       "&:focus": {
-        width: "15rem",
+        width: "100%",
       },
     },
   },
@@ -53,12 +54,18 @@ const searchSubredditsDebounced = debounce((dispatch, searchTerm) => {
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [showSubreddits, setShowSubreddits] = useState(false);
+  const toddleSubreddits = () => {
+    const newShowSubreddits = !showSubreddits;
+    setShowSubreddits(newShowSubreddits);
+  };
   const dispatch = useDispatch();
 
   const searchTermChangeHandler = (e) => {
     const newSearchTerm = e.target.value;
     setSearchTerm(newSearchTerm);
     searchSubredditsDebounced(dispatch, newSearchTerm);
+   
   };
 
   const clearSearchTermHandler = () => {
@@ -66,7 +73,10 @@ export const Search = () => {
     dispatch(getSubreddits());
   };
 
+  
+
   return (
+    <>
     <SearchDiv>
       <SearchIconWrapper>
         <SearchIcon />
@@ -87,5 +97,9 @@ export const Search = () => {
         }
       ></StyledInputBase>
     </SearchDiv>
+    <Box sx={{display: showSubreddits ? "display" : "none"}}>
+    <Subreddits />
+    </Box>
+    </>
   );
 };

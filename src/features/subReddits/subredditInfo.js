@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Card,
   CardContent,
@@ -12,23 +12,23 @@ import {
 } from "@mui/material";
 import CakeIcon from "@mui/icons-material/Cake";
 import { Box } from "@mui/system";
+import { getSubredditInfo } from "./subRedditsSlice";
 
-export const SubredditInfo = () => {
-  const selectedSubreddit = useSelector(
-    (state) => state.post.selectedSubreddit
-  );
-  const created = new Date(selectedSubreddit?.created * 1000);
-  console.log(created);
+export const SubredditInfo = ({ selectedSubreddit }) => {
+  const subredditInfo = useSelector((state) => state.subreddit.subredditInfo);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getSubredditInfo(selectedSubreddit));
+  }, [dispatch, selectedSubreddit]);
+  const created = new Date(subredditInfo.created * 1000);
   return (
     <>
       <Card>
-        <ListSubheader>
-          ABOUT{" "}
-          {(selectedSubreddit &&
-            selectedSubreddit.display_name.toUpperCase()) ||
-            " HOME "}{" "}
-          COMMUNITY
-          {selectedSubreddit?.advertiser_category && (
+        <ListSubheader sx={{ textTransform: "uppercase" }}>
+          {`ABOUT 
+          ${subredditInfo.display_name}
+          COMMUNITY`}
+          {subredditInfo.advertiser_category && (
             <Box
               sx={{ m: 0, p: "0 1rem", position: "absolute", right: 0, top: 0 }}
             >
@@ -41,21 +41,24 @@ export const SubredditInfo = () => {
                   fontSize: "0.6rem",
                   px: "0.3rem",
                   py: "0.2rem",
+                  textTransform: "none",
                 }}
               >
-                {selectedSubreddit.advertiser_category}
+                {subredditInfo.advertiser_category}
               </Typography>
             </Box>
           )}
         </ListSubheader>
-        {selectedSubreddit?.banner_img && (
-          <CardMedia
-            component="img"
-            src={selectedSubreddit.banner_img}
-            alt="post image"
-            height="100%"
-          ></CardMedia>
-        )}
+        <CardMedia
+          component="img"
+          src={subredditInfo.banner_img}
+          alt="post image"
+          height="100%"
+          onError={(event) => {
+            event.target.style.display = "none";
+            event.onerror = null;
+          }}
+        />
         <CardContent>
           <Typography
             variant="body2"
@@ -64,8 +67,12 @@ export const SubredditInfo = () => {
               textAlign: "justify",
             }}
           >
-            {selectedSubreddit && selectedSubreddit.public_description}
+            {subredditInfo.public_description}
           </Typography>
+          <ListItem sx={{display: "flex", justifyContent: "space-evenly"}}>
+            <Typography>{subredditInfo.subscribers}</Typography>
+            <Typography>{subredditInfo.accounts_active}</Typography>
+          </ListItem>
           <ListItem>
             <ListItemIcon sx={{ minWidth: "2rem" }}>
               <CakeIcon aria-label="date of creation" color="disabled" />
@@ -73,12 +80,10 @@ export const SubredditInfo = () => {
             <ListItemText>
               <Typography variant="h7" color="grey">
                 Created:{" "}
-                {selectedSubreddit
-                  ? created.toLocaleDateString("en-us", {
-                      year: "numeric",
-                      month: "short",
-                    })
-                  : "Jan 2009"}
+                {created.toLocaleDateString("en-us", {
+                  year: "numeric",
+                  month: "short",
+                })}
               </Typography>
             </ListItemText>
           </ListItem>
