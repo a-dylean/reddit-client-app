@@ -35,6 +35,7 @@ export const subRedditsSlice = createSlice({
   name: "subreddits",
   initialState: {
     subreddits: [],
+    featuredSubreddits: [],
     loading: false,
     subredditInfo: {}
   },
@@ -55,7 +56,7 @@ export const subRedditsSlice = createSlice({
     },
     [searchSubreddits.fulfilled]: (state, action) => {
       state.loading = false;
-      state.subreddits = action.payload;
+      state.featuredSubreddits = action.payload;
     },
     [searchSubreddits.rejected]: (state) => {
       state.loading = false;

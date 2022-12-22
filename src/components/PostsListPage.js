@@ -10,7 +10,6 @@ import { useParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useWindowSize } from "./helperFunctions";
 import { SubredditInfo } from "../features/subReddits/subredditInfo";
-import { getSubredditInfo } from "../features/subReddits/subRedditsSlice";
 
 const PostsListPage = () => {
   const dispatch = useDispatch();
@@ -20,8 +19,6 @@ const PostsListPage = () => {
   useEffect(() => {
     dispatch(getPosts({ subreddit: selectedSubreddit }));
   }, [selectedSubreddit, dispatch]);
-
- 
 
   const fetchMoreData = () => {
     dispatch(getPosts({ subreddit: selectedSubreddit, after }));
@@ -70,7 +67,6 @@ const PostsListPage = () => {
                 md={4}
                 sx={{
                   width: "100%",
-                  position: "sticky",
                   top: "3rem",
                 }}
               >
@@ -78,7 +74,7 @@ const PostsListPage = () => {
                   <SubredditInfo selectedSubreddit={selectedSubreddit}/>
                 </Card>
                 <Card>
-                { size.width > 600 && <ListSubheader>FEATURED SUBREDDITS</ListSubheader>}
+                {size.width > 600 && <ListSubheader>FEATURED SUBREDDITS</ListSubheader>}
                   <Subreddits />
                 </Card>
               </Grid>

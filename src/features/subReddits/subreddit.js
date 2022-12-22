@@ -19,14 +19,12 @@ import { useWindowSize } from "../../components/helperFunctions";
 
 export const Subreddit = ({ subreddit }) => {
   const thumbnail = subreddit.data.icon_img;
-  const subscribers = subreddit.data.subscribers.toLocaleString("en-US");
+  const subscribers = subreddit?.data?.subscribers?.toLocaleString("en-US");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClickHandler = () => {
     dispatch(selectSubreddit(subreddit.data.url.slice(3)));
-    //dispatch(selectSubreddit(subreddit.data));
     navigate(`${subreddit.data.url}`);
-    //toddleSubreddits();
   };
   const size = useWindowSize();
 

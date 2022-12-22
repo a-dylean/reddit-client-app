@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  Card,
-} from "@mui/material";
+import { AppBar, Toolbar, Typography, Box, Card } from "@mui/material";
 import { Search } from "./search";
 import { useNavigate } from "react-router-dom";
-import {useWindowSize} from "./helperFunctions";
-import { Subreddits } from "../features/subReddits/subReddits";
+import { useWindowSize } from "./helperFunctions";
+import FeaturedSubreddits from "../features/subReddits/featuredSubreddits";
 
 const Layout = ({ children, selectedSubreddit }) => {
   const navigate = useNavigate();
@@ -17,9 +11,12 @@ const Layout = ({ children, selectedSubreddit }) => {
 
   return (
     <>
-      <AppBar >
+      <AppBar>
         <Toolbar
-          sx={{ display: "flex", justifyContent: size.width < 600 && "space-between" }}
+          sx={{
+            display: "flex",
+            justifyContent: size.width < 600 && "space-between",
+          }}
         >
           <Typography
             sx={{
@@ -32,30 +29,13 @@ const Layout = ({ children, selectedSubreddit }) => {
           >
             /r/{selectedSubreddit}
           </Typography>
-          {size.width > 600 && (
-            <Box
-              sx={{ margin: "0 auto", width: "35%"}}
-            >
-              <Search/>
-              {/* <Card
-                sx={{
-                  width: "34%",
-                  position: "absolute",
-                  top: "4rem",
-                  //display: showSubreddits ? "display" : "none",
-                 boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-                 borderTopLeftRadius: 0,
-                 borderTopRightRadius: 0
-                }}
-              >
-                <Subreddits />
-              </Card> */}
-            </Box>
-          )}
+          
+          {/* <Box sx={{ margin: "0 auto", width: "35%" }}> */}
+            <Search />
+          {/* </Box> */}
 
           {/* {size.width < 600 && (
               <><Box 
-             // onClick={toddleSubreddits}
               >
                 <Search />
                 <Card
@@ -64,13 +44,12 @@ const Layout = ({ children, selectedSubreddit }) => {
                   top: "3.5rem",
                   right: "1rem",
                   left: "1rem",
-                  //display: showSubreddits ? "display" : "none",
                  boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
                  borderTopLeftRadius: 0,
                  borderTopRightRadius: 0
                 }}
               >
-                <Subreddits/>
+                <FeaturedSubreddits/>
               </Card>
               </Box>
               </>

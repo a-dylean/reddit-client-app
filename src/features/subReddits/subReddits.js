@@ -23,14 +23,6 @@ export const Subreddits = ({toddleSubreddits}) => {
     </div>);
   }
 
-  if (rejected || !subreddits.length) {
-    return (
-      <div>
-        <Typography variant="h7">Subreddit not found!</Typography>
-      </div>
-    );
-  }
-
   return (
       <List>
         {subreddits.slice(0, 10).map((subreddit) => (
