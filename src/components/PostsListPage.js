@@ -68,6 +68,7 @@ const PostsListPage = () => {
                 sx={{
                   width: "100%",
                   top: "3rem",
+                  minWidth: "23rem"
                 }}
               >
                 <Card sx={{ mb: "1rem" }}>

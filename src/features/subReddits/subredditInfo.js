@@ -8,11 +8,13 @@ import {
   CardMedia,
   ListItemIcon,
   ListItemText,
-  ListItem,
+  ListItem
 } from "@mui/material";
+import { Badge } from "@mui/icons-material";
 import CakeIcon from "@mui/icons-material/Cake";
 import { Box } from "@mui/system";
 import { getSubredditInfo } from "./subRedditsSlice";
+import { numFormatter } from "../../components/helperFunctions";
 
 export const SubredditInfo = ({ selectedSubreddit }) => {
   const subredditInfo = useSelector((state) => state.subreddit.subredditInfo);
@@ -63,17 +65,29 @@ export const SubredditInfo = ({ selectedSubreddit }) => {
           <Typography
             variant="body2"
             sx={{
-              px: "1rem",
+              p: "0.5rem 1rem  0",
               textAlign: "justify",
             }}
           >
             {subredditInfo.public_description}
           </Typography>
-          <ListItem sx={{display: "flex", justifyContent: "space-evenly"}}>
-            <Typography>{subredditInfo.subscribers}</Typography>
-            <Typography>{subredditInfo.accounts_active}</Typography>
+          <ListItem sx={{ pb: 0 }}>
+            <ListItemText sx={{ display: "flex", justifyContent: "center" }}>
+              <Typography variant="h7" sx={{ fontSize: "1.5rem" }}>
+                {numFormatter(subredditInfo.subscribers)}
+                <br />
+              </Typography>
+              <Typography variant="h7">Surscribers</Typography>
+            </ListItemText>
+            <ListItemText sx={{ display: "flex", justifyContent: "center" }}>
+              <Typography variant="h7" sx={{ fontSize: "1.5rem" }}>
+                {numFormatter(subredditInfo.accounts_active)}
+              </Typography>
+              <br />
+              <Typography variant="h7">Online🟢</Typography>
+            </ListItemText>
           </ListItem>
-          <ListItem>
+          <ListItem sx={{ pt: 0 }}>
             <ListItemIcon sx={{ minWidth: "2rem" }}>
               <CakeIcon aria-label="date of creation" color="disabled" />
             </ListItemIcon>

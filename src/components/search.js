@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
-  getSubreddits,
   searchSubreddits,
 } from "../features/subReddits/subRedditsSlice";
 import { debounce } from "lodash";
@@ -86,7 +85,8 @@ export const Search = () => {
   const searchTermChangeHandler = (e) => {
     const newSearchTerm = e.target.value;
     setSearchTerm(newSearchTerm);
-    searchSubredditsDebounced(dispatch, newSearchTerm);
+    dispatch(searchSubreddits(newSearchTerm));
+    //searchSubredditsDebounced(dispatch, newSearchTerm);
   };
 
   const clearSearchTermHandler = () => {

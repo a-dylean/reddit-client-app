@@ -33,9 +33,13 @@ export const relativeDays = (timestamp) => {
   const daysDifference = Math.round(
     (timestamp - new Date().getTime()) / oneDayinMs
   );
-  if (hoursDifference > -24) {
-    return rtf.format(hoursDifference, "hour");
-  } else {
-    return rtf.format(daysDifference, "day");
-  }
+  hoursDifference > -24 ? rtf.format(hoursDifference, "hour") : rtf.format(daysDifference, "day");
+};
+
+export const numFormatter = (num) => {
+  return Math.abs(num) > 999999
+    ? Math.sign(num) * (Math.abs(num) / 1000000).toFixed(1) + "m"
+    : Math.abs(num) > 999
+    ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
+    : Math.sign(num) * Math.abs(num);
 };
