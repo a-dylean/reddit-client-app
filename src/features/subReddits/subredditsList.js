@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { List, Typography, LinearProgress } from '@mui/material';
 import { Subreddit } from './subreddit';
 
-function FeaturedSubreddits() {
-  const { featuredSubreddits, loading, rejected } = useSelector((state) => state.subreddit);
+const SubredditsList = ({searchTerm}) => {
+  const { subreddits, loading, rejected } = useSelector((state) => state.subreddit);
 
   if (loading) {
     return (
@@ -14,7 +14,7 @@ function FeaturedSubreddits() {
     </div>);
   }
 
-  if (rejected || !featuredSubreddits.length) {
+  if (searchTerm && (rejected || !subreddits.length)) {
     return (
       <div>
         <Typography variant="h7">Subreddit not found!</Typography>
@@ -23,11 +23,11 @@ function FeaturedSubreddits() {
   }
   return (
     <List>
-        {featuredSubreddits.slice(0, 20).map((subreddit) => (
+        {subreddits.slice(0, 20).map((subreddit) => (
           <Subreddit subreddit={subreddit} key={subreddit.data.id}/>
         ))}
      </List>
   )
 }
 
-export default FeaturedSubreddits;
+export default SubredditsList;

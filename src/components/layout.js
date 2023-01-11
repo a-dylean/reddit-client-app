@@ -2,22 +2,24 @@ import React from "react";
 import { AppBar, Toolbar, Typography } from "@mui/material";
 import { Search } from "./search";
 import { useNavigate } from "react-router-dom";
-import { useWindowSize } from "./helperFunctions";
 
 const Layout = ({ children, selectedSubreddit }) => {
   const navigate = useNavigate();
-  const size = useWindowSize();
+
+  const hideSudreddit = () => {
+    document.getElementById("selectedSubreddit").style.display = "none";
+  };
+
+  const showSubreddit = () => {
+    document.getElementById("selectedSubreddit").style.display = "block";
+  };
 
   return (
     <>
       <AppBar>
-        <Toolbar
-          sx={{
-            display: "flex",
-            justifyContent: size.width < 600 && "space-between",
-          }}
-        >
+        <Toolbar variant="dense">
           <Typography
+            id="selectedSubreddit"
             sx={{
               color: "white",
               cursor: "pointer",
@@ -28,7 +30,7 @@ const Layout = ({ children, selectedSubreddit }) => {
           >
             /r/{selectedSubreddit}
           </Typography>
-            <Search />
+          <Search hideSudreddit={hideSudreddit} showSubreddit={showSubreddit}/>
         </Toolbar>
       </AppBar>
       <main>{children}</main>

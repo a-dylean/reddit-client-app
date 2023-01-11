@@ -9,7 +9,7 @@ import {
   Typography,
   ListItemText,
 } from "@mui/material";
-import { useWindowSize } from "../../components/helperFunctions";
+
 
 /* - takes the following props:
     - title
@@ -26,7 +26,6 @@ export const Subreddit = ({ subreddit }) => {
     dispatch(selectSubreddit(subreddit.data.url.slice(3)));
     navigate(`${subreddit.data.url}`);
   };
-  const size = useWindowSize();
 
   return (
     <li>
@@ -49,16 +48,14 @@ export const Subreddit = ({ subreddit }) => {
             }}
           />
         </ListItemAvatar>
-        <ListItemText sx={{ whiteSpace: "pre-line" }}>
+        <ListItemText>
           <Typography variant="h4">{subreddit.data.display_name.charAt(0).toUpperCase()+subreddit.data.display_name.slice(1)}</Typography>
-          {size.width > 600 && (
             <Typography
               variant="h7"
-              sx={{ color: "rgba(0, 0, 0, 0.54)", whiteSpace: "nowrap" }}
+              sx={{ color: "rgba(0, 0, 0, 0.54)", whiteSpace: "nowrap", display: {xs: "none", sm: "block"} }}
             >
               {subscribers} subscribers
             </Typography>
-          )}
         </ListItemText>
       </ListItemButton>)}
     </li>

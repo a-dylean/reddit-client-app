@@ -36,27 +36,28 @@ export const subRedditsSlice = createSlice({
   initialState: {
     subreddits: [],
     featuredSubreddits: [],
-    loading: false,
+    loading: true,
+    featuredSubredditsLoading: true,
     subredditInfo: {}
   },
   reducers: {},
   extraReducers: {
     [getSubreddits.pending]: (state) => {
-      state.loading = true;
+      state.featuredSubredditsLoading = true;
     },
     [getSubreddits.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.subreddits = action.payload;
+      state.featuredSubredditsLoading = false;
+      state.featuredSubreddits = action.payload;
     },
     [getSubreddits.rejected]: (state) => {
-      state.loading = false;
+      state.featuredSubredditsLoading = false;
     },
     [searchSubreddits.pending]: (state) => {
       state.loading = true;
     },
     [searchSubreddits.fulfilled]: (state, action) => {
       state.loading = false;
-      state.featuredSubreddits = action.payload;
+      state.subreddits = action.payload;
     },
     [searchSubreddits.rejected]: (state) => {
       state.loading = false;

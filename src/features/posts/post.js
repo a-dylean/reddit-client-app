@@ -20,10 +20,9 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
-import { useWindowSize, relativeDays } from "../../components/helperFunctions";
+import { relativeDays } from "../../components/helperFunctions";
 
 export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
-  const size = useWindowSize();
   const date = new Date(post.data.created_utc * 1000);
   const navigate = useNavigate();
   const handlePostClick = () => {
@@ -40,33 +39,31 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
           pb: 0,
         }}
       >
-        {size.width > 600 && (
-          <Box
-            sx={{
-              background: "#f5f5f5",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              alignItems: "center",
-            }}
+        <Box
+          sx={{
+            background: "#f5f5f5",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            display: { xs: "none", sm: "flex" },
+          }}
+        >
+          <IconButton
+            aria-label="thumb up"
+            sx={{ m: "0.3rem 0.3rem 0", p: "0.3rem" }}
           >
-            <IconButton
-              aria-label="thumb up"
-              sx={{ m: "0.3rem 0.3rem 0", p: "0.3rem" }}
-            >
-              <ThumbUpOffAltIcon />
-            </IconButton>
-            <Typography variant="h7">
-              {post.data.ups > 9999 ? "10k+" : post.data.ups}
-            </Typography>
-            <IconButton
-              aria-label="thumb down"
-              sx={{ m: "0 0.3rem 0.3rem", p: "0.3rem" }}
-            >
-              <ThumbDownOffAltIcon />
-            </IconButton>
-          </Box>
-        )}
+            <ThumbUpOffAltIcon />
+          </IconButton>
+          <Typography variant="h7">
+            {post.data.ups > 9999 ? "10k+" : post.data.ups}
+          </Typography>
+          <IconButton
+            aria-label="thumb down"
+            sx={{ m: "0 0.3rem 0.3rem", p: "0.3rem" }}
+          >
+            <ThumbDownOffAltIcon />
+          </IconButton>
+        </Box>
         <Box
           wrap="nowrap"
           sx={{
@@ -89,6 +86,7 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
               sx={{ cursor: fullVersion ? "auto" : "pointer" }}
             >
               <CardHeader
+              sx={{pb: "0.5rem"}}
                 title={post.data.title}
                 subheader={`Posted by ${post.data.author} ${relativeDays(
                   date.getTime()
@@ -139,7 +137,6 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
                   {post.data.selftext}
                 </Typography>
               )}
-
               <CardActions sx={{ p: "1rem" }}>
                 <ButtonGroup
                   variant="outlined"
@@ -150,10 +147,12 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
                     <ChatBubbleIcon sx={{ pr: "0.3rem" }} />
                     <Typography variant="h7">
                       {post.data.num_comments}
-                      {size.width > 600 &&
-                        (post.data.num_comments === 1
-                          ? " comment"
-                          : " comments")}
+                    </Typography>
+                    <Typography
+                      variant="h7"
+                      sx={{ display: { xs: "none", sm: "flex" }, p: "0.2rem" }}
+                    >
+                      {post.data.num_comments === 1 ? "comment" : "comments"}
                     </Typography>
                   </Button>
                   <Button aria-label="share post">

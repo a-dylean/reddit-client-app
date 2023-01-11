@@ -2,13 +2,12 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getPosts } from "../features/posts/postsSlice";
-import { Subreddits } from "../features/subReddits/subReddits";
+import { FeaturedSubreddits } from "../features/subReddits/featuredSubReddits";
 import { Post } from "../features/posts/post";
 import { Typography, LinearProgress, Container, Grid, Card, Box, ListSubheader } from "@mui/material";
-import Layout from "./Layout";
+import Layout from "./layout";
 import { useParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useWindowSize } from "./helperFunctions";
 import { SubredditInfo } from "../features/subReddits/subredditInfo";
 
 const PostsListPage = () => {
@@ -24,11 +23,9 @@ const PostsListPage = () => {
     dispatch(getPosts({ subreddit: selectedSubreddit, after }));
   };
 
-  const size = useWindowSize();
-
   return (
     <Layout selectedSubreddit={selectedSubreddit}>
-      <Container sx={{ mt: "5rem" }}>
+      <Container sx={{ mt: "4rem" }}>
         <Grid
           container
           direction="row"
@@ -58,8 +55,6 @@ const PostsListPage = () => {
               ))}
             </InfiniteScroll>
           </Grid>
-          {size.width > 600 && (
-            <>
               <Grid
                 item
                 maxWidth="md"
@@ -68,19 +63,18 @@ const PostsListPage = () => {
                 sx={{
                   width: "100%",
                   top: "3rem",
-                  minWidth: "23rem"
+                  minWidth: "23rem",
+                  display: {xs: "none", sm: "block"} 
                 }}
               >
                 <Card sx={{ mb: "1rem" }}>
                   <SubredditInfo selectedSubreddit={selectedSubreddit}/>
                 </Card>
                 <Card>
-                {size.width > 600 && <ListSubheader>FEATURED SUBREDDITS</ListSubheader>}
-                  <Subreddits />
+                <ListSubheader>FEATURED SUBREDDITS</ListSubheader>
+                  <FeaturedSubreddits />
                 </Card>
               </Grid>
-            </>
-          )}
         </Grid>
       </Container>
     </Layout>

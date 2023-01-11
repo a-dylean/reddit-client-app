@@ -4,7 +4,7 @@ import { Post } from "../features/posts/post";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getPost } from "../features/posts/postsSlice";
-import Layout from './Layout';
+import Layout from './layout';
 
 const PostPage = () => {
   const { postId, selectedSubreddit } = useParams();
@@ -17,7 +17,7 @@ const PostPage = () => {
 
   return (
     <Layout selectedSubreddit={selectedSubreddit}>
-      <Container sx={{ mt: "4rem" }}>
+      <Container sx={{ mt: "3rem" }}>
         <Box
           sx={{
             display: "flex",

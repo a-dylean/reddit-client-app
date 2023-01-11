@@ -1,6 +1,6 @@
 import React from "react";
-import PostPage from "./PostPage";
-import PostsListPage from "./PostsListPage";
+import PostPage from "./postPage";
+import PostsListPage from "./postsListPage";
 import {
   Routes,
   Route,

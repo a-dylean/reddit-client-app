@@ -10,7 +10,6 @@ import {
   ListItemText,
   ListItem
 } from "@mui/material";
-import { Badge } from "@mui/icons-material";
 import CakeIcon from "@mui/icons-material/Cake";
 import { Box } from "@mui/system";
 import { getSubredditInfo } from "./subRedditsSlice";
@@ -54,7 +53,7 @@ export const SubredditInfo = ({ selectedSubreddit }) => {
         <CardMedia
           component="img"
           src={subredditInfo.banner_img}
-          alt="post image"
+          alt="subreddit banner image"
           height="100%"
           onError={(event) => {
             event.target.style.display = "none";
@@ -84,7 +83,7 @@ export const SubredditInfo = ({ selectedSubreddit }) => {
                 {numFormatter(subredditInfo.accounts_active)}
               </Typography>
               <br />
-              <Typography variant="h7">Online🟢</Typography>
+              <Typography variant="h7">Online 🟢</Typography>
             </ListItemText>
           </ListItem>
           <ListItem sx={{ pt: 0 }}>
