@@ -27,7 +27,7 @@ const PostPage = () => {
           }}
         ></Box>
         {selectedPost ? (
-          <Post post={selectedPost} fullVersion={true} />
+          <Post post={selectedPost} fullVersion />
         ) : (
           <Card><Typography variant="h7">Loading...</Typography><LinearProgress/></Card>
         )}
