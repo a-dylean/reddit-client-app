@@ -20,7 +20,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
-import { relativeDays } from "../../components/helperFunctions";
+import { relativeDays } from "../../helpers/helperFunctions";
 
 export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
   const date = new Date(post.data.created_utc * 1000);
@@ -111,9 +111,9 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
                   height="500rem"
                   src={post.data.media.reddit_video.fallback_url}
                   preload="auto"
-                  controls={true}
-                  autoPlay={true}
-                  loop={true}
+                  controls
+                  autoPlay
+                  loop
                   sx={{ backgroundColor: "black" }}
                 />
               )}

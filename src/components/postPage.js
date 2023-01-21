@@ -9,6 +9,7 @@ import Layout from './layout';
 const PostPage = () => {
   const { postId, selectedSubreddit } = useParams();
   const selectedPost = useSelector((state) => state.post.posts[postId]);
+  const loading = useSelector((state) => state.post.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,20 +18,13 @@ const PostPage = () => {
 
   return (
     <Layout selectedSubreddit={selectedSubreddit}>
-      <Container sx={{ mt: "3rem" }}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "flex-start",
-            pb: "1rem",
-          }}
-        ></Box>
-        {selectedPost ? (
-          <Post post={selectedPost} fullVersion={true} />
-        ) : (
-          <Card><Typography variant="h7">Loading...</Typography><LinearProgress/></Card>
+      <Container sx={{ mt: "4rem" }}>
+        {loading && (<Card><Typography variant="h7">Loading...</Typography><LinearProgress/></Card>
         )}
+        {selectedPost && (
+          <Post post={selectedPost} fullVersion={true} />
+        )}
+          
       </Container>
     </Layout>
   );

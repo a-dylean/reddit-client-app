@@ -1,33 +1,35 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { List, Typography, LinearProgress } from '@mui/material';
-import { Subreddit } from './subreddit';
+import React from "react";
+import { useSelector } from "react-redux";
+import { List, Typography, LinearProgress } from "@mui/material";
+import { Subreddit } from "./subreddit";
 
-const SubredditsList = ({searchTerm}) => {
-  const { subreddits, loading, rejected } = useSelector((state) => state.subreddit);
+const SubredditsList = ({ searchTerm }) => {
+  const { subreddits, loading, rejected } = useSelector(
+    (state) => state.subreddit
+  );
 
-  if (loading) {
-    return (
-      <div>
-        <Typography variant="h7">Subreddits are loading...</Typography>
-        <LinearProgress/>
-    </div>);
-  }
-
-  if (searchTerm && (rejected || !subreddits.length)) {
-    return (
-      <div>
-        <Typography variant="h7">Subreddit not found!</Typography>
-      </div>
-    );
-  }
   return (
-    <List>
+    <>
+      {loading ? (
+        <div>
+          <Typography variant="h7">Subreddits are loading...</Typography>
+          <LinearProgress />
+        </div>
+      ) : (
+        searchTerm &&
+        (rejected || !subreddits.length) && (
+          <div>
+            <Typography variant="h7">Subreddit not found!</Typography>
+          </div>
+        )
+      )}
+      <List>
         {subreddits.slice(0, 20).map((subreddit) => (
-          <Subreddit subreddit={subreddit} key={subreddit.data.id}/>
+          <Subreddit subreddit={subreddit} key={subreddit.data.id} />
         ))}
-     </List>
-  )
-}
+      </List>
+    </>
+  );
+};
 
 export default SubredditsList;

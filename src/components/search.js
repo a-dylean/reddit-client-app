@@ -9,7 +9,7 @@ import { InputBase, Card } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import SubredditsList from "../features/subReddits/subredditsList";
-import { useWindowSize } from "./helperFunctions";
+import { useWindowSize } from "../helpers/helperFunctions";
 const ParentDiv = styled("div")(({ theme }) => ({
   position: "absolute",
   top: 0,

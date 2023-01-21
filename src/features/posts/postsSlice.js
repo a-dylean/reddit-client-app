@@ -15,7 +15,7 @@ export const getPost = createAsyncThunk(
   async (postId) => {
     return fetch(`https://api.reddit.com/api/info/?id=t3_${postId}`)
       .then((res) => res.json())
-      .then((data) => Object.assign({}, data.data.children[0]));
+      .then((data) => data.data.children[0]);
   }
 );
 

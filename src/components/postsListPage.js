@@ -35,16 +35,14 @@ const PostsListPage = () => {
           spacing={3.5}
         >
           <Grid item xs={16} md={8}>
-            {loading ? (
+            {loading && (
               <Card>
                 <Typography variant="h7">Posts are loading...</Typography>
-                <LinearProgress />{" "}
+                <LinearProgress />
               </Card>
-            ) : (
-              ""
             )}
             <InfiniteScroll
-              dataLength={Object.values(posts).length}
+              dataLength={Object.keys(posts).length}
               next={fetchMoreData}
               hasMore={after}
             >
@@ -61,9 +59,6 @@ const PostsListPage = () => {
                 xs={0}
                 md={4}
                 sx={{
-                  width: "100%",
-                  top: "3rem",
-                  minWidth: "23rem",
                   display: {xs: "none", sm: "block"} 
                 }}
               >

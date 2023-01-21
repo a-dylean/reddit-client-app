@@ -13,7 +13,7 @@ import {
 import CakeIcon from "@mui/icons-material/Cake";
 import { Box } from "@mui/system";
 import { getSubredditInfo } from "./subRedditsSlice";
-import { numFormatter } from "../../components/helperFunctions";
+import { numFormatter } from "../../helpers/helperFunctions";
 
 export const SubredditInfo = ({ selectedSubreddit }) => {
   const subredditInfo = useSelector((state) => state.subreddit.subredditInfo);
@@ -92,11 +92,11 @@ export const SubredditInfo = ({ selectedSubreddit }) => {
             </ListItemIcon>
             <ListItemText>
               <Typography variant="h7" color="grey">
-                Created:{" "}
-                {created.toLocaleDateString("en-us", {
+              Created:{" "}{created.toLocaleDateString("en-us", {
                   year: "numeric",
                   month: "short",
                 })}
+                
               </Typography>
             </ListItemText>
           </ListItem>

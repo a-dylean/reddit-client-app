@@ -12,12 +12,12 @@ import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
 import NorthIcon from "@mui/icons-material/North";
 import SouthIcon from "@mui/icons-material/South";
 import ReplyIcon from "@mui/icons-material/Reply";
-import { relativeDays } from "../../components/helperFunctions";
+import { relativeDays } from "../../helpers/helperFunctions";
 export const Comment = ({ comment }) => {
   const replies = comment.data?.replies?.data?.children;
   const date = new Date(comment.data.created_utc * 1000);
   const [showReplies, setShowReplies] = useState(false);
-  const toddleReplies = () => {
+  const toggleReplies = () => {
     const newShowReplies = !showReplies;
     setShowReplies(newShowReplies);
   };
@@ -33,7 +33,7 @@ export const Comment = ({ comment }) => {
                 p: "0 1rem",
                 width: "fit-content",
               }}
-              onClick={toddleReplies}
+              onClick={toggleReplies}
             >
               <Box sx={{ width: "max-content" }}>
                 <Typography variant="h7" gutterBottom={true}>
