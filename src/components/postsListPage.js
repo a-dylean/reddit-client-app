@@ -44,7 +44,7 @@ const PostsListPage = () => {
               ""
             )}
             <InfiniteScroll
-              dataLength={Object.values(posts).length}
+              dataLength={Object.keys(posts).length}
               next={fetchMoreData}
               hasMore={after}
             >
