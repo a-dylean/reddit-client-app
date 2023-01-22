@@ -22,9 +22,8 @@ const PostPage = () => {
         {loading && (<Card><Typography variant="h7">Loading...</Typography><LinearProgress/></Card>
         )}
         {selectedPost && (
-          <Post post={selectedPost} fullVersion={true} />
+          <Post post={selectedPost} fullVersion/>
         )}
-          
       </Container>
     </Layout>
   );
