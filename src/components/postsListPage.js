@@ -4,11 +4,16 @@ import { useDispatch } from "react-redux";
 import { getPosts } from "../features/posts/postsSlice";
 import { FeaturedSubreddits } from "../features/subReddits/featuredSubReddits";
 import { Post } from "../features/posts/post";
-import { Typography, LinearProgress, Container, Grid, Card, Box, ListSubheader } from "@mui/material";
+import {
+  Grid,
+  Card,
+  Box,
+} from "@mui/material";
 import Layout from "./layout";
 import { useParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { SubredditInfo } from "../features/subReddits/subredditInfo";
+import Loading from "./loading";
 
 const PostsListPage = () => {
   const dispatch = useDispatch();
@@ -25,7 +30,6 @@ const PostsListPage = () => {
 
   return (
     <Layout selectedSubreddit={selectedSubreddit}>
-      <Container sx={{ mt: "4rem" }}>
         <Grid
           container
           direction="row"
@@ -37,8 +41,7 @@ const PostsListPage = () => {
           <Grid item xs={16} md={8}>
             {loading && (
               <Card>
-                <Typography variant="h7">Posts are loading...</Typography>
-                <LinearProgress />
+                <Loading />
               </Card>
             )}
             <InfiniteScroll
@@ -53,25 +56,19 @@ const PostsListPage = () => {
               ))}
             </InfiniteScroll>
           </Grid>
-              <Grid
-                item
-                maxWidth="md"
-                xs={0}
-                md={4}
-                sx={{
-                  display: {xs: "none", sm: "block"} 
-                }}
-              >
-                <Card sx={{ mb: "1rem" }}>
-                  <SubredditInfo selectedSubreddit={selectedSubreddit}/>
-                </Card>
-                <Card>
-                <ListSubheader>FEATURED SUBREDDITS</ListSubheader>
-                  <FeaturedSubreddits />
-                </Card>
-              </Grid>
+          <Grid
+            item
+            maxWidth="md"
+            xs={0}
+            md={4}
+            sx={{
+              display: { xs: "none", sm: "block" },
+            }}
+          >
+            <SubredditInfo selectedSubreddit={selectedSubreddit} />
+            <FeaturedSubreddits />
+          </Grid>
         </Grid>
-      </Container>
     </Layout>
   );
 };

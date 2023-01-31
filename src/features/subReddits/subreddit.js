@@ -49,9 +49,8 @@ export const Subreddit = ({ subreddit }) => {
               {formatSubredditName(subreddit.data.display_name)}
             </Typography>
             <Typography
-              variant="h7"
+              variant="subtitle2"
               sx={{
-                color: "rgba(0, 0, 0, 0.54)",
                 whiteSpace: "nowrap",
                 display: { xs: "none", sm: "block" },
               }}

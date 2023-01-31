@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import { CommentsList } from "./commentsList";
 import {
-  Divider,
   Box,
   Typography,
-  IconButton,
   List,
   ListItemText,
+  ButtonGroup,
+  Button,
 } from "@mui/material";
 import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
 import NorthIcon from "@mui/icons-material/North";
 import SouthIcon from "@mui/icons-material/South";
 import ReplyIcon from "@mui/icons-material/Reply";
-import { relativeDays } from "../../helpers/helperFunctions";
+import { makeDate, relativeDays } from "../../helpers/helperFunctions";
+
 export const Comment = ({ comment }) => {
   const replies = comment.data?.replies?.data?.children;
-  const date = new Date(comment.data.created_utc * 1000);
+  const date = relativeDays(makeDate(comment.data?.created_utc).getTime());
   const [showReplies, setShowReplies] = useState(false);
   const toggleReplies = () => {
     const newShowReplies = !showReplies;
@@ -36,51 +37,61 @@ export const Comment = ({ comment }) => {
               onClick={toggleReplies}
             >
               <Box sx={{ width: "max-content" }}>
-                <Typography variant="h7" gutterBottom={true}>
-                  {comment.data.author} | {relativeDays(date.getTime())}:
+                <Typography variant="h7" gutterBottom>
+                  {comment.data.author} | {date}:
                 </Typography>
               </Box>
-              <Typography variant="h6" sx={{ p: 0 }}>
-                {comment.data.body}
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  width: "max-content",
-                }}
+              <Typography variant="h5">{comment.data.body}</Typography>
+              <ButtonGroup
+                variant="outlined"
+                aria-label="outlined button group"
+                size="small"
               >
                 {replies?.length && (
-                  <>
-                    <ForumRoundedIcon color="action" sx={{ pr: "0.3rem" }} />
-                    <Typography variant="h7">
-                      {replies?.length}
-                      {replies?.length > 1 ? " replies" : " reply"}
+                  <Button aria-label="view replies">
+                    <ForumRoundedIcon sx={{ pr: "0.3rem" }} />
+                    <Typography variant="h7">{replies?.length}</Typography>
+                    <Typography
+                      variant="h7"
+                      sx={{ display: { xs: "none", sm: "flex" }, p: "0.2rem" }}
+                    >
+                      {replies?.length > 1 ? "replies" : "reply"}
                     </Typography>
-                  </>
+                  </Button>
                 )}
-                <Box onClick={(event) => event.stopPropagation()}>
-                  <IconButton aria-label="rate up">
-                    <NorthIcon />
-                  </IconButton>
+                <Button
+                  aria-label="rate up"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <NorthIcon />
+                </Button>
+                <Button
+                  onClick={(event) => event.stopPropagation()}
+                  aria-label="rating"
+                >
                   <Typography variant="h7">{comment.data.ups}</Typography>
-                  <IconButton aria-label="rate down">
-                    <SouthIcon />
-                  </IconButton>
-                  <IconButton aria-label="reply">
-                    <ReplyIcon />
-                  </IconButton>
-                </Box>
-                <Divider />
-              </Box>
+                </Button>
+                <Button
+                  aria-label="rate down"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <SouthIcon />
+                </Button>
+                <Button
+                  aria-label="reply"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <ReplyIcon />
+                </Button>
+              </ButtonGroup>
             </Box>
           )
         }
       ></ListItemText>
-      {showReplies ? (
+      {showReplies && (
         <ListItemText
           sx={{ p: "0 1rem" }}
-          inset={true}
+          inset
           primary={
             replies && (
               <Box sx={{ width: "100%" }}>
@@ -89,8 +100,6 @@ export const Comment = ({ comment }) => {
             )
           }
         />
-      ) : (
-        ""
       )}
     </List>
   );

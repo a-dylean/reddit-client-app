@@ -6,7 +6,6 @@ import {
   CardActions,
   CardHeader,
   CardContent,
-  IconButton,
   Button,
   ButtonGroup,
   Box,
@@ -18,12 +17,11 @@ import ShareIcon from "@mui/icons-material/Share";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
-import { relativeDays } from "../../helpers/helperFunctions";
+import { makeDate, relativeDays } from "../../helpers/helperFunctions";
+import SideBar from "./sideBar";
 
 export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
-  const date = new Date(post.data.created_utc * 1000);
+  const date = relativeDays(makeDate(post.data.created_utc).getTime());
   const navigate = useNavigate();
   const handlePostClick = () => {
     !fullVersion && navigate(`/r/${selectedSubreddit}/${post.data.id}`);
@@ -34,51 +32,23 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
       <Card
         sx={{
           width: "auto",
-          mb: "1rem",
           display: "flex",
-          pb: 0,
         }}
       >
-        <Box
-          sx={{
-            background: "#f5f5f5",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            display: { xs: "none", sm: "flex" },
-          }}
-        >
-          <IconButton
-            aria-label="thumb up"
-            sx={{ m: "0.3rem 0.3rem 0", p: "0.3rem" }}
-          >
-            <ThumbUpOffAltIcon />
-          </IconButton>
-          <Typography variant="h7">
-            {post.data.ups > 9999 ? "10k+" : post.data.ups}
-          </Typography>
-          <IconButton
-            aria-label="thumb down"
-            sx={{ m: "0 0.3rem 0.3rem", p: "0.3rem" }}
-          >
-            <ThumbDownOffAltIcon />
-          </IconButton>
-        </Box>
+        <SideBar post={post} />
         <Box
           wrap="nowrap"
           sx={{
-            hight: "100%",
-            width: "100%",
             display: "flex",
             flexDirection: "column",
-            pb: 0,
+            width: "100%",
+            hight: "100%",
           }}
         >
           <CardContent
             sx={{
               display: "flex",
               flexDirection: "column",
-              p: 0,
             }}
           >
             <Box
@@ -86,11 +56,8 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
               sx={{ cursor: fullVersion ? "auto" : "pointer" }}
             >
               <CardHeader
-              sx={{pb: "0.5rem"}}
                 title={post.data.title}
-                subheader={`Posted by ${post.data.author} ${relativeDays(
-                  date.getTime()
-                )}`}
+                subheader={`Posted by ${post.data.author} ${date}`}
               />
               <CardMedia
                 component="img"
@@ -137,7 +104,7 @@ export const Post = ({ selectedSubreddit, post, fullVersion = false }) => {
                   {post.data.selftext}
                 </Typography>
               )}
-              <CardActions sx={{ p: "1rem" }}>
+              <CardActions>
                 <ButtonGroup
                   variant="outlined"
                   aria-label="outlined button group"

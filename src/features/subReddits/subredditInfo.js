@@ -2,52 +2,73 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Card,
-  CardContent,
   ListSubheader,
   Typography,
   CardMedia,
   ListItemIcon,
   ListItemText,
-  ListItem
+  ListItem,
 } from "@mui/material";
 import CakeIcon from "@mui/icons-material/Cake";
-import { Box } from "@mui/system";
 import { getSubredditInfo } from "./subRedditsSlice";
 import { numFormatter } from "../../helpers/helperFunctions";
+import Loading from "../../components/loading";
+import { styled } from "@mui/material/styles";
+import { makeDate } from "../../helpers/helperFunctions";
+import AccountsInfo from "./accountsInfo";
+import { useWindowSize } from "../../helpers/helperFunctions";
 
-export const SubredditInfo = ({ selectedSubreddit }) => {
-  const subredditInfo = useSelector((state) => state.subreddit.subredditInfo);
+const AdvertiserCategory = styled("p")(({ theme }) => ({
+  color: theme.palette.primary.main,
+  lineHeight: "1.5rem",
+  border: "0.1rem solid rgba(255, 67, 0, 0.5)",
+  borderRadius: "5rem",
+  fontSize: "0.7rem",
+  textTransform: "none",
+ padding: theme.spacing(0, 0.5),
+  whiteSpace: "nowrap",
+  
+}));
+
+const SubredditDescription = styled("p")(({ theme }) => ({
+ padding: theme.spacing(0.5, 2),
+  margin: 0,
+  textAlign: "justify",
+  fontSize: "0.85rem"
+}));
+
+export const SubredditInfo = ({ selectedSubreddit }) => { 
+const size = useWindowSize();
+  const { loading, subredditInfo } = useSelector((state) => state.subreddit);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSubredditInfo(selectedSubreddit));
   }, [dispatch, selectedSubreddit]);
-  const created = new Date(subredditInfo.created * 1000);
+  const dateOfCreation = makeDate(subredditInfo.created).toLocaleDateString("en-us", {
+    year: "numeric",
+    month: "short",
+  });
+  const allAccounts = numFormatter(subredditInfo.subscribers);
+  const activeAccounts = numFormatter(subredditInfo.accounts_active);
   return (
     <>
+      {loading && <Card><Loading /></Card>}
+      
       <Card>
-        <ListSubheader sx={{ textTransform: "uppercase" }}>
+       <ListSubheader
+          sx={{
+            textTransform: "uppercase",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
           {`ABOUT 
           ${subredditInfo.display_name}
           COMMUNITY`}
           {subredditInfo.advertiser_category && (
-            <Box
-              sx={{ m: 0, p: "0 1rem", position: "absolute", right: 0, top: 0 }}
-            >
-              <Typography
-                variant="h9"
-                sx={{
-                  color: "#FF4300",
-                  border: "0.1rem solid rgba(255, 67, 0, 0.5)",
-                  borderRadius: 50,
-                  fontSize: "0.6rem",
-                  px: "0.3rem",
-                  py: "0.2rem",
-                  textTransform: "none",
-                }}
-              >
-                {subredditInfo.advertiser_category}
-              </Typography>
-            </Box>
+            <AdvertiserCategory sx={{display: size.width < 1050 ? "none" : "block"}}>
+              {subredditInfo.advertiser_category}
+            </AdvertiserCategory>
           )}
         </ListSubheader>
         <CardMedia
@@ -60,48 +81,27 @@ export const SubredditInfo = ({ selectedSubreddit }) => {
             event.onerror = null;
           }}
         />
-        <CardContent>
-          <Typography
-            variant="body2"
-            sx={{
-              p: "0.5rem 1rem  0",
-              textAlign: "justify",
-            }}
-          >
+     
+        <SubredditDescription>
             {subredditInfo.public_description}
-          </Typography>
-          <ListItem sx={{ pb: 0 }}>
-            <ListItemText sx={{ display: "flex", justifyContent: "center" }}>
-              <Typography variant="h7" sx={{ fontSize: "1.5rem" }}>
-                {numFormatter(subredditInfo.subscribers)}
-                <br />
-              </Typography>
-              <Typography variant="h7">Surscribers</Typography>
-            </ListItemText>
-            <ListItemText sx={{ display: "flex", justifyContent: "center" }}>
-              <Typography variant="h7" sx={{ fontSize: "1.5rem" }}>
-                {numFormatter(subredditInfo.accounts_active)}
-              </Typography>
-              <br />
-              <Typography variant="h7">Online 🟢</Typography>
-            </ListItemText>
+          </SubredditDescription>
+          <ListItem>
+            <AccountsInfo num={allAccounts} text={"Subreddits"}/>
+            <AccountsInfo num={activeAccounts} text={"Online 🟢"}/>
           </ListItem>
-          <ListItem sx={{ pt: 0 }}>
+          <ListItem sx={{pt: 0}}>
             <ListItemIcon sx={{ minWidth: "2rem" }}>
-              <CakeIcon aria-label="date of creation" color="disabled" />
+              <CakeIcon aria-label="date of creation" />
             </ListItemIcon>
             <ListItemText>
-              <Typography variant="h7" color="grey">
-              Created:{" "}{created.toLocaleDateString("en-us", {
-                  year: "numeric",
-                  month: "short",
-                })}
-                
+              <Typography variant="body2">
+                Created:{" "}
+                {dateOfCreation}
               </Typography>
             </ListItemText>
           </ListItem>
-        </CardContent>
-      </Card>
+</Card>
+      
     </>
   );
 };

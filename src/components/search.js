@@ -1,5 +1,3 @@
-/* displays Searchbar and enables user to type and filter the output */
-
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchSubreddits } from "../features/subReddits/subRedditsSlice";
@@ -10,6 +8,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import SubredditsList from "../features/subReddits/subredditsList";
 import { useWindowSize } from "../helpers/helperFunctions";
+
 const ParentDiv = styled("div")(({ theme }) => ({
   position: "absolute",
   top: 0,
@@ -23,9 +22,8 @@ const ParentDiv = styled("div")(({ theme }) => ({
 }));
 
 const SearchDiv = styled("div")(({ theme }) => ({
-  borderRadius: 50,
-  backgroundColor: "#fafafa",
-  color: "rgba(0, 0, 0, 0.54)",
+  borderRadius: 50, // theme.shape.borderRadius * 50,
+  backgroundColor: theme.palette.primary.background,
   display: "flex",
   alignItems: "center",
   margin: "4.5px auto",
@@ -33,7 +31,6 @@ const SearchDiv = styled("div")(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "black",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     [theme.breakpoints.down("sm")]: {
@@ -49,7 +46,7 @@ const searchSubredditsDebounced = debounce((dispatch, searchTerm) => {
   dispatch(searchSubreddits(searchTerm));
 }, 300);
 
-export const Search = ({ hideSudreddit, showSubreddit }) => {
+export const Search = ({ onFocusChange }) => {
   const size = useWindowSize();
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
@@ -68,29 +65,30 @@ export const Search = ({ hideSudreddit, showSubreddit }) => {
 
   const handleMouseEnter = () => {
     setShowSubreddits(true);
+    size.width < 400 && onFocusChange(false);
   };
 
   const handleMouseLeave = () => {
     setShowSubreddits(false);
+    size.width < 400 && onFocusChange(true);
   };
 
   return (
     <ParentDiv onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <SearchDiv onClick={(size.width < 400) ? hideSudreddit : undefined}>
+      <SearchDiv>
         <StyledInputBase
           fullWidth
           placeholder="Search Reddit"
           value={searchTerm}
           onChange={searchTermChangeHandler}
-          startAdornment={
-            <SearchIcon sx={{ ml: 2, mr: 1, color: "rgba(0, 0, 0, 0.54)" }} />
-          }
+          onFocus={handleMouseEnter}
+          startAdornment={<SearchIcon color="action" sx={{ ml: 2, mr: 1 }} />}
           inputProps={{ "aria-label": "search" }}
-        >
-        </StyledInputBase>
+        ></StyledInputBase>
         {searchTerm.length > 0 && (
           <CancelOutlinedIcon
-            sx={{ mr: 2, color: "rgba(0, 0, 0, 0.54)" }}
+            color="action"
+            sx={{ mr: 2 }}
             onClick={clearSearchTermHandler}
           />
         )}
@@ -102,10 +100,7 @@ export const Search = ({ hideSudreddit, showSubreddit }) => {
           borderTopRightRadius: 0,
           display: showSubreddits ? "block" : "none",
         }}
-        onClick={() => {
-          setShowSubreddits(!showSubreddit);
-          showSubreddit();
-        }}
+        onClick={handleMouseLeave}
       >
         <SubredditsList searchTerm={searchTerm} />
       </Card>

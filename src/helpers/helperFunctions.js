@@ -40,6 +40,10 @@ export const relativeDays = (timestamp) => {
   } 
 };
 
+export const makeDate = (data) => {
+  return new Date(data * 1000);
+};
+
 export const numFormatter = (num) => {
   return Math.abs(num) > 999999
     ? Math.sign(num) * (Math.abs(num) / 1000000).toFixed(1) + "m"

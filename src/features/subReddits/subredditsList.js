@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { List, Typography, LinearProgress } from "@mui/material";
 import { Subreddit } from "./subreddit";
+import Loading from "../../components/loading";
 
 const SubredditsList = ({ searchTerm }) => {
   const { subreddits, loading, rejected } = useSelector(
@@ -11,10 +12,7 @@ const SubredditsList = ({ searchTerm }) => {
   return (
     <>
       {loading ? (
-        <div>
-          <Typography variant="h7">Subreddits are loading...</Typography>
-          <LinearProgress />
-        </div>
+        <Loading />
       ) : (
         searchTerm &&
         (rejected || !subreddits.length) && (

@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getComments } from "./commentsSlice";
 import { Comment } from "./comment";
 import { CommentsList } from "./commentsList";
-
-import { LinearProgress, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import Loading from "../../components/loading";
 
 export const Comments = ({ postId }) => {
   const { comments, loading } = useSelector((state) => state.comments);
@@ -17,10 +17,9 @@ export const Comments = ({ postId }) => {
   return (
     <>
       {loading ? (
-        <div>
-          <Typography variant="h7">Comments are loading...</Typography>
-          <LinearProgress />
-        </div>
+        <Box>
+          <Loading />
+        </Box>
       ) : (
         postComments?.length > 0 && (
           <CommentsList CommentsComponent={Comment} comments={postComments} />

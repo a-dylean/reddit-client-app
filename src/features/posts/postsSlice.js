@@ -38,7 +38,7 @@ export const postsSlice = createSlice({
     },
     [getPosts.fulfilled]: (state, action) => {
       state.loading = false;
-      const { data: { after, children } } = action.payload // action.payload = { kind: "Listing", data: { after: "blabla", children: []}}
+      const { data: { after, children } } = action.payload;
       state.after = after;
       state.posts = children.reduce(
         (accumulator, post) => ({...accumulator, [post.data.id]: post}),
