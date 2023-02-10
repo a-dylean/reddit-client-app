@@ -2,12 +2,12 @@ import React from "react";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import { IconButton, Typography, Box } from "@mui/material";
-
-const SideBar = ({ post }) => {
+import { grey } from "@mui/material/colors";
+const SideBar = ({ post, theme }) => {
   return (
     <Box
       sx={{
-        background: "#f5f5f5",
+        background: grey[100],
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",

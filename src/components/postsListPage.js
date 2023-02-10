@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getPosts } from "../features/posts/postsSlice";
 import { FeaturedSubreddits } from "../features/subReddits/featuredSubReddits";
-import { Post } from "../features/posts/post";
+import { PostItem } from "../features/posts/postItem";
 import {
   Grid,
   Card,
@@ -51,7 +51,7 @@ const PostsListPage = () => {
             >
               {Object.values(posts).map((post) => (
                 <Box key={post.data.id}>
-                  <Post post={post} selectedSubreddit={selectedSubreddit} />
+                  <PostItem post={post} selectedSubreddit={selectedSubreddit} />
                 </Box>
               ))}
             </InfiniteScroll>

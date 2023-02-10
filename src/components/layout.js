@@ -19,8 +19,7 @@ const Layout = ({ children, selectedSubreddit }) => {
         <Toolbar variant="dense">
           <Typography
             sx={{ display: displaySelectedSubreddit ? "block" : "none" }}
-            variant="h3"
-            id="selectedSubreddit"
+            variant="selectedSubreddit"
             noWrap
             onClick={() => navigate(`/r/${selectedSubreddit}`)}
           >

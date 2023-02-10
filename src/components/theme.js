@@ -1,20 +1,31 @@
 import { createTheme } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 const redditRedMain = "#FF4300";
 const redditRedFaded = "#FF430010";
+const backgroundColor = grey[300];
+const white = "#fff";
 
 export const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 700,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   palette: {
     primary: {
       main: redditRedMain,
-      background: "#fafafa",
     },
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: `
           body {
-            background-color: #e0e0e0;
+            background-color: ${backgroundColor}
           }
         `,
     },
@@ -31,10 +42,15 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           marginBottom: "1rem",
-          paddingBottom: 0
-
-        }
-      }
+        },
+      },
+    },
+    MuiCardActions: {
+      styleOverrides: {
+        root: {
+          padding: "1rem",
+        },
+      },
     },
     MuiList: {
       styleOverrides: {
@@ -54,6 +70,13 @@ export const theme = createTheme({
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        startIcon: {
+          marginRight: "0.3rem",
+        },
+      },
+    },
     MuiListItemButton: {
       styleOverrides: {
         root: {
@@ -63,29 +86,29 @@ export const theme = createTheme({
         },
       },
     },
- },
+  },
   typography: {
     allVariants: {
       fontFamily: "IBM Plex Sans, Arial, sans-serif",
       textTransform: "none",
       wordBreak: "break-word",
     },
-    h3: {
+    selectedSubreddit: {
       fontSize: "1.3rem",
       fontWeight: 600,
-      color: "#fff",
-      cursor: "pointer"
+      color: white,
+      cursor: "pointer",
     },
     h4: {
-      fontSize: "1rem",
-      fontWeight: 600,
-    },
-    h5: {
       fontFamily: "Noto Sans",
+      padding: "0 0 0.5rem",
       fontSize: "0.9rem",
-      padding: "0 0 0.3rem",
       fontWeight: 400,
       lineHeight: "1rem",
+    },
+    h5: {
+      fontSize: "1rem",
+      fontWeight: 600,
     },
     h6: {
       fontFamily: "Noto Sans",

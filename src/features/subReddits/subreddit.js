@@ -7,7 +7,7 @@ import {
   Avatar,
   ListItemAvatar,
   Typography,
-  ListItemText,
+  ListItemText
 } from "@mui/material";
 
 export const Subreddit = ({ subreddit }) => {
@@ -26,7 +26,7 @@ export const Subreddit = ({ subreddit }) => {
   };
 
   return (
-    <li>
+    <>
       {subreddit && (
         <ListItemButton
           divider
@@ -34,7 +34,7 @@ export const Subreddit = ({ subreddit }) => {
           onClick={onClickHandler}
           disableRipple
         >
-          <ListItemAvatar minwidth={"150rem"}>
+          <ListItemAvatar>
             <Avatar
               src={thumbnail || defaultPic}
               alt="thumbnail"
@@ -45,7 +45,7 @@ export const Subreddit = ({ subreddit }) => {
             />
           </ListItemAvatar>
           <ListItemText>
-            <Typography variant="h4">
+            <Typography variant="h5">
               {formatSubredditName(subreddit.data.display_name)}
             </Typography>
             <Typography
@@ -60,6 +60,6 @@ export const Subreddit = ({ subreddit }) => {
           </ListItemText>
         </ListItemButton>
       )}
-    </li>
+    </>
   );
 };

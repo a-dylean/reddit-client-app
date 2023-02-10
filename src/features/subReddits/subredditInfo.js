@@ -5,11 +5,9 @@ import {
   ListSubheader,
   Typography,
   CardMedia,
-  ListItemIcon,
   ListItemText,
   ListItem,
 } from "@mui/material";
-import CakeIcon from "@mui/icons-material/Cake";
 import { getSubredditInfo } from "./subRedditsSlice";
 import { numFormatter } from "../../helpers/helperFunctions";
 import Loading from "../../components/loading";
@@ -25,37 +23,43 @@ const AdvertiserCategory = styled("p")(({ theme }) => ({
   borderRadius: "5rem",
   fontSize: "0.7rem",
   textTransform: "none",
- padding: theme.spacing(0, 0.5),
+  padding: theme.spacing(0, 0.5),
   whiteSpace: "nowrap",
-  
 }));
 
 const SubredditDescription = styled("p")(({ theme }) => ({
- padding: theme.spacing(0.5, 2),
+  padding: theme.spacing(0.5, 2),
   margin: 0,
   textAlign: "justify",
-  fontSize: "0.85rem"
+  fontSize: "0.85rem",
 }));
 
-export const SubredditInfo = ({ selectedSubreddit }) => { 
-const size = useWindowSize();
+export const SubredditInfo = ({ selectedSubreddit }) => {
+  const size = useWindowSize();
   const { loading, subredditInfo } = useSelector((state) => state.subreddit);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSubredditInfo(selectedSubreddit));
   }, [dispatch, selectedSubreddit]);
-  const dateOfCreation = makeDate(subredditInfo.created).toLocaleDateString("en-us", {
-    year: "numeric",
-    month: "short",
-  });
+  const dateOfCreation = makeDate(subredditInfo.created).toLocaleDateString(
+    "en-us",
+    {
+      year: "numeric",
+      month: "short",
+    }
+  );
   const allAccounts = numFormatter(subredditInfo.subscribers);
   const activeAccounts = numFormatter(subredditInfo.accounts_active);
   return (
     <>
-      {loading && <Card><Loading /></Card>}
-      
+      {loading && (
+        <Card>
+          <Loading />
+        </Card>
+      )}
+
       <Card>
-       <ListSubheader
+        <ListSubheader
           sx={{
             textTransform: "uppercase",
             display: "flex",
@@ -66,7 +70,9 @@ const size = useWindowSize();
           ${subredditInfo.display_name}
           COMMUNITY`}
           {subredditInfo.advertiser_category && (
-            <AdvertiserCategory sx={{display: size.width < 1050 ? "none" : "block"}}>
+            <AdvertiserCategory
+              sx={{ display: size.width < 1050 ? "none" : "block" }}
+            >
               {subredditInfo.advertiser_category}
             </AdvertiserCategory>
           )}
@@ -81,27 +87,20 @@ const size = useWindowSize();
             event.onerror = null;
           }}
         />
-     
-        <SubredditDescription>
-            {subredditInfo.public_description}
-          </SubredditDescription>
-          <ListItem>
-            <AccountsInfo num={allAccounts} text={"Subreddits"}/>
-            <AccountsInfo num={activeAccounts} text={"Online 🟢"}/>
-          </ListItem>
-          <ListItem sx={{pt: 0}}>
-            <ListItemIcon sx={{ minWidth: "2rem" }}>
-              <CakeIcon aria-label="date of creation" />
-            </ListItemIcon>
-            <ListItemText>
-              <Typography variant="body2">
-                Created:{" "}
-                {dateOfCreation}
-              </Typography>
-            </ListItemText>
-          </ListItem>
-</Card>
-      
+
+        {subredditInfo.public_description && <SubredditDescription>
+          {subredditInfo.public_description}
+        </SubredditDescription>}
+        <ListItem dense divider>
+          <AccountsInfo num={allAccounts} text={"Subscribers"} />
+          <AccountsInfo num={activeAccounts} text={"Online 🟢"} />
+        </ListItem>
+        <ListItem dense>
+          <ListItemText>
+            <Typography variant="body2">Created: {dateOfCreation}</Typography>
+          </ListItemText>
+        </ListItem>
+      </Card>
     </>
   );
 };

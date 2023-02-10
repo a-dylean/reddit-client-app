@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { Container } from "@mui/material";
-import { Post } from "../features/posts/post";
+import { PostItem } from "../features/posts/postItem";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getPost } from "../features/posts/postsSlice";
@@ -18,7 +17,7 @@ const PostPage = () => {
   return (
     <Layout selectedSubreddit={selectedSubreddit}>
         {selectedPost && (
-          <Post post={selectedPost} fullVersion/>
+          <PostItem post={selectedPost} fullVersion/>
         )}
     </Layout>
   );

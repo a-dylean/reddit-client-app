@@ -33,11 +33,11 @@ export const relativeDays = (timestamp) => {
   const daysDifference = Math.round(
     (timestamp - new Date().getTime()) / oneDayinMs
   );
-  if (hoursDifference > -24) {
-    return rtf.format(hoursDifference, "hour")
-  } else {
-    return rtf.format(daysDifference, "day");
-  } 
+
+   return (hoursDifference > -24) 
+  ? rtf.format(hoursDifference, "hour")
+  : rtf.format(daysDifference, "day")
+
 };
 
 export const makeDate = (data) => {

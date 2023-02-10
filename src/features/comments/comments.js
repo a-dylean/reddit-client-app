@@ -5,15 +5,16 @@ import { Comment } from "./comment";
 import { CommentsList } from "./commentsList";
 import { Box } from "@mui/material";
 import Loading from "../../components/loading";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 export const Comments = ({ postId }) => {
   const { comments, loading } = useSelector((state) => state.comments);
   const postComments = comments[postId];
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getComments(postId));
+    dispatch(getComments(postId))
+    .then(unwrapResult)
   }, [postId, dispatch]);
-
   return (
     <>
       {loading ? (

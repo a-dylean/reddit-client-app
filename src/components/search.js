@@ -23,7 +23,7 @@ const ParentDiv = styled("div")(({ theme }) => ({
 
 const SearchDiv = styled("div")(({ theme }) => ({
   borderRadius: 50, // theme.shape.borderRadius * 50,
-  backgroundColor: theme.palette.primary.background,
+  backgroundColor: theme.palette.background.default,
   display: "flex",
   alignItems: "center",
   margin: "4.5px auto",
@@ -40,6 +40,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       },
     },
   },
+}));
+
+const SuggestedSubreddits = styled(Card)(() => ({
+  boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+  borderTopLeftRadius: 0,
+  borderTopRightRadius: 0,
 }));
 
 const searchSubredditsDebounced = debounce((dispatch, searchTerm) => {
@@ -93,17 +99,12 @@ export const Search = ({ onFocusChange }) => {
           />
         )}
       </SearchDiv>
-      <Card
-        sx={{
-          boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-          borderTopLeftRadius: 0,
-          borderTopRightRadius: 0,
-          display: showSubreddits ? "block" : "none",
-        }}
+      <SuggestedSubreddits
+        sx={{ display: showSubreddits ? "block" : "none"}}
         onClick={handleMouseLeave}
       >
         <SubredditsList searchTerm={searchTerm} />
-      </Card>
+      </SuggestedSubreddits>
     </ParentDiv>
   );
 };

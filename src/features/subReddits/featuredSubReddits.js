@@ -18,12 +18,15 @@ export const FeaturedSubreddits = () => {
     <>
       <Card>
         <ListSubheader>FEATURED SUBREDDITS</ListSubheader>
-        <List>
-          {featuredSubreddits.slice(0, 10).map((subreddit) => (
-            <Subreddit subreddit={subreddit} key={subreddit.data.id} />
-          ))}
-        </List>
-        {loading && <Loading />}
+        {loading ? (
+          <Loading />
+        ) : (
+          <List>
+            {featuredSubreddits.slice(0, 10).map((subreddit) => (
+              <Subreddit subreddit={subreddit} key={subreddit.data.id} />
+            ))}
+          </List>
+        )}
       </Card>
     </>
   );

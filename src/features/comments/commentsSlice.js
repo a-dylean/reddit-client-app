@@ -16,6 +16,7 @@ export const commentsSlice = createSlice({
   initialState: {
     comments: {},
     loading: false,
+    errorMessage: null
   },
   extraReducers: {
     [getComments.pending]: (state) => {
@@ -29,10 +30,13 @@ export const commentsSlice = createSlice({
         [postId]: comments,
       };
     },
-    [getComments.rejected]: (state) => {
+    [getComments.rejected]: (state, action) => {
       state.loading = false;
+      state.errorMessage = action.payload;
+     
+      }
     },
   },
-});
+);
 
 export default commentsSlice.reducer;
