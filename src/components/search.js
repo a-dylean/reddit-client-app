@@ -80,14 +80,14 @@ export const Search = ({ onFocusChange }) => {
   };
 
   return (
-    <ParentDiv onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <ParentDiv onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onFocus={handleMouseEnter}>
       <SearchDiv>
         <StyledInputBase
           fullWidth
           placeholder="Search Reddit"
           value={searchTerm}
           onChange={searchTermChangeHandler}
-          onFocus={handleMouseEnter}
+          
           startAdornment={<SearchIcon color="action" sx={{ ml: 2, mr: 1 }} />}
           inputProps={{ "aria-label": "search" }}
         ></StyledInputBase>

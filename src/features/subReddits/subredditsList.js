@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { List, Typography, LinearProgress } from "@mui/material";
+import { List, Typography } from "@mui/material";
 import { Subreddit } from "./subreddit";
 import Loading from "../../components/loading";
 
