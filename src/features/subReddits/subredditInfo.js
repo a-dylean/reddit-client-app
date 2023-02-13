@@ -14,7 +14,6 @@ import Loading from "../../components/loading";
 import { styled } from "@mui/material/styles";
 import { makeDate } from "../../helpers/helperFunctions";
 import AccountsInfo from "./accountsInfo";
-import { useWindowSize } from "../../helpers/helperFunctions";
 
 const AdvertiserCategory = styled("p")(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -35,12 +34,15 @@ const SubredditDescription = styled("p")(({ theme }) => ({
 }));
 
 export const SubredditInfo = ({ selectedSubreddit }) => {
-  const size = useWindowSize();
   const { loading, subredditInfo } = useSelector((state) => state.subreddit);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSubredditInfo(selectedSubreddit));
   }, [dispatch, selectedSubreddit]);
+
+ if (!subredditInfo) {
+    return null;
+  }
   const dateOfCreation = makeDate(subredditInfo.created).toLocaleDateString(
     "en-us",
     {
@@ -48,8 +50,10 @@ export const SubredditInfo = ({ selectedSubreddit }) => {
       month: "short",
     }
   );
+ 
   const allAccounts = numFormatter(subredditInfo.subscribers);
   const activeAccounts = numFormatter(subredditInfo.accounts_active);
+
   return (
     <>
       {loading && (
@@ -71,23 +75,18 @@ export const SubredditInfo = ({ selectedSubreddit }) => {
           COMMUNITY`}
           {subredditInfo.advertiser_category && (
             <AdvertiserCategory
-              sx={{ display: size.width < 1050 ? "none" : "block" }}
+              sx={{ display: { xs: "none", sm: "none", md: "none", lg: "block", xl: "block"} }}
             >
               {subredditInfo.advertiser_category}
             </AdvertiserCategory>
           )}
         </ListSubheader>
-        <CardMedia
+        {subredditInfo.banner_img && <CardMedia
           component="img"
           src={subredditInfo.banner_img}
           alt="subreddit banner image"
-          height="100%"
-          onError={(event) => {
-            event.target.style.display = "none";
-            event.onerror = null;
-          }}
-        />
-
+          height="100rem"
+        />}
         {subredditInfo.public_description && <SubredditDescription>
           {subredditInfo.public_description}
         </SubredditDescription>}
