@@ -63,13 +63,13 @@ export const theme = createTheme({
         },
       },
     },
-    MuiBox: {
-      styleOverrides: {
-        root: {
-          padding: 0,
-        },
-      },
-    },
+    // MuiBox: {
+    //   styleOverrides: {
+    //     root: {
+    //       padding: 0,
+    //     },
+    //   },
+    // },
     MuiButton: {
       styleOverrides: {
         startIcon: {
@@ -107,7 +107,7 @@ export const theme = createTheme({
       lineHeight: "1rem",
     },
     h5: {
-      fontSize: "1rem",
+      fontSize: "1.125rem",
       fontWeight: 600,
     },
     h6: {

@@ -16,6 +16,7 @@ import ReplyIcon from "@mui/icons-material/Reply";
 import { makeDate, relativeDays } from "../../helpers/helperFunctions";
 import { styled } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
+import { TextTypography } from "../../helpers/textTypography";
 
 const CommentBox = styled(Box)(() => ({
   padding: "0 1rem",
@@ -52,7 +53,9 @@ export const Comment = ({ comment }) => {
             <Typography variant="h7" gutterBottom>
               {author} | {date}:
             </Typography>
-            <Typography variant="h4">{comment.data.body}</Typography>
+            <Typography component={'div'} variant="h4">
+              <TextTypography text={comment.data.body}/>
+              </Typography>
             <ButtonGroup
               variant="outlined"
               aria-label="outlined button group"

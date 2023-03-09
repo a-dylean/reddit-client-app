@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getComments } from "./commentsSlice";
-import { Comment } from "./comment";
+import { Comment } from "./commentItem";
 import { CommentsList } from "./commentsList";
 import { Box } from "@mui/material";
 import Loading from "../../components/loading";

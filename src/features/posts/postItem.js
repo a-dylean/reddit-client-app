@@ -20,6 +20,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { makeDate, relativeDays } from "../../helpers/helperFunctions";
 import SideBar from "./sideBar";
+import { TextTypography } from "../../helpers/textTypography";
 
 export const PostItem = ({ selectedSubreddit, post, fullVersion = false }) => {
   const date = relativeDays(makeDate(post.data.created_utc).getTime());
@@ -87,14 +88,17 @@ export const PostItem = ({ selectedSubreddit, post, fullVersion = false }) => {
                     : "none",
                 }}
               >
-                <Typography variant="h6" paragraph wrap="nowrap">
-                  {post.data.selftext}
+                <Typography component={'div'} variant="h6" paragraph wrap="nowrap"> 
+                <TextTypography text={post.data.selftext} />
                 </Typography>
+                
               </Collapse>
             ) : (
-              <Typography variant="h6" paragraph wrap="nowrap">
-                {post.data.selftext}
+              
+                 <Typography component={'div'} variant="h6" paragraph wrap="nowrap">
+                <TextTypography text={post.data.selftext}/>
               </Typography>
+              
             )}
             <CardActions>
               <ButtonGroup

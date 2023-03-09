@@ -14,6 +14,7 @@ import Loading from "../../components/loading";
 import { styled } from "@mui/material/styles";
 import { makeDate } from "../../helpers/helperFunctions";
 import AccountsInfo from "./accountsInfo";
+import { TextTypography } from "../../helpers/textTypography";
 
 const AdvertiserCategory = styled("p")(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -26,7 +27,7 @@ const AdvertiserCategory = styled("p")(({ theme }) => ({
   whiteSpace: "nowrap",
 }));
 
-const SubredditDescription = styled("p")(({ theme }) => ({
+const SubredditDescription = styled("div")(({ theme }) => ({
   padding: theme.spacing(0.5, 2),
   margin: 0,
   textAlign: "justify",
@@ -88,7 +89,7 @@ export const SubredditInfo = ({ selectedSubreddit }) => {
           height="100rem"
         />}
         {subredditInfo.public_description && <SubredditDescription>
-          {subredditInfo.public_description}
+         <TextTypography text={subredditInfo.public_description} />
         </SubredditDescription>}
         <ListItem dense divider>
           <AccountsInfo num={allAccounts} text={"Subscribers"} />

@@ -49,7 +49,7 @@ export const Subreddit = ({ subreddit }) => {
         />
       </ListItemAvatar>
       <ListItemText>
-        <Typography variant="h5">
+        <Typography variant="subtitle1" sx={{fontWeight: 600}}>
           {formatSubredditName(subreddit.data.display_name)}
         </Typography>
         <Typography
