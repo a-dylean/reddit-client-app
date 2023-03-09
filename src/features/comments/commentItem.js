@@ -15,11 +15,11 @@ import SouthIcon from "@mui/icons-material/South";
 import ReplyIcon from "@mui/icons-material/Reply";
 import { makeDate, relativeDays } from "../../helpers/helperFunctions";
 import { styled } from "@mui/material/styles";
-import { grey } from "@mui/material/colors";
 import { TextTypography } from "../../helpers/textTypography";
+import { theme } from "../../components/theme";
 
-const CommentBox = styled(Box)(() => ({
-  padding: "0 1rem",
+const CommentBox = styled(Box)(({ theme }) => ({
+  padding: `0 ${theme.spacing(1.5)}`,
 }));
 
 export const Comment = ({ comment }) => {
@@ -39,7 +39,7 @@ export const Comment = ({ comment }) => {
   }
 
   return (
-    <List sx={{ borderLeft: `0.15rem inset ${grey[50]}` }}>
+    <List sx={{ borderLeft: `${theme.spacing(0.3)} inset ${theme.palette.primary.lightgrey}` }}>
       <ListItemText
         disableTypography
         primary={
@@ -50,12 +50,12 @@ export const Comment = ({ comment }) => {
             }}
             onClick={toggleReplies}
           >
-            <Typography variant="h7" gutterBottom>
+            <Typography variant="h7">
               {author} | {date}:
             </Typography>
-            <Typography component={'div'} variant="h4">
-              <TextTypography text={comment.data.body}/>
-              </Typography>
+            <Typography component={"div"} variant="h4">
+              <TextTypography text={comment.data.body} />
+            </Typography>
             <ButtonGroup
               variant="outlined"
               aria-label="outlined button group"

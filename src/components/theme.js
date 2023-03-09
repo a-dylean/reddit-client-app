@@ -19,6 +19,8 @@ export const theme = createTheme({
   palette: {
     primary: {
       main: redditRedMain,
+      lightgrey: grey[50],
+      sideBarGrey: grey[100]
     },
   },
   components: {
@@ -28,6 +30,14 @@ export const theme = createTheme({
             background-color: ${backgroundColor}
           }
         `,
+    },
+    MuiCardMedia: {
+      styleOverrides: {
+        root: {
+          height: "500px"
+        }
+      }
+
     },
     MuiCardContent: {
       styleOverrides: {
@@ -42,6 +52,13 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           marginBottom: "1rem",
+        },
+      },
+    },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          marginTop: "4rem",
         },
       },
     },
@@ -63,13 +80,6 @@ export const theme = createTheme({
         },
       },
     },
-    // MuiBox: {
-    //   styleOverrides: {
-    //     root: {
-    //       padding: 0,
-    //     },
-    //   },
-    // },
     MuiButton: {
       styleOverrides: {
         startIcon: {

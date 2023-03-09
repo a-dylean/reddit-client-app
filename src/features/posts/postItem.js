@@ -47,7 +47,7 @@ export const PostItem = ({ selectedSubreddit, post, fullVersion = false }) => {
         >
           <Box
             onClick={handlePostClick}
-            sx={{ cursor: fullVersion ? "auto" : "pointer" }}
+            sx={{ cursor: !fullVersion ? "auto" : "pointer" }}
           >
             <CardHeader
               title={post.data.title}
@@ -57,7 +57,6 @@ export const PostItem = ({ selectedSubreddit, post, fullVersion = false }) => {
               component="img"
               src={post.data.url}
               alt="post image"
-              height="400rem"
               sx={{
                 objectFit: "contain",
               }}
@@ -69,8 +68,8 @@ export const PostItem = ({ selectedSubreddit, post, fullVersion = false }) => {
             {post.data.media?.reddit_video && (
               <CardMedia
                 component="video"
-                height="500rem"
                 src={post.data.media.reddit_video.fallback_url}
+                alt="post video"
                 preload="auto"
                 controls
                 autoPlay
