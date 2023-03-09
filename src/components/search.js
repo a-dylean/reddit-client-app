@@ -8,6 +8,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import SubredditsList from "../features/subReddits/subredditsList";
 import { useWindowSize } from "../helpers/helperFunctions";
+import { theme } from "./theme";
 
 const ParentDiv = styled("div")(({ theme }) => ({
   position: "absolute",
@@ -17,7 +18,7 @@ const ParentDiv = styled("div")(({ theme }) => ({
     width: "33%",
   },
   [theme.breakpoints.down("sm")]: {
-    right: "1rem",
+    right: theme.spacing(0.5)
   },
 }));
 
@@ -42,8 +43,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SuggestedSubreddits = styled(Card)(() => ({
-  boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+const SuggestedSubreddits = styled(Card)(({ theme }) => ({
+  boxShadow: theme.shadows[10],
   borderTopLeftRadius: 0,
   borderTopRightRadius: 0,
 }));

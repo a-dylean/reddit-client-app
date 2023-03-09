@@ -28,7 +28,7 @@ const Layout = ({ children, selectedSubreddit }) => {
           <Search onFocusChange={onFocusChange} />
         </Toolbar>
       </AppBar>
-      <Container sx={{ mt: "4rem" }}>
+      <Container>
         <main>{children}</main>
       </Container>
     </>

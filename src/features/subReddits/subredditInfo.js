@@ -18,10 +18,10 @@ import { TextTypography } from "../../helpers/textTypography";
 
 const AdvertiserCategory = styled("p")(({ theme }) => ({
   color: theme.palette.primary.main,
-  lineHeight: "1.5rem",
-  border: "0.1rem solid rgba(255, 67, 0, 0.5)",
-  borderRadius: "5rem",
-  fontSize: "0.7rem",
+  lineHeight: theme.spacing(3),
+  border: `${theme.spacing(0.1)} solid ${theme.palette.primary.main}`,
+  borderRadius: theme.spacing(5),
+  fontSize: theme.typography.h7.fontSize,
   textTransform: "none",
   padding: theme.spacing(0, 0.5),
   whiteSpace: "nowrap",
@@ -30,8 +30,7 @@ const AdvertiserCategory = styled("p")(({ theme }) => ({
 const SubredditDescription = styled("div")(({ theme }) => ({
   padding: theme.spacing(0.5, 2),
   margin: 0,
-  textAlign: "justify",
-  fontSize: "0.85rem",
+  textAlign: "justify"
 }));
 
 export const SubredditInfo = ({ selectedSubreddit }) => {
@@ -88,8 +87,8 @@ export const SubredditInfo = ({ selectedSubreddit }) => {
           alt="subreddit banner image"
           height="100rem"
         />}
-        {subredditInfo.public_description && <SubredditDescription>
-         <TextTypography text={subredditInfo.public_description} />
+        {subredditInfo.public_description && <SubredditDescription><Typography variant="body2">
+         <TextTypography text={subredditInfo.public_description} /></Typography>
         </SubredditDescription>}
         <ListItem dense divider>
           <AccountsInfo num={allAccounts} text={"Subscribers"} />
