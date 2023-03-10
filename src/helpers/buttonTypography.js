@@ -9,7 +9,7 @@ export const ButtonTypography = ({ num, text }) => {
       </Typography>
       <Typography
         variant="h7"
-        sx={{ display: { xs: "none", sm: "flex" }, pl: "0.2rem" }}
+        sx={{ display: { xs: "none", sm: "none", md: "flex" }, pl: "0.2rem" }}
       >
         {text}
       </Typography>

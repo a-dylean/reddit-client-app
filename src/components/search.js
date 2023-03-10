@@ -8,7 +8,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import SubredditsList from "../features/subReddits/subredditsList";
 import { useWindowSize } from "../helpers/helperFunctions";
-import { theme } from "./theme";
 
 const ParentDiv = styled("div")(({ theme }) => ({
   position: "absolute",
@@ -18,7 +17,7 @@ const ParentDiv = styled("div")(({ theme }) => ({
     width: "33%",
   },
   [theme.breakpoints.down("sm")]: {
-    right: theme.spacing(0.5)
+    right: theme.spacing(0.5),
   },
 }));
 
@@ -27,7 +26,7 @@ const SearchDiv = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   display: "flex",
   alignItems: "center",
-  margin: "4.5px auto",
+  margin: `${theme.spacing(0.6)} auto`,
   width: "100%",
 }));
 
@@ -81,14 +80,17 @@ export const Search = ({ onFocusChange }) => {
   };
 
   return (
-    <ParentDiv onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onFocus={handleMouseEnter}>
+    <ParentDiv
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onFocus={handleMouseEnter}
+    >
       <SearchDiv>
         <StyledInputBase
           fullWidth
           placeholder="Search Reddit"
           value={searchTerm}
           onChange={searchTermChangeHandler}
-          
           startAdornment={<SearchIcon color="action" sx={{ ml: 2, mr: 1 }} />}
           inputProps={{ "aria-label": "search" }}
         ></StyledInputBase>
@@ -101,7 +103,7 @@ export const Search = ({ onFocusChange }) => {
         )}
       </SearchDiv>
       <SuggestedSubreddits
-        sx={{ display: showSubreddits ? "block" : "none"}}
+        sx={{ display: showSubreddits ? "block" : "none" }}
         onClick={handleMouseLeave}
       >
         <SubredditsList searchTerm={searchTerm} />

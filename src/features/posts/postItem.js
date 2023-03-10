@@ -24,17 +24,24 @@ import { TextTypography } from "../../helpers/textTypography";
 
 export const PostItem = ({ selectedSubreddit, post, fullVersion = false }) => {
   const date = relativeDays(makeDate(post.data.created_utc).getTime());
+  const video = post.data.media?.reddit_video;
+  const selftext = post.data.selftext;
+  const textBreakpoint = (text) => {
+    if (text.length >= 300) {
+      return true;
+    }
+    return;
+  };
   const navigate = useNavigate();
   const handlePostClick = () => {
     !fullVersion && navigate(`/r/${selectedSubreddit}/${post.data.id}`);
   };
-
   return (
     <>
       <Card
         sx={{
           width: "auto",
-          display: "flex"
+          display: "flex",
         }}
       >
         <SideBar post={post} />
@@ -65,7 +72,7 @@ export const PostItem = ({ selectedSubreddit, post, fullVersion = false }) => {
                 event.onerror = null;
               }}
             />
-            {post.data.media?.reddit_video && (
+            {video && (
               <CardMedia
                 component="video"
                 src={post.data.media.reddit_video.fallback_url}
@@ -77,7 +84,7 @@ export const PostItem = ({ selectedSubreddit, post, fullVersion = false }) => {
                 sx={{ backgroundColor: "black" }}
               />
             )}
-            {post.data.selftext.length >= 300 ? (
+            {textBreakpoint(selftext) ? (
               <Collapse
                 in={fullVersion}
                 collapsedSize={110}
@@ -87,17 +94,24 @@ export const PostItem = ({ selectedSubreddit, post, fullVersion = false }) => {
                     : "none",
                 }}
               >
-                <Typography component={'div'} variant="h6" paragraph wrap="nowrap"> 
-                <TextTypography text={post.data.selftext} />
+                <Typography
+                  component={"div"}
+                  variant="h6"
+                  paragraph
+                  wrap="nowrap"
+                >
+                  <TextTypography text={selftext} />
                 </Typography>
-                
               </Collapse>
             ) : (
-              
-                 <Typography component={'div'} variant="h6" paragraph wrap="nowrap">
-                <TextTypography text={post.data.selftext}/>
+              <Typography
+                component={"div"}
+                variant="h6"
+                paragraph
+                wrap="nowrap"
+              >
+                <TextTypography text={selftext} />
               </Typography>
-              
             )}
             <CardActions>
               <ButtonGroup

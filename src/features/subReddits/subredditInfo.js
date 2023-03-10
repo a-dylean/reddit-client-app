@@ -30,7 +30,7 @@ const AdvertiserCategory = styled("p")(({ theme }) => ({
 const SubredditDescription = styled("div")(({ theme }) => ({
   padding: theme.spacing(0.5, 2),
   margin: 0,
-  textAlign: "justify"
+  textAlign: "justify",
 }));
 
 export const SubredditInfo = ({ selectedSubreddit }) => {
@@ -39,8 +39,7 @@ export const SubredditInfo = ({ selectedSubreddit }) => {
   useEffect(() => {
     dispatch(getSubredditInfo(selectedSubreddit));
   }, [dispatch, selectedSubreddit]);
-
- if (!subredditInfo) {
+  if (!subredditInfo) {
     return null;
   }
   const dateOfCreation = makeDate(subredditInfo.created).toLocaleDateString(
@@ -50,10 +49,8 @@ export const SubredditInfo = ({ selectedSubreddit }) => {
       month: "short",
     }
   );
- 
   const allAccounts = numFormatter(subredditInfo.subscribers);
   const activeAccounts = numFormatter(subredditInfo.accounts_active);
-
   return (
     <>
       {loading && (
@@ -68,6 +65,7 @@ export const SubredditInfo = ({ selectedSubreddit }) => {
             textTransform: "uppercase",
             display: "flex",
             justifyContent: "space-between",
+            whiteSpace: "nowrap",
           }}
         >
           {`ABOUT 
@@ -75,21 +73,35 @@ export const SubredditInfo = ({ selectedSubreddit }) => {
           COMMUNITY`}
           {subredditInfo.advertiser_category && (
             <AdvertiserCategory
-              sx={{ display: { xs: "none", sm: "none", md: "none", lg: "block", xl: "block"} }}
+              sx={{
+                display: {
+                  xs: "none",
+                  sm: "none",
+                  md: "none",
+                  lg: "block",
+                  xl: "block",
+                },
+              }}
             >
               {subredditInfo.advertiser_category}
             </AdvertiserCategory>
           )}
         </ListSubheader>
-        {subredditInfo.banner_img && <CardMedia
-          component="img"
-          src={subredditInfo.banner_img}
-          alt="subreddit banner image"
-          height="100rem"
-        />}
-        {subredditInfo.public_description && <SubredditDescription><Typography variant="body2">
-         <TextTypography text={subredditInfo.public_description} /></Typography>
-        </SubredditDescription>}
+        {subredditInfo.banner_img && (
+          <CardMedia
+            component="img"
+            src={subredditInfo.banner_img}
+            alt="subreddit banner image"
+            height="100%"
+          />
+        )}
+        {subredditInfo.public_description && (
+          <SubredditDescription>
+            <Typography component={"div"} variant="body2">
+              <TextTypography text={subredditInfo.public_description} />
+            </Typography>
+          </SubredditDescription>
+        )}
         <ListItem dense divider>
           <AccountsInfo num={allAccounts} text={"Subscribers"} />
           <AccountsInfo num={activeAccounts} text={"Online 🟢"} />
