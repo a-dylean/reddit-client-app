@@ -1,5 +1,6 @@
-## Reddit-client-app ##
-Reddit clone front-end web application made with Material UI.
+# Reddit-client-app #
+Reddit clone front-end web application made with Material UI  
+
 Deployed [here](https://reddit-client.atonkopiy.com/ )
 
 ## Features ##
