@@ -9,7 +9,7 @@ import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import SubredditsList from "../features/subReddits/subredditsList";
 import { useWindowSize } from "../helpers/helperFunctions";
 
-const ParentDiv = styled("div")(({ theme }) => ({
+const SearchBar = styled("div")(({ theme }) => ({
   position: "absolute",
   top: 0,
   [theme.breakpoints.up("sm")]: {
@@ -21,7 +21,7 @@ const ParentDiv = styled("div")(({ theme }) => ({
   },
 }));
 
-const SearchDiv = styled("div")(({ theme }) => ({
+const InputArea = styled("div")(({ theme }) => ({
   borderRadius: 50, // theme.shape.borderRadius * 50,
   backgroundColor: theme.palette.background.default,
   display: "flex",
@@ -80,12 +80,12 @@ export const Search = ({ onFocusChange }) => {
   };
 
   return (
-    <ParentDiv
+    <SearchBar
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleMouseEnter}
     >
-      <SearchDiv>
+      <InputArea>
         <StyledInputBase
           fullWidth
           placeholder="Search Reddit"
@@ -101,13 +101,13 @@ export const Search = ({ onFocusChange }) => {
             onClick={clearSearchTermHandler}
           />
         )}
-      </SearchDiv>
+      </InputArea>
       <SuggestedSubreddits
         sx={{ display: showSubreddits ? "block" : "none" }}
         onClick={handleMouseLeave}
       >
         <SubredditsList searchTerm={searchTerm} />
       </SuggestedSubreddits>
-    </ParentDiv>
+    </SearchBar>
   );
 };
