@@ -32,10 +32,8 @@ export const theme = createTheme({
         `,
     },
     MuiCardMedia: {
-      styleOverrides: {
-        root: {
+      defaultProps: {
           height: "500px"
-        }
       }
 
     },
