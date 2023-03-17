@@ -16,7 +16,7 @@ Deployed [here](https://reddit-client.atonkopiy.com/ )
 * NodeJS
 * MUI5
 
-## How to run local ##
+## How to run locally ##
 1. Clone the repositary
 ```
 git clone https://github.com/a-dylean/reddit-client-app.git
