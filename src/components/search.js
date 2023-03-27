@@ -8,9 +8,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import SubredditsList from "../features/subReddits/subredditsList";
 import { useWindowSize } from "../helpers/helperFunctions";
-import { theme } from "./theme";
 
-const ParentDiv = styled("div")(({ theme }) => ({
+const SearchBar = styled("div")(({ theme }) => ({
   position: "absolute",
   top: 0,
   [theme.breakpoints.up("sm")]: {
@@ -18,16 +17,16 @@ const ParentDiv = styled("div")(({ theme }) => ({
     width: "33%",
   },
   [theme.breakpoints.down("sm")]: {
-    right: theme.spacing(0.5)
+    right: theme.spacing(0.5),
   },
 }));
 
-const SearchDiv = styled("div")(({ theme }) => ({
+const InputArea = styled("div")(({ theme }) => ({
   borderRadius: 50, // theme.shape.borderRadius * 50,
   backgroundColor: theme.palette.background.default,
   display: "flex",
   alignItems: "center",
-  margin: "4.5px auto",
+  margin: `${theme.spacing(0.6)} auto`,
   width: "100%",
 }));
 
@@ -81,14 +80,17 @@ export const Search = ({ onFocusChange }) => {
   };
 
   return (
-    <ParentDiv onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onFocus={handleMouseEnter}>
-      <SearchDiv>
+    <SearchBar
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onFocus={handleMouseEnter}
+    >
+      <InputArea>
         <StyledInputBase
           fullWidth
           placeholder="Search Reddit"
           value={searchTerm}
           onChange={searchTermChangeHandler}
-          
           startAdornment={<SearchIcon color="action" sx={{ ml: 2, mr: 1 }} />}
           inputProps={{ "aria-label": "search" }}
         ></StyledInputBase>
@@ -99,13 +101,13 @@ export const Search = ({ onFocusChange }) => {
             onClick={clearSearchTermHandler}
           />
         )}
-      </SearchDiv>
+      </InputArea>
       <SuggestedSubreddits
-        sx={{ display: showSubreddits ? "block" : "none"}}
+        sx={{ display: showSubreddits ? "block" : "none" }}
         onClick={handleMouseLeave}
       >
         <SubredditsList searchTerm={searchTerm} />
       </SuggestedSubreddits>
-    </ParentDiv>
+    </SearchBar>
   );
 };

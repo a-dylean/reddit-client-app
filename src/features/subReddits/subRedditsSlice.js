@@ -1,5 +1,4 @@
 // Reducers & Actions
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Fetching Data using API with createAsyncThunk (Redux-Toolkit)
