@@ -17,7 +17,7 @@ Deployed [here](https://reddit-client.atonkopiy.com/ )
 * MUI5
 
 ## How to run locally ##
-1. Clone the repositary
+1. Clone the repository
 ```
 git clone https://github.com/a-dylean/reddit-client-app.git
 ```
